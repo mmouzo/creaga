@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRIAGA - Explorador Interactivo del Proyecto v2</title>
+    <!-- Chosen Palette: CRIAGA Red (Tonos terrosos y rojo teja: #8C1D18, #FCFBF8, #333333, #E5E5E5) -->
+    <!-- Application Structure Plan: Se mantiene la estructura de una sola página, pero enriquecida. Se añade una sección de 'Análisis del Entorno' para contextualizar. La sección 'Programa' se amplía con una galería de razas. La sección 'Diseño' ahora incluye un carrusel visual del proceso evolutivo. La sección 'Análisis' se profundiza con datos estructurales clave. Esta ampliación añade profundidad al contenido sin sacrificar la navegación intuitiva, guiando al usuario desde el porqué (entorno) hasta el qué (programa) y el cómo (diseño y técnica). -->
+    <!-- Visualization & Content Choices: 1. Proceso de Diseño (Explicar) -> Carrusel interactivo (HTML/CSS/JS) -> El clic en botones actualiza la imagen y el texto -> Justificación: Transforma una secuencia estática en una narrativa visual y dinámica. 2. Razas Autóctonas (Explorar/Informar) -> Galería con selección (HTML/JS) -> El clic en un nombre de raza muestra su imagen y datos -> Justificación: Fomenta la interacción y presenta la información de forma visual y organizada. 3. Análisis Territorial (Contextualizar) -> Tarjetas informativas (HTML/CSS) -> Hover para efecto sutil -> Justificación: Divide conceptos complejos en fragmentos digeribles y visualmente separados. Todos los gráficos y tablas anteriores se mantienen. CONFIRMADO: No se utiliza SVG ni Mermaid.js. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FCFBF8; /* Off-white cálido */
+            color: #333333;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Lora', serif;
+            color: #8C1D18; /* Rojo teja oscuro */
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link.active, .nav-link:hover {
+            color: #8C1D18;
+            border-bottom-color: #8C1D18;
+        }
+        .card {
+            background-color: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .btn-primary {
+            background-color: #8C1D18;
+            color: #FFFFFF;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #A6231D;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: auto;
+            max-height: 500px;
+        }
+        .slider-diagram {
+            border: 2px solid #E5E5E5;
+            background-color: #FAFAFA;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">CRIAGA</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#vision" class="nav-link active">Visión</a>
+                <a href="#entorno" class="nav-link">Entorno</a>
+                <a href="#programa" class="nav-link">Programa</a>
+                <a href="#diseno" class="nav-link">Diseño</a>
+                <a href="#analisis" class="nav-link">Análisis</a>
+                <a href="#pliego" class="nav-link">Pliego</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-2xl">☰</button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white px-6 pb-4">
+             <a href="#vision" class="block py-2 nav-link-mobile">Visión</a>
+             <a href="#entorno" class="block py-2 nav-link-mobile">Entorno</a>
+             <a href="#programa" class="block py-2 nav-link-mobile">Programa</a>
+             <a href="#diseno" class="block py-2 nav-link-mobile">Diseño</a>
+             <a href="#analisis" class="block py-2 nav-link-mobile">Análisis</a>
+             <a href="#pliego" class="block py-2 nav-link-mobile">Pliego</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Section 1: Visión General -->
+        <section id="vision" class="mb-24 text-center">
+            <h2 class="text-4xl font-bold mb-4">Centro de Cría de Razas Galegas</h2>
+            <p class="max-w-3xl mx-auto text-lg mb-12 text-gray-600">
+                Un proyecto para investigar una nueva ruralidad a través de la construcción de una Granja Agroganadera en Lusquiños, Pontevedra. CRIAGA busca poner en valor las razas autóctonas, los terrenos de pasto y cultivo, y actuar como un catalizador para la comunidad local.
+            </p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-2">La Granja</h3>
+                    <p class="text-gray-600">El núcleo del proyecto. Un espacio para la cría extensiva y ecológica de seis razas de vacas gallegas, además de cabras, ovejas y gallinas, integrando el bienestar animal con el paisaje.</p>
+                </div>
+                <div class="card p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-2">La Vivienda</h3>
+                    <p class="text-gray-600">Una unidad de vivienda mínima para los encargados, diseñada para anclarse con la comunidad existente, rehabilitando y ampliando una construcción preexistente.</p>
+                </div>
+                <div class="card p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-2">Centro de Visitantes</h3>
+                    <p class="text-gray-600">Un espacio para la divulgación, formación y exposición, incluyendo una bodega para recuperar la viticultura local con variedades autóctonas como Caiño Blanco y Tinto.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 2: Análisis del Entorno -->
+        <section id="entorno" class="mb-24">
+            <h2 class="text-3xl font-bold mb-8 text-center">Análisis del Entorno: El porqué del Proyecto</h2>
+            <p class="max-w-3xl mx-auto text-lg mb-12 text-center text-gray-600">
+                El diseño de CRIAGA nace de un profundo análisis del territorio. Se busca recuperar elementos perdidos y potenciar los existentes para revitalizar el núcleo rural de Lusquiños.
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card p-6 rounded-lg">
+                    <h4 class="text-xl font-bold mb-2">Caminos</h4>
+                    <p class="text-gray-600">Recuperación de la red parroquial histórica de caminos, generando conexiones peatonales seguras y rutas para el ganado que revitalicen los lugares de encuentro vecinal.</p>
+                </div>
+                <div class="card p-6 rounded-lg">
+                    <h4 class="text-xl font-bold mb-2">Emparrados</h4>
+                    <p class="text-gray-600">Reactivación de la viticultura tradicional mediante la plantación de viñedos (emparrados), coexistiendo con la ganadería y recuperando un elemento cultural en desuso.</p>
+                </div>
+                <div class="card p-6 rounded-lg">
+                    <h4 class="text-xl font-bold mb-2">Monte Comunal</h4>
+                    <p class="text-gray-600">Puesta en valor del monte comunal como un elemento productivo a través del pastoreo, la limpieza de especies invasoras y la reforestación, previniendo incendios.</p>
+                </div>
+                <div class="card p-6 rounded-lg">
+                    <h4 class="text-xl font-bold mb-2">Río Gafos</h4>
+                    <p class="text-gray-600">Respeto por el espacio fluvial, manteniendo el proyecto alejado del cauce para prevenir problemas futuros y permitir que la naturaleza actúe como corredor ecológico.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: El Programa Ganadero -->
+        <section id="programa" class="mb-24">
+            <h2 class="text-3xl font-bold mb-8 text-center">El Programa Ganadero y de Espacios</h2>
+            <p class="max-w-3xl mx-auto text-lg mb-12 text-center text-gray-600">
+                El programa se dimensiona para cumplir con los requisitos de la ganadería ecológica, primando el bienestar de las razas autóctonas y el aprovechamiento sostenible del entorno.
+            </p>
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 text-center">Razas Autóctonas</h3>
+                    <div class="flex flex-wrap justify-center gap-2 mb-4">
+                        <!-- Breed buttons will be injected by JS -->
+                    </div>
+                    <div id="breed-display" class="text-center p-4 bg-gray-50 rounded-lg min-h-[280px]">
+                        <!-- Breed info will be injected by JS -->
+                    </div>
+                </div>
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 text-center">Distribución de Superficies de la Granja (m²)</h3>
+                    <div class="chart-container h-96">
+                        <canvas id="superficiesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Diseño Arquitectónico -->
+        <section id="diseno" class="mb-24">
+             <h2 class="text-3xl font-bold mb-8 text-center">Evolución del Diseño Arquitectónico</h2>
+             <p class="max-w-3xl mx-auto text-lg mb-12 text-center text-gray-600">
+                La arquitectura del proyecto busca una integración total con el entorno. La granja se concibe como un elemento que conecta la zona baja de pastos con el monte, fusionándose con la topografía.
+            </p>
+            <div class="card p-8 rounded-lg">
+                <div id="slider-container" class="relative">
+                    <div id="slider-diagram-content" class="slider-diagram rounded-lg mb-4">
+                        <!-- Diagram content will be injected by JS -->
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <button id="prev-slide" class="btn-primary px-4 py-2 rounded-full">←</button>
+                        <p id="slide-description" class="text-center font-semibold flex-grow mx-4"></p>
+                        <button id="next-slide" class="btn-primary px-4 py-2 rounded-full">→</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Análisis Técnico y Económico -->
+        <section id="analisis" class="mb-24">
+            <h2 class="text-3xl font-bold mb-8 text-center">Análisis Técnico y Económico</h2>
+            <p class="max-w-3xl mx-auto text-lg mb-12 text-center text-gray-600">
+                El proyecto se fundamenta en un riguroso análisis técnico, cumpliendo con toda la normativa vigente, y se define con un presupuesto detallado que asegura su viabilidad.
+            </p>
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 text-center">Resumen del Presupuesto</h3>
+                    <div class="chart-container">
+                         <canvas id="budgetChart"></canvas>
+                    </div>
+                    <p class="text-center mt-4 font-bold text-xl">Total: 4.594.747,74 €</p>
+                </div>
+                <div class="space-y-6">
+                     <div class="card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4">Datos Clave de la Estructura</h3>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="bg-gray-50 p-3 rounded"><strong>Cimentación:</strong> Zapatas corridas</div>
+                            <div class="bg-gray-50 p-3 rounded"><strong>Hormigón Muros:</strong> HA-30/F/12/XC4</div>
+                            <div class="bg-gray-50 p-3 rounded"><strong>Acero:</strong> B 500 S</div>
+                            <div class="bg-gray-50 p-3 rounded"><strong>Cubierta:</strong> Losa maciza H.A. 35 cm</div>
+                            <div class="bg-gray-50 p-3 rounded"><strong>Acción Viento:</strong> 0.45 kN/m²</div>
+                             <div class="bg-gray-50 p-3 rounded"><strong>Acción Nieve:</strong> 0.3 kN/m²</div>
+                        </div>
+                    </div>
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4">Cumplimiento Normativo (CTE)</h3>
+                        <div id="accordion-container" class="space-y-2">
+                            <!-- Accordion items will be injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Pliego de Condiciones -->
+        <section id="pliego">
+            <h2 class="text-3xl font-bold mb-8 text-center">Pliego de Condiciones</h2>
+            <p class="max-w-3xl mx-auto text-lg mb-12 text-center text-gray-600">
+                Seleccione una unidad de obra para consultar sus especificaciones técnicas, normativa de aplicación y proceso de ejecución detallado.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <button class="pliego-btn btn-primary px-4 py-2 rounded-md" data-target="muro">Muro de Hormigón</button>
+                <button class="pliego-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-md" data-target="viga">Viga de Hormigón</button>
+                <button class="pliego-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-md" data-target="losa">Losa Maciza</button>
+            </div>
+            <div id="pliego-content" class="card p-8 rounded-lg min-h-[300px]">
+                <!-- Pliego content will be injected by JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white mt-24 border-t">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>&copy; 2025 Pedro Citoula Pérez - Proyecto CRIAGA</p>
+            <p class="text-sm">Aplicación Interactiva generada para la exploración del proyecto.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Data
+            const budgetData = {
+                labels: ['Acond. Terreno', 'Estructuras', 'Urbanización', 'Instalaciones', 'Cimentaciones', 'Otros'],
+                datasets: [{
+                    label: 'Distribución del Presupuesto',
+                    data: [27.42, 22.28, 14.21, 12.27, 9.70, 14.12],
+                    backgroundColor: ['#8C1D18', '#A6231D', '#BF4A3F', '#D97566', '#F2A499', '#E5E5E5'],
+                    borderColor: '#FCFBF8',
+                    borderWidth: 3,
+                    hoverOffset: 4
+                }]
+            };
+
+            const superficiesData = {
+                labels: ['Carballeira', 'Viñedos', 'Zona Ext. Vacas', 'Granja', 'Eira', 'Caminos', 'Cultivos', 'Invernaderos'],
+                datasets: [{
+                    label: 'Superficie (m²)',
+                    data: [12359.98, 4993.75, 4181.67, 2989.32, 2287.89, 1511.95, 1449.79, 432.00],
+                    backgroundColor: '#BF4A3F',
+                    borderColor: '#8C1D18',
+                    borderWidth: 1
+                }]
+            };
+
+            const breedsData = [
+                { id: 'cachena', name: 'Cachena', img: 'https://placehold.co/400x250/EFE8D8/8C1D18?text=Vaca+Cachena' },
+                { id: 'caldela', name: 'Caldelá', img: 'https://placehold.co/400x250/EFE8D8/8C1D18?text=Vaca+Caldelá' },
+                { id: 'frieiresa', name: 'Frieiresa', img: 'https://placehold.co/400x250/EFE8D8/8C1D18?text=Vaca+Frieiresa' },
+                { id: 'limia', name: 'Limiá', img: 'https://placehold.co/400x250/EFE8D8/8C1D18?text=Vaca+Limiá' },
+                { id: 'rubia', name: 'Rubia Galega', img: 'https://placehold.co/400x250/EFE8D8/8C1D18?text=Rubia+Galega' },
+                { id: 'vianesa', name: 'Vianesa', img: 'https://placehold.co/400x250/EFE8D8/8C1D18?text=Vaca+Vianesa' }
+            ];
+
+            const sliderData = [
+                { description: '1. Preexistencias y Parcela', diagram: '<div class="h-24 w-16 bg-gray-400 opacity-50 relative" style="left: -100px; top: 40px;"></div><div class="h-16 w-12 bg-gray-400 opacity-50 relative" style="left: 100px; top: -20px;"></div><p class="absolute bottom-2 text-xs text-gray-500">Dos edificaciones en ruinas en parcelas separadas.</p>' },
+                { description: '2. Idea de Volumen Inicial', diagram: '<div class="h-12 w-64 bg-red-300 absolute" style="top: 20px;"></div><p class="absolute bottom-2 text-xs text-gray-500">Un gran volumen longitudinal para la granja.</p>' },
+                { description: '3. Idea Estructural Inicial', diagram: '<div class="flex gap-2 h-24">{Array(10).fill(0).map(() => `<div class="w-2 bg-red-400"></div>`).join("")}</div><p class="absolute bottom-2 text-xs text-gray-500">Secuencia de muros permeables.</p>' },
+                { description: '4. Adaptación a la Topografía', diagram: '<div class="h-32 w-64 bg-red-300 absolute" style="clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);"></div><p class="absolute bottom-2 text-xs text-gray-500">El volumen se quiebra para seguir las curvas de nivel.</p>' },
+                { description: '5. Desarrollo y Estado Final', diagram: '<div class="h-32 w-64 bg-red-500 relative" style="clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);"><div class="absolute top-0 left-0 w-full h-4 bg-green-500"></div></div><p class="absolute bottom-2 text-xs text-gray-500">Edificio final con cubierta vegetal, integrado en el paisaje.</p>' },
+            ];
+            
+            // Chart Initialization
+            const ctxBudget = document.getElementById('budgetChart').getContext('2d');
+            new Chart(ctxBudget, { type: 'doughnut', data: budgetData, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { font: { family: "'Inter', sans-serif" }}}, tooltip: { callbacks: { label: (c) => `${c.label}: ${c.parsed}%` }}} }});
+
+            const ctxSuperficies = document.getElementById('superficiesChart').getContext('2d');
+            new Chart(ctxSuperficies, { type: 'bar', data: superficiesData, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, title: { display: true, text: 'Superficie (m²)' } } } } });
+
+            // Accordion and Pliego (same as before)
+            const accordionData = [
+                { title: 'DB-SI: Seguridad en caso de Incendio', content: 'El proyecto cumple con las exigencias del DB-SI, considerando la granja un espacio exterior abierto. Se definen sectores de incendio para zonas cerradas como la sala de control (Riesgo Bajo). Se dota de extintores, B.I.E., hidrantes y sistema de detección y alarma. La estructura principal (muros y losa de hormigón) garantiza una resistencia al fuego R-90.' },
+                { title: 'DB-SUA: Seguridad de Utilización y Accesibilidad', content: 'Se garantiza la seguridad frente a caídas con pavimentos de clase 3 (Rd>45). Los desniveles se resuelven con rampas de pendiente controlada (<12%). Aunque no es de obligado cumplimiento por el uso agrario, el diseño de la planta baja es accesible. Se instala un sistema de protección contra el rayo de Nivel 3.' },
+                { title: 'DB-HS: Salubridad', content: 'Se asegura la protección frente a la humedad en muros y soleras en contacto con el terreno, y en la cubierta vegetal. La ventilación es principalmente natural. Se proyecta una red de saneamiento para purines con tratamiento y depuración por lagunaje, y una red separada para el aseo. El edificio se considera exento de cumplir la protección frente al radón por su condición de espacio abierto.' },
+                { title: 'DB-HE: Ahorro de Energía', content: 'El proyecto está exento de cumplir las exigencias de limitación de consumo (HE0, HE1, HE2) por ser un edificio agrícola de baja demanda energética. No obstante, el diseño bioclimático (cubierta vegetal, ventilación natural) contribuye a un uso racional de la energía.' }
+            ];
+            const accordionContainer = document.getElementById('accordion-container');
+            accordionData.forEach(item => {
+                const accordionItem = document.createElement('div');
+                accordionItem.className = 'bg-white border border-gray-200 rounded-lg';
+                accordionItem.innerHTML = `<button class="accordion-header w-full flex justify-between items-center p-4 text-left font-semibold"><span>${item.title}</span><span class="transform transition-transform duration-300">▼</span></button><div class="accordion-content px-4 pb-4 text-gray-700"><p>${item.content}</p></div>`;
+                accordionContainer.appendChild(accordionItem);
+            });
+            document.querySelectorAll('.accordion-header').forEach(button => button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('span:last-child');
+                const isOpening = !content.style.maxHeight;
+                document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
+                document.querySelectorAll('.accordion-header span:last-child').forEach(i => i.style.transform = 'rotate(0deg)');
+                if (isOpening) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            }));
+
+            const pliegoData = {
+                muro: { title: 'Unidad EHN030B: Muro de hormigón armado', content: `<p class="mb-4"><strong>Descripción:</strong> Muro de hormigón armado de 40 cm de espesor medio, realizado con hormigón HA-30/F/12/XC4 fabricado en central y vertido con cubilote. Armado con acero UNE-EN 10080 B 500 S (cuantía aprox. 51,4 kg/m³).</p><p class="mb-4"><strong>Normativa:</strong> Elaboración, transporte y puesta en obra del hormigón según el Código Estructural.</p><h4 class="font-semibold mb-2">Proceso de Ejecución:</h4><ol class="list-decimal list-inside space-y-1"><li>Replanteo y comprobación de armaduras de espera.</li><li>Colocación de armadura principal con separadores homologados.</li><li>Vertido y compactación del hormigón, evitando la disgregación.</li><li>Curado del hormigón para garantizar la resistencia.</li></ol>` },
+                viga: { title: 'Unidad EHV030: Viga de hormigón armado', content: `<p class="mb-4"><strong>Descripción:</strong> Viga descolgada de hormigón armado, realizada con hormigón HA-25/F/20/X0 fabricado en central y vertido con cubilote. Armado con acero UNE-EN 10080 B 500 S (cuantía aprox. 112,7 kg/m³).</p><p class="mb-4"><strong>Normativa:</strong> Código Estructural y NTE-EME (Encofrados).</p><h4 class="font-semibold mb-2">Proceso de Ejecución:</h4><ol class="list-decimal list-inside space-y-1"><li>Montaje de sistema de encofrado con superficie tratada.</li><li>Colocación de la armadura con separadores, asegurando recubrimientos.</li><li>Vertido y compactación del hormigón.</li></ol>` },
+                losa: { title: 'Unidad EHL030: Losa maciza de hormigón armado', content: `<p class="mb-4"><strong>Descripción:</strong> Losa maciza horizontal de 35 cm de canto, realizada con hormigón HA-25/F/20/X0. Armado con acero UNE-EN 10080 B 500 S (cuantía aprox. 28,7 kg/m²).</p><p class="mb-4"><strong>Normativa:</strong> Código Estructural y NTE-EME (Encofrados).</p><h4 class="font-semibold mb-2">Proceso de Ejecución:</h4><ol class="list-decimal list-inside space-y-1"><li>Montaje de sistema de encofrado continuo sobre puntales.</li><li>Colocación de armaduras (inferior, superior, de reparto) con separadores.</li><li>Vertido continuo y compactación del hormigón.</li></ol>` }
+            };
+            const pliegoButtons = document.querySelectorAll('.pliego-btn');
+            const pliegoContent = document.getElementById('pliego-content');
+            function updatePliegoContent(target) { pliegoContent.innerHTML = `<h3 class="text-2xl font-bold mb-4">${pliegoData[target].title}</h3>${pliegoData[target].content}`; }
+            pliegoButtons.forEach(button => button.addEventListener('click', () => {
+                const target = button.dataset.target;
+                updatePliegoContent(target);
+                pliegoButtons.forEach(btn => { btn.classList.remove('btn-primary'); btn.classList.add('bg-gray-200', 'text-gray-700'); });
+                button.classList.add('btn-primary'); button.classList.remove('bg-gray-200', 'text-gray-700');
+            }));
+            updatePliegoContent('muro');
+            
+            // Breed Gallery Initialization
+            const breedButtonContainer = document.querySelector('#programa .flex-wrap');
+            const breedDisplay = document.getElementById('breed-display');
+            breedsData.forEach(breed => {
+                const button = document.createElement('button');
+                button.className = 'breed-btn bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm';
+                button.dataset.id = breed.id;
+                button.textContent = breed.name;
+                breedButtonContainer.appendChild(button);
+            });
+            function updateBreedInfo(id) {
+                const breed = breedsData.find(b => b.id === id);
+                breedDisplay.innerHTML = `<img src="${breed.img}" alt="Imagen de ${breed.name}" class="w-full h-auto object-cover rounded-lg mb-4"><h4 class="text-xl font-bold">${breed.name}</h4><p class="text-gray-600">Raza autóctona en programa de cría extensiva.</p>`;
+                document.querySelectorAll('.breed-btn').forEach(btn => {
+                    btn.classList.toggle('btn-primary', btn.dataset.id === id);
+                     btn.classList.toggle('bg-gray-200', btn.dataset.id !== id);
+                     btn.classList.toggle('text-gray-700', btn.dataset.id !== id);
+                });
+            }
+            breedButtonContainer.addEventListener('click', (e) => {
+                if(e.target.classList.contains('breed-btn')) {
+                    updateBreedInfo(e.target.dataset.id);
+                }
+            });
+            updateBreedInfo('cachena'); // Initial state
+
+            // Design Slider Initialization
+            let currentSlide = 0;
+            const sliderDiagram = document.getElementById('slider-diagram-content');
+            const slideDescription = document.getElementById('slide-description');
+            const prevBtn = document.getElementById('prev-slide');
+            const nextBtn = document.getElementById('next-slide');
+
+            function updateSlider() {
+                const slide = sliderData[currentSlide];
+                sliderDiagram.innerHTML = slide.diagram.replace(/{Array\(([^)]+)\)\.fill\(([^)]+)\)\.map\(([^)]+)\)\.join\(([^)]+)\)}/g, (match, count, fillVal, mapFunc, joinVal) => new Function('return Array(' + count + ').fill(' + fillVal + ').map(' + mapFunc + ').join(' + joinVal + ')')());
+                slideDescription.textContent = slide.description;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + sliderData.length) % sliderData.length;
+                updateSlider();
+            });
+            nextBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % sliderData.length;
+                updateSlider();
+            });
+            updateSlider(); // Initial state
+
+
+            // Nav Scrollspy
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            window.addEventListener('scroll', () => {
+                let current = 'vision';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 80) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            document.querySelectorAll('.nav-link-mobile').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+        });
+    </script>
+</body>
+</html>
