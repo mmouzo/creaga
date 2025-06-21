@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+const { title } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} || CRIAGA - Explorador Interactivo del Proyecto v2</title>
+    <!-- Chosen Palette: CRIAGA Red (Tonos terrosos y rojo teja: #8C1D18, #FCFBF8, #333333, #E5E5E5) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+</head>
+<body class="antialiased">
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">CRIAGA</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#vision" class="nav-link active">Visión</a>
+                <a href="#entorno" class="nav-link">Entorno</a>
+                <a href="#programa" class="nav-link">Programa</a>
+                <a href="#diseno" class="nav-link">Diseño</a>
+                <a href="#analisis" class="nav-link">Análisis</a>
+                <a href="#pliego" class="nav-link">Pliego</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-2xl">☰</button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white px-6 pb-4">
+             <a href="#vision" class="block py-2 nav-link-mobile">Visión</a>
+             <a href="#entorno" class="block py-2 nav-link-mobile">Entorno</a>
+             <a href="#programa" class="block py-2 nav-link-mobile">Programa</a>
+             <a href="#diseno" class="block py-2 nav-link-mobile">Diseño</a>
+             <a href="#analisis" class="block py-2 nav-link-mobile">Análisis</a>
+             <a href="#pliego" class="block py-2 nav-link-mobile">Pliego</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <slot /> <!-- Page content will be injected here -->
+    </main>
+
+    <footer class="bg-white mt-24 border-t">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>&copy; 2025 Pedro Citoula Pérez - Proyecto CRIAGA</p>
+            <p class="text-sm">Aplicación Interactiva generada para la exploración del proyecto.</p>
+        </div>
+    </footer>
+
+    <!-- Moved page-specific script to index.astro, or will be in specific components -->
+</body>
+</html>

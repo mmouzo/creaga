@@ -1,0 +1,40 @@
+---
+// Componente para la Sección Análisis Técnico y Económico
+---
+<section id="analisis" class="mb-24">
+    <h2 class="text-3xl font-bold mb-8 text-center">Análisis Técnico y Económico</h2>
+    <p class="max-w-3xl mx-auto text-lg mb-12 text-center text-gray-600">
+        El proyecto CRIAGA se fundamenta en un riguroso análisis técnico, asegurando el cumplimiento de la normativa vigente (Código Técnico de la Edificación - CTE, Código Estructural, etc.) y se define con un presupuesto detallado que garantiza su viabilidad económica. Se consideran aspectos como la cimentación adaptada al estudio geotécnico, la estructura de hormigón armado, y las acciones de viento y nieve correspondientes a la ubicación.
+    </p>
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <div class="card p-6 rounded-lg">
+            <h3 class="text-xl font-bold mb-4 text-center">Resumen del Presupuesto (Estimado)</h3>
+            <div class="chart-container">
+                 <canvas id="budgetChart"></canvas>
+            </div>
+            <p class="text-center mt-4 font-bold text-xl">Total Estimado: 4.594.747,74 €</p>
+            <p class="text-xs text-center text-gray-500 mt-1">Este es un valor de referencia basado en el documento técnico. El desglose porcentual es ilustrativo.</p>
+        </div>
+        <div class="space-y-6">
+             <div class="card p-6 rounded-lg">
+                <h3 class="text-xl font-bold mb-4">Datos Clave de la Estructura</h3>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div class="bg-gray-50 p-3 rounded"><strong>Cimentación:</strong> Zapatas corridas (adaptadas al estudio geotécnico).</div>
+                    <div class="bg-gray-50 p-3 rounded"><strong>Hormigón Muros:</strong> HA-30/F/12/XC4 (principalmente).</div>
+                    <div class="bg-gray-50 p-3 rounded"><strong>Acero Corrugado:</strong> B 500 S.</div>
+                    <div class="bg-gray-50 p-3 rounded"><strong>Cubierta Granja:</strong> Losa maciza de hormigón armado (aprox. 35 cm).</div>
+                    <div class="bg-gray-50 p-3 rounded"><strong>Acción Viento (Pontevedra):</strong> qb = 0.45 kN/m² (Zona A).</div>
+                     <div class="bg-gray-50 p-3 rounded"><strong>Carga Nieve (Pontevedra, &lt;1000m):</strong> sk = 0.3 kN/m².</div>
+                </div>
+            </div>
+            <div class="card p-6 rounded-lg">
+                <h3 class="text-xl font-bold mb-4">Cumplimiento Normativo (CTE)</h3>
+                <p class="text-sm text-gray-600 mb-3">El proyecto se adhiere a las exigencias del Código Técnico de la Edificación. A continuación, un resumen de los Documentos Básicos (DB) más relevantes para la granja:</p>
+                <div id="accordion-container" class="space-y-2">
+                    <!-- Accordion items are injected by JS in index.astro -->
+                     <p class="text-gray-500 text-sm">Cargando información sobre cumplimiento normativo...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

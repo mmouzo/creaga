@@ -1,0 +1,28 @@
+---
+// Componente para la Sección El Programa Ganadero
+---
+<section id="programa" class="mb-24">
+    <h2 class="text-3xl font-bold mb-8 text-center">El Programa Ganadero y de Espacios</h2>
+    <p class="max-w-3xl mx-auto text-lg mb-12 text-center text-gray-600">
+        CRIAGA se enfoca en la producción extensiva y ecológica, priorizando el bienestar animal y el uso de razas autóctonas adaptadas al entorno. El programa ganadero incluye vacas (Cachena, Caldelá, Frieiresa, Limiá, Rubia Galega, Vianesa), cabras (Cabra Galega), ovejas (Ovella Galega) y gallinas (Galiña de Mos). Se dimensionan los espacios interiores y de pasto según las necesidades de la ganadería ecológica.
+    </p>
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <div class="card p-6 rounded-lg">
+            <h3 class="text-xl font-bold mb-4 text-center">Razas Autóctonas Galegas</h3>
+            <div class="flex flex-wrap justify-center gap-2 mb-4">
+                <!-- Breed buttons are injected by JS in index.astro -->
+            </div>
+            <div id="breed-display" class="text-center p-4 bg-gray-50 rounded-lg min-h-[280px]">
+                <!-- Breed info will be injected by JS -->
+                <p>Selecciona una raza para ver más información.</p>
+            </div>
+        </div>
+        <div class="card p-6 rounded-lg">
+            <h3 class="text-xl font-bold mb-4 text-center">Distribución de Superficies de la Granja (m²)</h3>
+            <p class="text-sm text-center text-gray-500 mb-2">Estimación de superficies del proyecto según el programa ganadero y agrícola.</p>
+            <div class="chart-container h-96">
+                <canvas id="superficiesChart"></canvas>
+            </div>
+        </div>
+    </div>
+</section>

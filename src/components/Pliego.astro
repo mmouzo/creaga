@@ -1,0 +1,18 @@
+---
+// Componente para la Sección Pliego de Condiciones
+---
+<section id="pliego">
+    <h2 class="text-3xl font-bold mb-8 text-center">Pliego de Condiciones Técnicas Particulares</h2>
+    <p class="max-w-3xl mx-auto text-lg mb-12 text-center text-gray-600">
+        El Pliego de Condiciones Técnicas Particulares detalla las especificaciones para las unidades de obra más representativas del proyecto. A continuación, se presenta un extracto interactivo. Seleccione una unidad para ver su descripción, normativa de aplicación y proceso de ejecución.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4 mb-8">
+        <button class="pliego-btn btn-primary px-4 py-2 rounded-md" data-target="muro">Muro de Hormigón Armado (EHN030B)</button>
+        <button class="pliego-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-md" data-target="viga">Viga de Hormigón Armado (EHV030)</button>
+        <button class="pliego-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-md" data-target="losa">Losa Maciza de Hormigón (EHL030)</button>
+    </div>
+    <div id="pliego-content" class="card p-8 rounded-lg min-h-[300px]">
+        <!-- Pliego content is injected by JS in index.astro -->
+        <p class="text-gray-500">Seleccione una unidad de obra para ver los detalles.</p>
+    </div>
+</section>
