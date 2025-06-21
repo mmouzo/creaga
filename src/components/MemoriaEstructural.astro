@@ -1,0 +1,91 @@
+---
+// Componente para la Sección Memoria Estructural
+---
+
+<style>
+    .feature-card {
+        @apply bg-white p-4 rounded-lg shadow transition-all hover:shadow-md;
+    }
+    .feature-card h4 {
+        @apply text-lg font-semibold text-sky-700 mb-2;
+    }
+    .feature-card p {
+        @apply text-sm text-gray-600;
+    }
+    .grid-auto-rows {
+        grid-auto-rows: minmax(min-content, max-content);
+    }
+</style>
+
+<section id="memoria-estructural" class="mb-24">
+    <h2 class="text-3xl font-bold mb-8 text-center">Memoria Estructural</h2>
+    <p class="max-w-3xl mx-auto text-lg mb-10 text-center text-gray-600">
+        La memoria estructural detalla la solución adoptada para la granja, priorizando la integración paisajística y la funcionalidad. Se basa en un sistema de pórticos de hormigón armado que se adaptan a la topografía, minimizando el impacto visual y facilitando la conexión con el entorno.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-6 mb-10 grid-auto-rows">
+        <div class="feature-card md:col-span-1">
+            <h4>Justificación de la Solución</h4>
+            <p>Se opta por una estructura longitudinal de muros de hormigón armado paralelos, siguiendo la pendiente del terreno. Esta disposición permite una conexión visual y física directa entre los pastos y la zona de monte, integrando el edificio en el paisaje.</p>
+        </div>
+        <div class="feature-card md:col-span-1">
+            <h4>Sistema Estructural Principal</h4>
+            <p>Pórticos de hormigón armado con muros portantes y vigas de canto en voladizo. La cubierta es una losa maciza de hormigón armado (35 cm), manteniendo una altura constante que permite el almacenaje y paso de maquinaria.</p>
+        </div>
+        <div class="feature-card md:col-span-1">
+            <h4>Cimentación</h4>
+            <p>Zapatas corridas bajo los muros, apoyadas sobre terreno resistente (según estudio geotécnico a 2.3-3.6m de profundidad), con hormigón de limpieza. Se prevén pozos de cimentación si son necesarios y mejora del terreno con zahorras.</p>
+        </div>
+    </div>
+
+    <div class="card p-6 rounded-lg mb-10">
+        <h3 class="text-xl font-semibold mb-4 text-center">Características Clave de Materiales y Cálculo</h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+            <div class="bg-sky-50 p-3 rounded">
+                <strong class="text-sky-800">Hormigón (General):</strong> HA-30 (fck 30 N/mm²) para cimentación, muros, losas. HA-25 para algunos elementos.
+            </div>
+            <div class="bg-sky-50 p-3 rounded">
+                <strong class="text-sky-800">Acero Corrugado:</strong> B 500 S (límite elástico 500 N/mm²).
+            </div>
+            <div class="bg-sky-50 p-3 rounded">
+                <strong class="text-sky-800">Método de Cálculo:</strong> Estados Límites (Código Estructural), usando CYPE CAD con revisión manual.
+            </div>
+            <div class="bg-sky-50 p-3 rounded">
+                <strong class="text-sky-800">Control de Calidad:</strong> Nivel estadístico para hormigón, normal para acero. Ensayos según Código Estructural.
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h3 class="text-xl font-semibold mb-6 text-center">Acciones Consideradas en el Cálculo</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="feature-card">
+                <h4>Acciones Gravitatorias</h4>
+                <p>Peso propio de la losa de hormigón (35 cm), cubierta vegetal pesada (6,5 kN/m²), y sobrecargas de uso (5 kN/m² en zonas públicas, 1 kN/m² en cubierta para mantenimiento).</p>
+            </div>
+            <div class="feature-card">
+                <h4>Acciones del Viento</h4>
+                <p>Presión dinámica (qb) de 0,45 kN/m² (Pontevedra, Zona A). Grado de aspereza III. Coeficientes de presión/succión según CTE DB-SE-AE.</p>
+            </div>
+            <div class="feature-card">
+                <h4>Acciones de Nieve</h4>
+                <p>Carga de nieve de 0,3 kN/m² (Pontevedra, cota < 1000m, cubierta plana).</p>
+            </div>
+            <div class="feature-card">
+                <h4>Acciones Térmicas y Reológicas</h4>
+                <p>Consideradas en el diseño de juntas de dilatación (2 juntas principales dividiendo la estructura).</p>
+            </div>
+            <div class="feature-card">
+                <h4>Acciones Sísmicas</h4>
+                <p>No consideradas por ser construcción de importancia normal en zona de aceleración sísmica básica < 0,04g (NCSE-02).</p>
+            </div>
+            <div class="feature-card">
+                <h4>Combinaciones de Acciones</h4>
+                <p>Según Código Estructural para Estados Límite Últimos (ELU) y de Servicio (ELS), considerando coeficientes parciales de seguridad y de combinación.</p>
+            </div>
+        </div>
+    </div>
+    <p class="text-xs text-gray-500 mt-8 text-center">
+        La memoria estructural completa incluye detalles sobre asientos admisibles, límites de deformación, y características específicas de los hormigones y aceros para cada elemento (cimentación, muros, losas, solera), así como los coeficientes de seguridad aplicados.
+    </p>
+</section>

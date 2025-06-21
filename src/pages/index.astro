@@ -1,20 +1,28 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import MainLayout from '../layouts/MainLayout.astro';
 import Vision from '../components/Vision.astro';
 import Entorno from '../components/Entorno.astro';
 import Programa from '../components/Programa.astro';
 import Diseno from '../components/Diseno.astro';
 import Analisis from '../components/Analisis.astro';
+import MemoriaUrbanistica from '../components/MemoriaUrbanistica.astro';
+import MemoriaEstructural from '../components/MemoriaEstructural.astro';
 import Pliego from '../components/Pliego.astro';
 ---
 
-<MainLayout title="Página Principal">
-    <Vision />
-    <Entorno />
-    <Programa />
-    <Diseno />
-    <Analisis />
-    <Pliego />
+<MainLayout title="CRIAGA - Explorador del Proyecto">
+    <main class="container mx-auto px-4 md:px-6 py-8">
+        <Vision />
+        <Entorno />
+        <Programa />
+        <Diseno />
+        <Analisis />
+        <MemoriaUrbanistica />
+        <MemoriaEstructural />
+        <Pliego />
+    </main>
+</MainLayout>
 
     <script is:inline>
         document.addEventListener('DOMContentLoaded', function () {

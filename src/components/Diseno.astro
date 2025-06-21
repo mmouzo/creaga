@@ -6,13 +6,13 @@
      <p class="max-w-3xl mx-auto text-lg mb-12 text-center text-gray-600">
         La granja, edificio principal, se concibe como un elemento de conexión entre los pastos bajos y el monte. Su diseño busca la mínima alteración del paisaje y la máxima integración topográfica, acompañando las curvas de nivel. Se estructura como una secuencia de muros permeables que permiten la ventilación e iluminación natural, y vistas cruzadas, culminando en una cubierta vegetal.
     </p>
-    <div class="card p-8 rounded-lg">
+    <div class="bg-white shadow-xl rounded-lg p-8"> {/* Reemplazo de card con shadow-xl y padding */}
         <div id="slider-container" class="relative">
             <div id="slider-diagram-content" class="slider-diagram rounded-lg mb-4">
                 <!-- Diagram content is injected by JS in index.astro -->
                  <p class="text-gray-500">Cargando diagrama interactivo del proceso de diseño...</p>
             </div>
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-center mt-4"> {/* Añadido margen superior para separar botones del slider */}
                 <button id="prev-slide" class="btn-primary px-4 py-2 rounded-full">← Anterior</button>
                 <p id="slide-description" class="text-center font-semibold flex-grow mx-4">Descripción de la fase de diseño.</p>
                 <button id="next-slide" class="btn-primary px-4 py-2 rounded-full">Siguiente →</button>

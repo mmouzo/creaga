@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 body {
     font-family: 'Inter', sans-serif;
@@ -24,23 +22,56 @@ h1, h2, h3, h4 {
     border: 1px solid #E5E5E5;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+.card {
+    @apply bg-white shadow-lg rounded-xl overflow-hidden transition-all duration-300 ease-in-out;
 }
+.card:hover {
+    /* transform: translateY(-5px); // Keep or remove based on preference */
+    @apply shadow-2xl; /* Enhanced shadow on hover */
+}
+.card h3 { /* Apply consistent heading color for cards, can be overridden by more specific component styles */
+    @apply text-sky-700;
+}
+
 .btn-primary {
-    background-color: #8C1D18;
-    color: #FFFFFF;
-    transition: background-color 0.3s ease;
+    @apply bg-sky-600 text-white transition-colors duration-200 ease-in-out py-2 px-4 rounded-md;
 }
 .btn-primary:hover {
-    background-color: #A6231D;
+    @apply bg-sky-700;
 }
-.accordion-content {
+
+/* Accordion Styles - Using Tailwind classes directly in components is preferred, but these are global fallbacks/enhancements */
+#accordion-container .accordion-item button {
+    @apply bg-slate-100 text-slate-800 p-4 w-full text-left border-b border-slate-300 cursor-pointer transition-colors duration-200 ease-in-out flex justify-between items-center;
+}
+
+#accordion-container .accordion-item button:hover {
+    @apply bg-slate-200;
+}
+
+#accordion-container .accordion-item button.active { /* Style for the active accordion button */
+    @apply bg-sky-600 text-white;
+}
+
+#accordion-container .accordion-item button .arrow { /* Style for the arrow icon if you add one */
+    @apply transition-transform duration-200 ease-in-out;
+}
+
+#accordion-container .accordion-item button.active .arrow {
+    @apply transform rotate-180;
+}
+
+.accordion-content { /* This existing class is for the JS max-height transition */
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease-out;
+    @apply bg-white border border-t-0 border-slate-300; /* Added some base styling */
 }
+#accordion-container .accordion-item .accordion-content.prose { /* Specific styling for prose content within accordion */
+    @apply p-4;
+}
+
+
 .chart-container {
     position: relative;
     width: 100%;
