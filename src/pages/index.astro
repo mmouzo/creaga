@@ -1,16 +1,539 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import Section from '../components/Section.astro';
+import Card from '../components/Card.astro';
+import BreedGallery from '../components/BreedGallery';
+import DesignSlider from '../components/DesignSlider';
+import InteractiveChart from '../components/InteractiveChart';
+import Accordion from '../components/Accordion';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="CRIAGA - Centro de Cría de Razas Galegas">
+  <Navigation />
+  <TableOfContents />
+  
+  <main class="container mx-auto px-6 py-12 max-w-7xl">
+    
+    <!-- Hero Section -->
+    <section class="text-center mb-24 py-12">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl md:text-6xl font-bold font-serif text-criaga-red mb-6 animate-fade-in">
+          CRIAGA
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-600 mb-8 animate-slide-up">
+          Centro de Cría de Razas Galegas
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-12 animate-fade-in">
+          Un proyecto innovador para investigar una nueva ruralidad a través de la construcción 
+          de una Granja Agroganadera en Lusquiños, Pontevedra. CRIAGA busca poner en valor las 
+          razas autóctonas, los terrenos de pasto y cultivo, y actuar como un catalizador para 
+          la comunidad local.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a 
+            href="#vision" 
+            class="bg-criaga-red text-white px-8 py-3 rounded-lg font-semibold hover:bg-criaga-red-light transition-colors duration-200 shadow-lg hover:shadow-xl"
+          >
+            Explorar Proyecto
+          </a>
+          <a 
+            href="#programa" 
+            class="border-2 border-criaga-red text-criaga-red px-8 py-3 rounded-lg font-semibold hover:bg-criaga-red hover:text-white transition-all duration-200"
+          >
+            Ver Programa
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 1: Visión General -->
+    <Section 
+      id="vision" 
+      title="Visión General del Proyecto"
+      subtitle="CRIAGA integra tres elementos fundamentales: la granja como núcleo productivo, la vivienda como anclaje comunitario, y el centro de visitantes como espacio de divulgación y formación."
+    >
+      <div class="grid md:grid-cols-3 gap-8">
+        <Card title="La Granja" className="animate-slide-up">
+          <div class="mb-4">
+            <img src="/images/image12.png" alt="Vista de la granja" class="w-full h-32 object-cover rounded-lg mb-4" loading="lazy">
+          </div>
+          <p class="text-gray-600 leading-relaxed">
+            El núcleo del proyecto. Un espacio para la cría extensiva y ecológica de seis razas 
+            de vacas gallegas, además de cabras, ovejas y gallinas, integrando el bienestar animal 
+            con el paisaje natural.
+          </p>
+        </Card>
+        
+        <Card title="La Vivienda" className="animate-slide-up" style="animation-delay: 0.1s">
+          <div class="mb-4">
+            <img src="/images/image13.png" alt="Vista de la vivienda" class="w-full h-32 object-cover rounded-lg mb-4" loading="lazy">
+          </div>
+          <p class="text-gray-600 leading-relaxed">
+            Una unidad de vivienda mínima para los encargados, diseñada para anclarse con la 
+            comunidad existente, rehabilitando y ampliando una construcción preexistente con 
+            criterios de sostenibilidad.
+          </p>
+        </Card>
+        
+        <Card title="Centro de Visitantes" className="animate-slide-up" style="animation-delay: 0.2s">
+          <div class="mb-4">
+            <img src="/images/image14.png" alt="Centro de visitantes" class="w-full h-32 object-cover rounded-lg mb-4" loading="lazy">
+          </div>
+          <p class="text-gray-600 leading-relaxed">
+            Un espacio para la divulgación, formación y exposición, incluyendo una bodega para 
+            recuperar la viticultura local con variedades autóctonas como Caiño Blanco y Tinto.
+          </p>
+        </Card>
+      </div>
+    </Section>
+
+    <!-- Section 2: Análisis del Entorno -->
+    <Section 
+      id="entorno" 
+      title="Análisis del Entorno"
+      subtitle="El diseño de CRIAGA nace de un profundo análisis del territorio. Se busca recuperar elementos perdidos y potenciar los existentes para revitalizar el núcleo rural de Lusquiños."
+    >
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Card className="text-center animate-fade-in">
+          <div class="mb-4">
+            <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold font-serif text-criaga-red mb-2">Caminos</h4>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Recuperación de la red parroquial histórica de caminos, generando conexiones peatonales 
+            seguras y rutas para el ganado que revitalicen los lugares de encuentro vecinal.
+          </p>
+        </Card>
+        
+        <Card className="text-center animate-fade-in" style="animation-delay: 0.1s">
+          <div class="mb-4">
+            <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold font-serif text-criaga-red mb-2">Emparrados</h4>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Reactivación de la viticultura tradicional mediante la plantación de viñedos (emparrados), 
+            coexistiendo con la ganadería y recuperando un elemento cultural en desuso.
+          </p>
+        </Card>
+        
+        <Card className="text-center animate-fade-in" style="animation-delay: 0.2s">
+          <div class="mb-4">
+            <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold font-serif text-criaga-red mb-2">Monte Comunal</h4>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Puesta en valor del monte comunal como un elemento productivo a través del pastoreo, 
+            la limpieza de especies invasoras y la reforestación, previniendo incendios.
+          </p>
+        </Card>
+        
+        <Card className="text-center animate-fade-in" style="animation-delay: 0.3s">
+          <div class="mb-4">
+            <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293H15M9 10v4a2 2 0 002 2h2a2 2 0 002-2v-4M9 10V9a2 2 0 012-2h2a2 2 0 012 2v1"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold font-serif text-criaga-red mb-2">Río Gafos</h4>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Respeto por el espacio fluvial, manteniendo el proyecto alejado del cauce para prevenir 
+            problemas futuros y permitir que la naturaleza actúe como corredor ecológico.
+          </p>
+        </Card>
+      </div>
+    </Section>
+
+    <!-- Section 3: Programa Ganadero -->
+    <Section 
+      id="programa" 
+      title="Programa Ganadero y de Espacios"
+      subtitle="El programa se dimensiona para cumplir con los requisitos de la ganadería ecológica, primando el bienestar de las razas autóctonas y el aprovechamiento sostenible del entorno."
+    >
+      <BreedGallery client:load />
+    </Section>
+
+    <!-- Section 4: Diseño Arquitectónico -->
+    <Section 
+      id="diseno" 
+      title="Evolución del Diseño Arquitectónico"
+      subtitle="La arquitectura del proyecto busca una integración total con el entorno. La granja se concibe como un elemento que conecta la zona baja de pastos con el monte, fusionándose con la topografía."
+    >
+      <DesignSlider client:load />
+    </Section>
+
+    <!-- Section 5: Análisis Técnico y Económico -->
+    <Section 
+      id="analisis" 
+      title="Análisis Técnico y Económico"
+      subtitle="El proyecto se fundamenta en un riguroso análisis técnico, cumpliendo con toda la normativa vigente, y se define con un presupuesto detallado que asegura su viabilidad."
+    >
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <Card title="Resumen del Presupuesto" className="animate-fade-in">
+          <div class="h-80 mb-4">
+            <canvas id="budgetChart"></canvas>
+          </div>
+          <p class="text-center font-bold text-xl text-criaga-red">
+            Total: 4.594.747,74 €
+          </p>
+        </Card>
+        
+        <div class="space-y-6">
+          <Card title="Datos Clave de la Estructura" className="animate-fade-in" style="animation-delay: 0.1s">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <strong class="text-criaga-red">Cimentación:</strong><br>
+                Zapatas corridas
+              </div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <strong class="text-criaga-red">Hormigón Muros:</strong><br>
+                HA-30/F/12/XC4
+              </div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <strong class="text-criaga-red">Acero:</strong><br>
+                B 500 S
+              </div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <strong class="text-criaga-red">Cubierta:</strong><br>
+                Losa maciza H.A. 35 cm
+              </div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <strong class="text-criaga-red">Acción Viento:</strong><br>
+                0.45 kN/m²
+              </div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <strong class="text-criaga-red">Acción Nieve:</strong><br>
+                0.3 kN/m²
+              </div>
+            </div>
+          </Card>
+          
+          <Card title="Cumplimiento Normativo (CTE)" className="animate-fade-in" style="animation-delay: 0.2s">
+            <Accordion 
+              client:load
+              items={[
+                {
+                  id: 'db-si',
+                  title: 'DB-SI: Seguridad en caso de Incendio',
+                  content: 'El proyecto cumple con las exigencias del DB-SI, considerando la granja un espacio exterior abierto. Se definen sectores de incendio para zonas cerradas como la sala de control (Riesgo Bajo). Se dota de extintores, B.I.E., hidrantes y sistema de detección y alarma. La estructura principal (muros y losa de hormigón) garantiza una resistencia al fuego R-90.'
+                },
+                {
+                  id: 'db-sua',
+                  title: 'DB-SUA: Seguridad de Utilización y Accesibilidad',
+                  content: 'Se garantiza la seguridad frente a caídas con pavimentos de clase 3 (Rd>45). Los desniveles se resuelven con rampas de pendiente controlada (<12%). Aunque no es de obligado cumplimiento por el uso agrario, el diseño de la planta baja es accesible. Se instala un sistema de protección contra el rayo de Nivel 3.'
+                },
+                {
+                  id: 'db-hs',
+                  title: 'DB-HS: Salubridad',
+                  content: 'Se asegura la protección frente a la humedad en muros y soleras en contacto con el terreno, y en la cubierta vegetal. La ventilación es principalmente natural. Se proyecta una red de saneamiento para purines con tratamiento y depuración por lagunaje, y una red separada para el aseo. El edificio se considera exento de cumplir la protección frente al radón por su condición de espacio abierto.'
+                },
+                {
+                  id: 'db-he',
+                  title: 'DB-HE: Ahorro de Energía',
+                  content: 'El proyecto está exento de cumplir las exigencias de limitación de consumo (HE0, HE1, HE2) por ser un edificio agrícola de baja demanda energética. No obstante, el diseño bioclimático (cubierta vegetal, ventilación natural) contribuye a un uso racional de la energía.'
+                }
+              ]}
+            />
+          </Card>
+        </div>
+      </div>
+    </Section>
+
+    <!-- Section 6: Pliego de Condiciones -->
+    <Section 
+      id="pliego" 
+      title="Pliego de Condiciones"
+      subtitle="Seleccione una unidad de obra para consultar sus especificaciones técnicas, normativa de aplicación y proceso de ejecución detallado."
+    >
+      <div class="flex flex-wrap justify-center gap-4 mb-8">
+        <button class="pliego-btn bg-criaga-red text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-criaga-red-light transition-all duration-200" data-target="muro">
+          Muro de Hormigón
+        </button>
+        <button class="pliego-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-all duration-200" data-target="viga">
+          Viga de Hormigón
+        </button>
+        <button class="pliego-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-all duration-200" data-target="losa">
+          Losa Maciza
+        </button>
+      </div>
+      
+      <Card className="min-h-[400px]">
+        <div id="pliego-content">
+          <!-- Content will be injected by JavaScript -->
+        </div>
+      </Card>
+    </Section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-criaga-gray-light mt-24">
+    <div class="container mx-auto px-6 py-12">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold font-serif text-criaga-red mb-4">CRIAGA</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Centro de Cría de Razas Galegas - Un proyecto innovador para la revitalización 
+            del mundo rural gallego a través de la ganadería sostenible.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-criaga-red mb-4">Proyecto</h4>
+          <ul class="space-y-2 text-gray-600">
+            <li><a href="#vision" class="hover:text-criaga-red transition-colors">Visión General</a></li>
+            <li><a href="#programa" class="hover:text-criaga-red transition-colors">Programa Ganadero</a></li>
+            <li><a href="#diseno" class="hover:text-criaga-red transition-colors">Diseño Arquitectónico</a></li>
+            <li><a href="#analisis" class="hover:text-criaga-red transition-colors">Análisis Técnico</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold text-criaga-red mb-4">Información</h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Proyecto desarrollado por Pedro Citoula Pérez como Trabajo Fin de Máster.
+            Aplicación web interactiva para la exploración del proyecto CRIAGA.
+          </p>
+        </div>
+      </div>
+      <div class="border-t border-criaga-gray-light mt-8 pt-8 text-center text-gray-500">
+        <p>&copy; 2025 Pedro Citoula Pérez - Proyecto CRIAGA</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Chart data
+      const budgetData = {
+        labels: ['Acond. Terreno', 'Estructuras', 'Urbanización', 'Instalaciones', 'Cimentaciones', 'Otros'],
+        datasets: [{
+          label: 'Distribución del Presupuesto',
+          data: [27.42, 22.28, 14.21, 12.27, 9.70, 14.12],
+          backgroundColor: ['#8C1D18', '#A6231D', '#BF4A3F', '#D97566', '#F2A499', '#E5E5E5'],
+          borderColor: '#FCFBF8',
+          borderWidth: 3,
+          hoverOffset: 8
+        }]
+      };
+
+      const superficiesData = {
+        labels: ['Carballeira', 'Viñedos', 'Zona Ext. Vacas', 'Granja', 'Eira', 'Caminos', 'Cultivos', 'Invernaderos'],
+        datasets: [{
+          label: 'Superficie (m²)',
+          data: [12359.98, 4993.75, 4181.67, 2989.32, 2287.89, 1511.95, 1449.79, 432.00],
+          backgroundColor: '#BF4A3F',
+          borderColor: '#8C1D18',
+          borderWidth: 1
+        }]
+      };
+
+      // Initialize charts
+      if (window.Chart) {
+        // Budget Chart
+        const ctxBudget = document.getElementById('budgetChart');
+        if (ctxBudget) {
+          new Chart(ctxBudget.getContext('2d'), {
+            type: 'doughnut',
+            data: budgetData,
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  position: 'right',
+                  labels: {
+                    font: { family: "'Inter', sans-serif" },
+                    padding: 20
+                  }
+                },
+                tooltip: {
+                  callbacks: {
+                    label: (context) => `${context.label}: ${context.parsed}%`
+                  }
+                }
+              }
+            }
+          });
+        }
+
+        // Superficies Chart
+        const ctxSuperficies = document.getElementById('superficiesChart');
+        if (ctxSuperficies) {
+          new Chart(ctxSuperficies.getContext('2d'), {
+            type: 'bar',
+            data: superficiesData,
+            options: {
+              indexAxis: 'y',
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { display: false }
+              },
+              scales: {
+                x: {
+                  beginAtZero: true,
+                  title: {
+                    display: true,
+                    text: 'Superficie (m²)'
+                  }
+                }
+              }
+            }
+          });
+        }
+      }
+
+      // Pliego functionality
+      const pliegoData = {
+        muro: {
+          title: 'Unidad EHN030B: Muro de hormigón armado',
+          content: `
+            <p class="mb-4"><strong>Descripción:</strong> Muro de hormigón armado de 40 cm de espesor medio, realizado con hormigón HA-30/F/12/XC4 fabricado en central y vertido con cubilote. Armado con acero UNE-EN 10080 B 500 S (cuantía aprox. 51,4 kg/m³).</p>
+            <p class="mb-4"><strong>Normativa:</strong> Elaboración, transporte y puesta en obra del hormigón según el Código Estructural.</p>
+            <h4 class="font-semibold mb-2 text-criaga-red">Proceso de Ejecución:</h4>
+            <ol class="list-decimal list-inside space-y-1 text-gray-700">
+              <li>Replanteo y comprobación de armaduras de espera.</li>
+              <li>Colocación de armadura principal con separadores homologados.</li>
+              <li>Vertido y compactación del hormigón, evitando la disgregación.</li>
+              <li>Curado del hormigón para garantizar la resistencia.</li>
+            </ol>
+          `
+        },
+        viga: {
+          title: 'Unidad EHV030: Viga de hormigón armado',
+          content: `
+            <p class="mb-4"><strong>Descripción:</strong> Viga descolgada de hormigón armado, realizada con hormigón HA-25/F/20/X0 fabricado en central y vertido con cubilote. Armado con acero UNE-EN 10080 B 500 S (cuantía aprox. 112,7 kg/m³).</p>
+            <p class="mb-4"><strong>Normativa:</strong> Código Estructural y NTE-EME (Encofrados).</p>
+            <h4 class="font-semibold mb-2 text-criaga-red">Proceso de Ejecución:</h4>
+            <ol class="list-decimal list-inside space-y-1 text-gray-700">
+              <li>Montaje de sistema de encofrado con superficie tratada.</li>
+              <li>Colocación de la armadura con separadores, asegurando recubrimientos.</li>
+              <li>Vertido y compactación del hormigón.</li>
+            </ol>
+          `
+        },
+        losa: {
+          title: 'Unidad EHL030: Losa maciza de hormigón armado',
+          content: `
+            <p class="mb-4"><strong>Descripción:</strong> Losa maciza horizontal de 35 cm de canto, realizada con hormigón HA-25/F/20/X0. Armado con acero UNE-EN 10080 B 500 S (cuantía aprox. 28,7 kg/m²).</p>
+            <p class="mb-4"><strong>Normativa:</strong> Código Estructural y NTE-EME (Encofrados).</p>
+            <h4 class="font-semibold mb-2 text-criaga-red">Proceso de Ejecución:</h4>
+            <ol class="list-decimal list-inside space-y-1 text-gray-700">
+              <li>Montaje de sistema de encofrado continuo sobre puntales.</li>
+              <li>Colocación de armaduras (inferior, superior, de reparto) con separadores.</li>
+              <li>Vertido continuo y compactación del hormigón.</li>
+            </ol>
+          `
+        }
+      };
+
+      const pliegoButtons = document.querySelectorAll('.pliego-btn');
+      const pliegoContent = document.getElementById('pliego-content');
+
+      function updatePliegoContent(target) {
+        if (pliegoContent && pliegoData[target]) {
+          pliegoContent.innerHTML = `
+            <h3 class="text-2xl font-bold font-serif text-criaga-red mb-6">${pliegoData[target].title}</h3>
+            ${pliegoData[target].content}
+          `;
+        }
+      }
+
+      pliegoButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const target = button.getAttribute('data-target');
+          updatePliegoContent(target);
+          
+          // Update button styles
+          pliegoButtons.forEach(btn => {
+            btn.classList.remove('bg-criaga-red', 'text-white');
+            btn.classList.add('bg-gray-200', 'text-gray-700');
+          });
+          button.classList.remove('bg-gray-200', 'text-gray-700');
+          button.classList.add('bg-criaga-red', 'text-white');
+        });
+      });
+
+      // Initialize with first option
+      updatePliegoContent('muro');
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        let searchTimeout;
+        
+        searchInput.addEventListener('input', function() {
+          clearTimeout(searchTimeout);
+          searchTimeout = setTimeout(() => {
+            const query = this.value.toLowerCase().trim();
+            
+            if (query.length < 2) {
+              searchResults.innerHTML = '';
+              return;
+            }
+            
+            // Simple search implementation
+            const sections = document.querySelectorAll('section[id]');
+            const results = [];
+            
+            sections.forEach(section => {
+              const title = section.querySelector('h2')?.textContent || '';
+              const content = section.textContent.toLowerCase();
+              
+              if (content.includes(query)) {
+                results.push({
+                  title: title,
+                  id: section.id,
+                  snippet: content.substring(content.indexOf(query) - 50, content.indexOf(query) + 100)
+                });
+              }
+            });
+            
+            if (results.length > 0) {
+              searchResults.innerHTML = results.map(result => `
+                <div class="p-3 hover:bg-gray-50 rounded-lg cursor-pointer border-b border-gray-100 last:border-b-0">
+                  <a href="#${result.id}" class="block">
+                    <h4 class="font-semibold text-criaga-red mb-1">${result.title}</h4>
+                    <p class="text-sm text-gray-600">${result.snippet}...</p>
+                  </a>
+                </div>
+              `).join('');
+            } else {
+              searchResults.innerHTML = '<p class="p-3 text-gray-500 text-center">No se encontraron resultados</p>';
+            }
+          }, 300);
+        });
+      }
+    });
+  </script>
+</Layout>

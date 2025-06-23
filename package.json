@@ -1,5 +1,5 @@
 {
-  "name": "creaga",
+  "name": "criaga",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -9,6 +9,18 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.10.0"
+    "astro": "^5.10.0",
+    "@astrojs/tailwind": "^5.1.2",
+    "@astrojs/react": "^3.6.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.0",
+    "chart.js": "^4.4.0",
+    "fuse.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "typescript": "^5.6.3"
   }
 }
