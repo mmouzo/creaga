@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+// import ImageGallery from '../components/ImageGallery.astro'; // To be created later
+---
+
+<Layout title="CRIAGA - Galería">
+  <div class="container mx-auto p-8">
+    <h1 class="text-4xl font-bold text-primary mb-6 text-center">Galería Visual del Proyecto CRIAGA</h1>
+
+    <div class="prose lg:prose-xl max-w-none mx-auto mb-8">
+      <p class="text-lg text-center">
+        Una colección de imágenes, planos y visualizaciones que dan vida al Centro de Cría de Razas Galegas.
+      </p>
+    </div>
+
+    {/* Placeholder for ImageGallery component or direct image embedding */}
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {Array.from({ length: 12 }).map((_, i) => (
+        <div class="card bg-base-100 shadow-xl image-full">
+          <figure><img src={`https://source.unsplash.com/random/400x300/?architecture,galicia,farm&${i}`} alt={`Imagen de galería ${i + 1}`} /></figure>
+          <div class="card-body justify-end">
+            <h2 class="card-title text-white text-opacity-90">Imagen {i+1}</h2>
+            <p class="text-sm text-white text-opacity-80">Breve descripción o categoría.</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/*
+      Example usage of a future ImageGallery component:
+      <ImageGallery images={[
+        { src: "/path/to/image1.jpg", alt: "Description 1", title: "Title 1" },
+        { src: "/path/to/image2.jpg", alt: "Description 2", title: "Title 2" },
+      ]} />
+    */}
+
+  </div>
+</Layout>

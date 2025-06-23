@@ -1,16 +1,57 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/HeroSection.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="CRIAGA - Inicio">
+  <HeroSection
+    title="CRIAGA"
+    subtitle="Centro de Cría de Razas Galegas: Un Legado Arquitectónico Reimaginado"
+    imageUrl="https://source.unsplash.com/random/1600x900/?architecture,nature,galicia,farm"
+    ctaText="Descubre el Proyecto"
+    ctaLink="/proyecto"
+  />
+  <div class="container mx-auto">
+    <section class="py-12 px-4 md:px-8">
+      <h2 class="text-3xl font-bold text-center mb-8 text-neutral-content-focus">Transformando la Memoria en Experiencia</h2>
+      <p class="text-lg text-center max-w-3xl mx-auto mb-6 text-base-content">
+        Nuestra misión es reinterpretar la densa memoria técnica del proyecto CRIAGA para convertirla en una experiencia digital que sea intuitiva, visualmente impactante y universalmente accesible.
+      </p>
+      <div class="text-center">
+        <a href="/memorias" class="btn btn-secondary">Explorar Memorias Técnicas</a>
+      </div>
+    </section>
+
+    <section class="py-12 bg-base-200">
+      <div class="container mx-auto px-4 md:px-8">
+        <h2 class="text-3xl font-bold text-center mb-8">Objetivos Clave</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body items-center text-center">
+              <h3 class="card-title text-primary">Accesibilidad</h3>
+              <p>Presentar la información de forma clara y concisa.</p>
+            </div>
+          </div>
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body items-center text-center">
+              <h3 class="card-title text-primary">Atractivo Visual</h3>
+              <p>Una interfaz que refleje la importancia y estética del proyecto.</p>
+            </div>
+          </div>
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body items-center text-center">
+              <h3 class="card-title text-primary">Navegación Intuitiva</h3>
+              <p>Exploración fluida de las secciones del proyecto.</p>
+            </div>
+          </div>
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body items-center text-center">
+              <h3 class="card-title text-primary">Divulgación</h3>
+              <p>Convertir un documento técnico en herramienta cultural.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

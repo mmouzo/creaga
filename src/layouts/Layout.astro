@@ -1,0 +1,45 @@
+---
+import '@fontsource/inter/variable.css';
+
+interface Props {
+	title: string;
+}
+
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" data-theme="criaga">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Explorador interactivo del proyecto arquitectónico CRIAGA" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="font-sans flex flex-col min-h-screen">
+		<Navbar />
+		<main class="flex-grow">
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>
+<style is:global>
+	:root {
+		color-scheme: light dark;
+	}
+	html {
+		font-family: 'Inter', sans-serif;
+	}
+	body {
+		margin: 0;
+		padding:0;
+		box-sizing: border-box;
+		background-color: hsl(var(--b1));
+		color: hsl(var(--bc));
+	}
+</style>
