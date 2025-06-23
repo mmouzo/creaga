@@ -1,16 +1,316 @@
 ---
+import "../assets/app.css";
 
+const memoriaDescriptiva = {
+	title: "MEMORIA DESCRIPTIVA Y JUSTIFICATIVA",
+	sections: [
+		{
+			title: "AGENTES",
+			content: [
+				"El presente proyecto se redacta como parte del Trabajo Fin de Máster de la Escuela Técnica Superior de Arquitectura de A Coruña (ETSAC).",
+				"Promotor: Escuela Técnica Superior de Arquitectura de A Coruña.",
+				"Arquitecto, redactor de la presente memoria: Pedro Citoula Pérez",
+				"Tipo de obra: Nueva construcción y rehabilitación."
+			]
+		},
+		{
+			title: "INFORMACIÓN PREVIA: ANTECEDENTES Y CONDICIONANTES DE PARTIDA",
+			subsections: [
+				{
+					title: "EL EMPLAZAMIENTO",
+					content: [
+						"El programa se encuentra en el Lugar de Lusquiños, siguiendo río arriba el curso del río Gafos, en la parroquia pontevedresa de Tomeza.",
+						"Este núcleo es la representación de un medio rural con una estructura parcelaria y edificada todavía tradicional, que sobrevive en la periferia de la ciudad. Esta se encuentra tensionada por las infraestructuras cercanas como los viales de gran capacidad de entrada a la ciudad y la vía férrea. La expansión de la ciudad y la construcción de nuevas viviendas, que esta conlleva, están también rondando el núcleo por lo que pone en riesgo su carácter propio."
+					],
+					images: [
+						{ src: "/images/image128.png", alt: "Ruta realizada desde la estación de tren de Pontevedra hasta la ubicación final de la parcela" },
+						{ src: "/images/image124.png", alt: "Mapa del emplazamiento" }
+					]
+				},
+				{
+					title: "LA PARCELA",
+					content: [
+						"Debido a la fragmentación del parcelario en el ámbito elegido se opta por la unión de una serie de parcelas para poder llevar a cabo el proyecto. En este caso fueron 21 las fincas seleccionadas, las cuales se separan en dos nuevas parcelas debido a que se encuentran a ambos márgenes de la carretera. En este momento pasaremos a hablar de una parcela en el margen este de la vía y otra en el oeste en las que se repartirá el programa."
+					],
+					subsections: [
+						{
+							title: "Superficies",
+							// Table data would be more complex to represent here directly, will be added in HTML
+						},
+						{
+							title: "Geometría",
+							content: [
+								"La parcela del margen oeste cuenta con una geometría de forma triangular en la que la topografía es bastante plana. En este caso la base del triángulo coincidiría con la carretera principal, mientras que sus otros dos lados limitan con parcelas ocupadas con viviendas unifamiliares aisladas, cercada por una red por el norte y un muro de piedra por el sur que se juntan en el vértice oeste de la parcela, el punto más alto de esta.",
+								"La parcela de mayor tamaño, en el este, tiene una forma irregular. Esta cuenta con una topografía plana y sin grandes desniveles desde su margen oeste hasta la mitad, donde la topografía cambia y empieza a elevarse hacia el este. En ella existe un camino que da acceso desde la carretera a su parte central, donde se produce el cambio de la topografía, y también cuenta con acceso en su margen este mediante otro camino que la bordea por la parte alta.",
+								"Si la dividimos en dos partes, la parte baja se encuentra limitada en el oeste por la vía principal, linda con dos viviendas hacia el norte, ambas situadas en el límite común dejando sus medianeras vistas, entre las que se cuenta con un acceso secundario a la parcela, y por el sur limita con otra vivienda unifamiliar aislada."
+							],
+							images: [
+								{ src: "/images/image122.png", alt: "Geometría de la parcela" },
+								{ src: "/images/image121.png", alt: "Casa en medio de campo" },
+								{ src: "/images/image120.png", alt: "Un tren pasando por un camino de tierra" }
+							]
+						},
+						{
+							title: "Conectividad",
+							content: ["Ambos solares cuentan con conexiones a las infraestructuras públicas como son red de saneamiento, electricidad y agua, a mayores, en la parroquia también se cuenta con una red de agua vecinal."],
+							images: [
+								{ src: "/images/image119.png", alt: "Una calle de tierra" },
+								{ src: "/images/image118.png", alt: "Vista de una ciudad" },
+								{ src: "/images/image117.png", alt: "Imagen que contiene exterior, edificio, camino, pasto" }
+							]
+						}
+					]
+				},
+				{
+					title: "EDIFICACIONES PREEXISTENTES",
+					content: [
+						"En el margen suroeste, al borde de la carretera, en la parcela este se encuentra una edificación levantada con perpiaños de granito, esta cuenta con un bajo y primera planta se encuentra en muy buen estado de conservación tiene acceso directo a la vía, un cobertizo exterior abierto y un hórreo.",
+						"Por otro lado, en la parcela oeste, enfrentada a la construcción anteriormente mencionada y también al borde de la carretera, en este caso, en el punto sureste de la parcela. Se encuentra una construcción en un estado ruinoso y lleno de maleza. De este podemos encontrar una pequeña estancia en pie y del volumen mayor la traza se aprecia por las piedras de los muros que la conformaban. El muro central entre ambas estancias y un trozo del muro norte también se encuentra en pie.",
+						"Ambas construcciones se pueden observar en el vuelo americano de 1956-57.",
+						"En la parcela también se encontraron restos de emparrados en desuso, los cuales debido a su deterioro y mal estado de conservación se deciden cambiar por unos nuevos. De esta forma todo el acondicionamiento de la parcela se realizará de forma más sencilla, con la nueva plantación."
+					],
+					images: [
+						{ src: "/images/image116.png", alt: "Una casa de piedra" },
+						{ src: "/images/image115.png", alt: "Casa en medio de un camino" },
+						{ src: "/images/image100.png", alt: "Un conjunto de árboles" },
+						{ src: "/images/image99.png", alt: "Imagen que contiene pastel, interior, tabla, pieza" }
+					]
+				}
+			]
+		},
+		// ... (other main sections will be added progressively)
+	]
+};
 ---
 
-<html lang="en">
+<html lang="es" data-theme="emerald">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>CRIAGA - Explorador del Proyecto</title>
+		<style>
+			html {
+				scroll-behavior: smooth;
+			}
+
+			/* Figtree */
+			@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+			/* Lora */
+			@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+			/* PT Serif */
+			@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+			body {
+				font-family: 'Figtree', sans-serif; /* Default font */
+			}
+			.font-lora {
+				font-family: 'Lora', serif;
+			}
+			.font-pt-serif {
+				font-family: 'PT Serif', serif;
+			}
+			section {
+				margin-bottom: 3rem; /* Increased space between sections */
+				padding-top: 5rem; /* Add padding to offset sticky navbar */
+				margin-top: -5rem; /* Negative margin to keep content position */
+			}
+			h2 {
+				font-family: 'Lora', serif;
+				font-size: 2.25rem; /* text-4xl */
+				font-weight: bold;
+				margin-bottom: 1.5rem; /* Increased margin */
+				border-bottom: 3px solid hsl(var(--p)/0.7); /* Primary color with opacity */
+				padding-bottom: 0.75rem; /* Increased padding */
+				color: hsl(var(--nc)); /* Neutral content color */
+			}
+			h3 {
+				font-family: 'Lora', serif;
+				font-size: 1.875rem; /* text-3xl */
+				font-weight: bold;
+				margin-top: 2rem; /* Increased margin */
+				margin-bottom: 1rem; /* Increased margin */
+				color: hsl(var(--nc));
+			}
+			h4 {
+				font-family: 'Figtree', sans-serif;
+				font-size: 1.5rem; /* text-2xl */
+				font-weight: bold;
+				margin-top: 1.5rem; /* Increased margin */
+				margin-bottom: 0.75rem; /* Increased margin */
+				color: hsl(var(--nc));
+			}
+			h5 { /* Style for sub-subsections */
+				font-family: 'Figtree', sans-serif;
+				font-size: 1.25rem; /* text-xl */
+				font-weight: 600; /* semibold */
+				margin-top: 1.25rem;
+				margin-bottom: 0.5rem;
+				color: hsl(var(--n)); /* Neutral color */
+			}
+			p, li {
+				font-family: 'PT Serif', serif;
+				line-height: 1.8; /* Increased line height for readability */
+				margin-bottom: 1rem; /* Increased margin */
+				color: hsl(var(--bc)); /* Base content color */
+			}
+			ul {
+				list-style-type: disc;
+				padding-left: 2.5rem; /* Increased padding */
+			}
+			.image-gallery {
+				display: grid; /* Changed to grid for more control */
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+				gap: 1.5rem; /* Increased gap */
+				margin-top: 1.5rem; /* Increased margin */
+			}
+			.image-gallery img {
+				width: 100%; /* Ensure images take full width of their grid cell */
+				height: auto;
+				border-radius: 0.75rem; /* rounded-xl */
+				box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* shadow-lg */
+				transition: transform 0.3s ease-in-out; /* Added subtle hover effect */
+			}
+			.image-gallery img:hover {
+				transform: scale(1.03); /* Slight zoom on hover */
+			}
+			.table {
+				background-color: hsl(var(--b1)); /* Base-100 for table background */
+				color: hsl(var(--bc));
+			}
+			.table th {
+				color: hsl(var(--nc));
+			}
+		</style>
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body class="bg-base-200 text-base-content">
+		<div class="navbar bg-base-100 shadow-xl sticky top-0 z-50">
+			<div class="navbar-start">
+				<div class="dropdown">
+					<label tabindex="0" class="btn btn-ghost lg:hidden">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+					</label>
+					<ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+						<li><a href="#memoria-descriptiva">Memoria Descriptiva</a></li>
+						<li><a href="#memoria-urbanistica">Memoria Urbanística</a></li>
+						<li><a href="#memoria-estructural">Memoria Estructural</a></li>
+						<li><a href="#memoria-constructiva">Memoria Constructiva</a></li>
+						<li><a href="#presupuesto">Presupuesto</a></li>
+					</ul>
+				</div>
+				<a class="btn btn-ghost text-xl font-lora" href="#">CRIAGA</a>
+			</div>
+			<div class="navbar-center hidden lg:flex">
+				<ul class="menu menu-horizontal px-1">
+					<li><a href="#memoria-descriptiva" class="font-pt-serif">Memoria Descriptiva</a></li>
+					<li><a href="#memoria-urbanistica" class="font-pt-serif">Memoria Urbanística</a></li>
+					<li><a href="#memoria-estructural" class="font-pt-serif">Memoria Estructural</a></li>
+					<li><a href="#memoria-constructiva" class="font-pt-serif">Memoria Constructiva</a></li>
+					<li><a href="#presupuesto" class="font-pt-serif">Presupuesto</a></li>
+				</ul>
+			</div>
+			<div class="navbar-end">
+				{/* Future elements can go here */}
+			</div>
+		</div>
+
+		<main class="container mx-auto p-4 pt-8">
+			<div class="hero min-h-[calc(100vh-12rem)] bg-base-200 rounded-box shadow-xl mb-12" style="background-image: url(/images/image121.png);">
+        <div class="hero-overlay bg-opacity-60 rounded-box"></div>
+				<div class="hero-content text-center text-neutral-content">
+					<div class="max-w-md">
+						<h1 class="mb-5 text-5xl font-bold font-lora">CRIAGA</h1>
+						<p class="mb-5 font-pt-serif text-lg">Centro de Cría de Razas Galegas. Un explorador interactivo del proyecto arquitectónico.</p>
+						<a href="#memoria-descriptiva" class="btn btn-primary">Comenzar Exploración</a>
+					</div>
+				</div>
+			</div>
+
+			<section id="memoria-descriptiva" class="card bg-base-100 shadow-xl p-6 md:p-8">
+				<h2 class="card-title">{memoriaDescriptiva.title}</h2>
+				{memoriaDescriptiva.sections.map(section => (
+					<div class="mb-6">
+						<h3>{section.title}</h3>
+						{section.content?.map(paragraph => <p>{paragraph}</p>)}
+						{section.images && (
+							<div class="image-gallery">
+								{section.images.map(image => <img src={image.src} alt={image.alt} class="object-cover" />)}
+							</div>
+						)}
+						{section.subsections?.map(subsection => (
+							<div class="ml-4 mt-4">
+								<h4>{subsection.title}</h4>
+								{subsection.content?.map(paragraph => <p>{paragraph}</p>)}
+								{subsection.images && (
+									<div class="image-gallery">
+										{subsection.images.map(image => <img src={image.src} alt={image.alt} class="object-cover" />)}
+									</div>
+								)}
+                 {/* Placeholder for table if subsection.title === "Superficies" */}
+                                {subsection.title === "Superficies" && (
+                                    <div class="overflow-x-auto mt-4">
+                                        <table class="table table-zebra w-full">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Referencia catastral</th>
+                                                    <th>Superficie</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><th>1</th><td>36900A090001020000QQ</td><td>518 m²</td></tr>
+                                                <tr><th>2</th><td>36900A090001030000QP</td><td>671 m²</td></tr>
+                                                {/* ... Add more rows as needed */}
+                                                <tr><th>21</th><td>36900A064002170000QL</td><td>3.989 m²</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                )}
+								{subsection.subsections?.map(subSubSection => (
+									<div class="ml-8 mt-3">
+										<h5 class="text-lg font-semibold font-figtree">{subSubSection.title}</h5>
+										{subSubSection.content?.map(paragraph => <p>{paragraph}</p>)}
+										{subSubSection.images && (
+											<div class="image-gallery">
+												{subSubSection.images.map(image => <img src={image.src} alt={image.alt} class="object-cover" />)}
+											</div>
+										)}
+									</div>
+								))}
+							</div>
+						))}
+					</div>
+				))}
+			</section>
+
+			{/* Placeholder sections for other Memorias */}
+			<section id="memoria-urbanistica" class="card bg-base-100 shadow-xl p-6 md:p-8">
+				<h2 class="card-title">MEMORIA URBANÍSTICA</h2>
+				<p>Contenido de la memoria urbanística irá aquí...</p>
+			</section>
+
+			<section id="memoria-estructural" class="card bg-base-100 shadow-xl p-6 md:p-8">
+				<h2 class="card-title">MEMORIA ESTRUCTURAL</h2>
+				<p>Contenido de la memoria estructural irá aquí...</p>
+			</section>
+
+			<section id="memoria-constructiva" class="card bg-base-100 shadow-xl p-6 md:p-8">
+				<h2 class="card-title">MEMORIA CONSTRUCTIVA</h2>
+				<p>Contenido de la memoria constructiva irá aquí...</p>
+			</section>
+
+			<section id="presupuesto" class="card bg-base-100 shadow-xl p-6 md:p-8">
+				<h2 class="card-title">PRESUPUESTO, MEDICIONES Y PLIEGO DE CONDICIONES</h2>
+				<p>Contenido del presupuesto irá aquí...</p>
+			</section>
+
+		</main>
+
+		<footer class="footer footer-center p-4 bg-base-300 text-base-content">
+			<aside>
+				<p>Copyright © {new Date().getFullYear()} - Todos los derechos reservados por CRIAGA</p>
+			</aside>
+		</footer>
 	</body>
 </html>
