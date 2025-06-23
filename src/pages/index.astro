@@ -4,47 +4,97 @@ import Navigation from '../components/Navigation.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import Section from '../components/Section.astro';
 import Card from '../components/Card.astro';
+import Logo from '../components/Logo.astro';
 import BreedGallery from '../components/BreedGallery';
 import DesignSlider from '../components/DesignSlider';
 import InteractiveChart from '../components/InteractiveChart';
 import Accordion from '../components/Accordion';
+import ImageGallery from '../components/ImageGallery';
+import AnimatedSection from '../components/AnimatedSection';
+import ScrollAnimations from '../components/ScrollAnimations';
+
+// Gallery data
+const galleryImages = [
+  // Razas Autóctonas
+  { id: '1', src: '/images/image1.png', alt: 'Vaca Cachena', category: 'Razas', title: 'Vaca Cachena', description: 'Raza autóctona de pequeño tamaño, muy rústica y adaptada al monte gallego.', metadata: { type: 'Bovino', location: 'Galicia' } },
+  { id: '2', src: '/images/image2.png', alt: 'Vaca Caldelá', category: 'Razas', title: 'Vaca Caldelá', description: 'Raza de aptitud cárnica, bien adaptada a las condiciones climáticas de Galicia.', metadata: { type: 'Bovino', location: 'Galicia' } },
+  { id: '3', src: '/images/image3.png', alt: 'Vaca Frieiresa', category: 'Razas', title: 'Vaca Frieiresa', description: 'Raza de gran rusticidad, tradicionalmente utilizada para trabajo y producción de carne.', metadata: { type: 'Bovino', location: 'Galicia' } },
+  { id: '4', src: '/images/image4.png', alt: 'Vaca Limiá', category: 'Razas', title: 'Vaca Limiá', description: 'Raza originaria de la comarca de A Limia, de gran valor genético.', metadata: { type: 'Bovino', location: 'A Limia' } },
+  { id: '5', src: '/images/image5.png', alt: 'Rubia Galega', category: 'Razas', title: 'Rubia Galega', description: 'La raza bovina más representativa de Galicia, de gran tamaño y excelente producción cárnica.', metadata: { type: 'Bovino', location: 'Galicia' } },
+  { id: '6', src: '/images/image6.png', alt: 'Vaca Vianesa', category: 'Razas', title: 'Vaca Vianesa', description: 'Raza de montaña, muy rústica y adaptada a terrenos difíciles.', metadata: { type: 'Bovino', location: 'Viana do Bolo' } },
+  
+  // Proceso de Diseño
+  { id: '7', src: '/images/image7.png', alt: 'Preexistencias', category: 'Diseño', title: 'Análisis de Preexistencias', description: 'Estado inicial del terreno con edificaciones en ruinas.', metadata: { type: 'Análisis', location: 'Lusquiños' } },
+  { id: '8', src: '/images/image8.png', alt: 'Volumen inicial', category: 'Diseño', title: 'Concepto Volumétrico', description: 'Idea inicial del volumen longitudinal para la granja.', metadata: { type: 'Concepto', location: 'Lusquiños' } },
+  { id: '9', src: '/images/image9.png', alt: 'Estructura inicial', category: 'Diseño', title: 'Sistema Estructural', description: 'Secuencia de muros permeables para ventilación natural.', metadata: { type: 'Estructura', location: 'Lusquiños' } },
+  { id: '10', src: '/images/image10.png', alt: 'Adaptación topográfica', category: 'Diseño', title: 'Integración Topográfica', description: 'Adaptación del volumen a las curvas de nivel existentes.', metadata: { type: 'Topografía', location: 'Lusquiños' } },
+  { id: '11', src: '/images/image11.png', alt: 'Estado final', category: 'Diseño', title: 'Propuesta Final', description: 'Edificio con cubierta vegetal integrado en el paisaje.', metadata: { type: 'Propuesta', location: 'Lusquiños' } },
+  
+  // Instalaciones
+  { id: '12', src: '/images/image12.png', alt: 'Vista granja', category: 'Instalaciones', title: 'Vista General de la Granja', description: 'Perspectiva general de las instalaciones ganaderas.', metadata: { type: 'Instalación', location: 'Lusquiños' } },
+  { id: '13', src: '/images/image13.png', alt: 'Vivienda', category: 'Instalaciones', title: 'Unidad de Vivienda', description: 'Vivienda mínima para los encargados de la granja.', metadata: { type: 'Vivienda', location: 'Lusquiños' } },
+  { id: '14', src: '/images/image14.png', alt: 'Centro visitantes', category: 'Instalaciones', title: 'Centro de Visitantes', description: 'Espacio para divulgación, formación y exposición.', metadata: { type: 'Centro', location: 'Lusquiños' } },
+  
+  // Planos y Documentación
+  { id: '15', src: '/images/image15.png', alt: 'Plano situación', category: 'Documentación', title: 'Plano de Situación', description: 'Ubicación del proyecto en el contexto territorial.', metadata: { type: 'Plano', location: 'Lusquiños' } },
+  { id: '16', src: '/images/image16.png', alt: 'Plano emplazamiento', category: 'Documentación', title: 'Plano de Emplazamiento', description: 'Implantación detallada en la parcela.', metadata: { type: 'Plano', location: 'Lusquiños' } },
+  { id: '17', src: '/images/image17.png', alt: 'Planta general', category: 'Documentación', title: 'Planta General', description: 'Distribución completa de las instalaciones.', metadata: { type: 'Plano', location: 'Lusquiños' } },
+  
+  // Detalles Constructivos
+  { id: '18', src: '/images/image18.png', alt: 'Detalle cimentación', category: 'Construcción', title: 'Detalle de Cimentación', description: 'Sistema de cimentación con zapatas corridas.', metadata: { type: 'Detalle', location: 'Lusquiños' } },
+  { id: '19', src: '/images/image19.png', alt: 'Detalle muro', category: 'Construcción', title: 'Detalle de Muro', description: 'Construcción de muros de hormigón armado.', metadata: { type: 'Detalle', location: 'Lusquiños' } },
+  { id: '20', src: '/images/image20.png', alt: 'Detalle cubierta', category: 'Construcción', title: 'Detalle de Cubierta', description: 'Sistema de cubierta vegetal sobre losa de hormigón.', metadata: { type: 'Detalle', location: 'Lusquiños' } }
+];
+
+const galleryCategories = ['Razas', 'Diseño', 'Instalaciones', 'Documentación', 'Construcción'];
 ---
 
 <Layout title="CRIAGA - Centro de Cría de Razas Galegas">
   <Navigation />
   <TableOfContents />
+  <ScrollAnimations client:load />
   
   <main class="container mx-auto px-6 py-12 max-w-7xl">
     
     <!-- Hero Section -->
-    <section class="text-center mb-24 py-12">
-      <div class="max-w-4xl mx-auto">
-        <h1 class="text-5xl md:text-6xl font-bold font-serif text-criaga-red mb-6 animate-fade-in">
-          CRIAGA
-        </h1>
-        <p class="text-xl md:text-2xl text-gray-600 mb-8 animate-slide-up">
-          Centro de Cría de Razas Galegas
-        </p>
-        <p class="text-lg text-gray-700 leading-relaxed mb-12 animate-fade-in">
-          Un proyecto innovador para investigar una nueva ruralidad a través de la construcción 
-          de una Granja Agroganadera en Lusquiños, Pontevedra. CRIAGA busca poner en valor las 
-          razas autóctonas, los terrenos de pasto y cultivo, y actuar como un catalizador para 
-          la comunidad local.
-        </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <a 
-            href="#vision" 
-            class="bg-criaga-red text-white px-8 py-3 rounded-lg font-semibold hover:bg-criaga-red-light transition-colors duration-200 shadow-lg hover:shadow-xl"
-          >
-            Explorar Proyecto
-          </a>
-          <a 
-            href="#programa" 
-            class="border-2 border-criaga-red text-criaga-red px-8 py-3 rounded-lg font-semibold hover:bg-criaga-red hover:text-white transition-all duration-200"
-          >
-            Ver Programa
-          </a>
-        </div>
+    <section class="hero-section relative text-center mb-24 py-20 overflow-hidden">
+      <div class="hero-bg absolute inset-0 opacity-5">
+        <img src="/images/image127.png" alt="Background" class="w-full h-full object-cover" />
+      </div>
+      <div class="relative z-10 max-w-4xl mx-auto">
+        <AnimatedSection animation="fadeIn" client:load>
+          <Logo size="xl" className="justify-center mb-8" />
+        </AnimatedSection>
+        
+        <AnimatedSection animation="slideUp" delay={0.3} client:load>
+          <p class="text-xl md:text-2xl text-gray-600 mb-8">
+            Un proyecto innovador para investigar una nueva ruralidad
+          </p>
+        </AnimatedSection>
+        
+        <AnimatedSection animation="slideUp" delay={0.6} client:load>
+          <p class="text-lg text-gray-700 leading-relaxed mb-12">
+            CRIAGA busca poner en valor las razas autóctonas gallegas, los terrenos de pasto y cultivo, 
+            y actuar como un catalizador para la revitalización de la comunidad rural de Lusquiños, Pontevedra.
+          </p>
+        </AnimatedSection>
+        
+        <AnimatedSection animation="scale" delay={0.9} client:load>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a 
+              href="#vision" 
+              class="bg-criaga-red text-white px-8 py-3 rounded-lg font-semibold hover:bg-criaga-red-light transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              Explorar Proyecto
+            </a>
+            <a 
+              href="#galeria" 
+              class="border-2 border-criaga-red text-criaga-red px-8 py-3 rounded-lg font-semibold hover:bg-criaga-red hover:text-white transition-all duration-300"
+            >
+              Ver Galería
+            </a>
+          </div>
+        </AnimatedSection>
       </div>
     </section>
 
@@ -53,9 +103,10 @@ import Accordion from '../components/Accordion';
       id="vision" 
       title="Visión General del Proyecto"
       subtitle="CRIAGA integra tres elementos fundamentales: la granja como núcleo productivo, la vivienda como anclaje comunitario, y el centro de visitantes como espacio de divulgación y formación."
+      className="reveal-section"
     >
-      <div class="grid md:grid-cols-3 gap-8">
-        <Card title="La Granja" className="animate-slide-up">
+      <div class="grid md:grid-cols-3 gap-8 cards-container">
+        <Card title="La Granja" className="animate-card">
           <div class="mb-4">
             <img src="/images/image12.png" alt="Vista de la granja" class="w-full h-32 object-cover rounded-lg mb-4" loading="lazy">
           </div>
@@ -66,7 +117,7 @@ import Accordion from '../components/Accordion';
           </p>
         </Card>
         
-        <Card title="La Vivienda" className="animate-slide-up" style="animation-delay: 0.1s">
+        <Card title="La Vivienda" className="animate-card">
           <div class="mb-4">
             <img src="/images/image13.png" alt="Vista de la vivienda" class="w-full h-32 object-cover rounded-lg mb-4" loading="lazy">
           </div>
@@ -77,7 +128,7 @@ import Accordion from '../components/Accordion';
           </p>
         </Card>
         
-        <Card title="Centro de Visitantes" className="animate-slide-up" style="animation-delay: 0.2s">
+        <Card title="Centro de Visitantes" className="animate-card">
           <div class="mb-4">
             <img src="/images/image14.png" alt="Centro de visitantes" class="w-full h-32 object-cover rounded-lg mb-4" loading="lazy">
           </div>
@@ -94,67 +145,76 @@ import Accordion from '../components/Accordion';
       id="entorno" 
       title="Análisis del Entorno"
       subtitle="El diseño de CRIAGA nace de un profundo análisis del territorio. Se busca recuperar elementos perdidos y potenciar los existentes para revitalizar el núcleo rural de Lusquiños."
+      className="reveal-section"
     >
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="text-center animate-fade-in">
-          <div class="mb-4">
-            <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
-              <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
-              </svg>
+        <AnimatedSection animation="slideUp" delay={0} client:load>
+          <Card className="text-center h-full">
+            <div class="mb-4">
+              <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold font-serif text-criaga-red mb-2">Caminos</h4>
             </div>
-            <h4 class="text-lg font-bold font-serif text-criaga-red mb-2">Caminos</h4>
-          </div>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Recuperación de la red parroquial histórica de caminos, generando conexiones peatonales 
-            seguras y rutas para el ganado que revitalicen los lugares de encuentro vecinal.
-          </p>
-        </Card>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Recuperación de la red parroquial histórica de caminos, generando conexiones peatonales 
+              seguras y rutas para el ganado que revitalicen los lugares de encuentro vecinal.
+            </p>
+          </Card>
+        </AnimatedSection>
         
-        <Card className="text-center animate-fade-in" style="animation-delay: 0.1s">
-          <div class="mb-4">
-            <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
-              <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-              </svg>
+        <AnimatedSection animation="slideUp" delay={0.1} client:load>
+          <Card className="text-center h-full">
+            <div class="mb-4">
+              <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold font-serif text-criaga-red mb-2">Emparrados</h4>
             </div>
-            <h4 class="text-lg font-bold font-serif text-criaga-red mb-2">Emparrados</h4>
-          </div>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Reactivación de la viticultura tradicional mediante la plantación de viñedos (emparrados), 
-            coexistiendo con la ganadería y recuperando un elemento cultural en desuso.
-          </p>
-        </Card>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Reactivación de la viticultura tradicional mediante la plantación de viñedos (emparrados), 
+              coexistiendo con la ganadería y recuperando un elemento cultural en desuso.
+            </p>
+          </Card>
+        </AnimatedSection>
         
-        <Card className="text-center animate-fade-in" style="animation-delay: 0.2s">
-          <div class="mb-4">
-            <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
-              <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
-              </svg>
+        <AnimatedSection animation="slideUp" delay={0.2} client:load>
+          <Card className="text-center h-full">
+            <div class="mb-4">
+              <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold font-serif text-criaga-red mb-2">Monte Comunal</h4>
             </div>
-            <h4 class="text-lg font-bold font-serif text-criaga-red mb-2">Monte Comunal</h4>
-          </div>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Puesta en valor del monte comunal como un elemento productivo a través del pastoreo, 
-            la limpieza de especies invasoras y la reforestación, previniendo incendios.
-          </p>
-        </Card>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Puesta en valor del monte comunal como un elemento productivo a través del pastoreo, 
+              la limpieza de especies invasoras y la reforestación, previniendo incendios.
+            </p>
+          </Card>
+        </AnimatedSection>
         
-        <Card className="text-center animate-fade-in" style="animation-delay: 0.3s">
-          <div class="mb-4">
-            <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
-              <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293H15M9 10v4a2 2 0 002 2h2a2 2 0 002-2v-4M9 10V9a2 2 0 012-2h2a2 2 0 012 2v1"></path>
-              </svg>
+        <AnimatedSection animation="slideUp" delay={0.3} client:load>
+          <Card className="text-center h-full">
+            <div class="mb-4">
+              <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293H15M9 10v4a2 2 0 002 2h2a2 2 0 002-2v-4M9 10V9a2 2 0 012-2h2a2 2 0 012 2v1"></path>
+                </svg>
+              </div>
+              <h4 class="text-lg font-bold font-serif text-criaga-red mb-2">Río Gafos</h4>
             </div>
-            <h4 class="text-lg font-bold font-serif text-criaga-red mb-2">Río Gafos</h4>
-          </div>
-          <p class="text-gray-600 text-sm leading-relaxed">
-            Respeto por el espacio fluvial, manteniendo el proyecto alejado del cauce para prevenir 
-            problemas futuros y permitir que la naturaleza actúe como corredor ecológico.
-          </p>
-        </Card>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Respeto por el espacio fluvial, manteniendo el proyecto alejado del cauce para prevenir 
+              problemas futuros y permitir que la naturaleza actúe como corredor ecológico.
+            </p>
+          </Card>
+        </AnimatedSection>
       </div>
     </Section>
 
@@ -164,7 +224,9 @@ import Accordion from '../components/Accordion';
       title="Programa Ganadero y de Espacios"
       subtitle="El programa se dimensiona para cumplir con los requisitos de la ganadería ecológica, primando el bienestar de las razas autóctonas y el aprovechamiento sostenible del entorno."
     >
-      <BreedGallery client:load />
+      <AnimatedSection animation="fadeIn" client:load>
+        <BreedGallery client:load />
+      </AnimatedSection>
     </Section>
 
     <!-- Section 4: Diseño Arquitectónico -->
@@ -173,109 +235,138 @@ import Accordion from '../components/Accordion';
       title="Evolución del Diseño Arquitectónico"
       subtitle="La arquitectura del proyecto busca una integración total con el entorno. La granja se concibe como un elemento que conecta la zona baja de pastos con el monte, fusionándose con la topografía."
     >
-      <DesignSlider client:load />
+      <AnimatedSection animation="slideUp" client:load>
+        <DesignSlider client:load />
+      </AnimatedSection>
     </Section>
 
-    <!-- Section 5: Análisis Técnico y Económico -->
+    <!-- Section 5: Galería Multimedia -->
+    <Section 
+      id="galeria" 
+      title="Galería Multimedia"
+      subtitle="Explora la documentación visual completa del proyecto CRIAGA, desde las razas autóctonas hasta los detalles constructivos."
+    >
+      <AnimatedSection animation="fadeIn" client:load>
+        <ImageGallery 
+          images={galleryImages} 
+          categories={galleryCategories}
+          client:load 
+        />
+      </AnimatedSection>
+    </Section>
+
+    <!-- Section 6: Análisis Técnico y Económico -->
     <Section 
       id="analisis" 
       title="Análisis Técnico y Económico"
       subtitle="El proyecto se fundamenta en un riguroso análisis técnico, cumpliendo con toda la normativa vigente, y se define con un presupuesto detallado que asegura su viabilidad."
+      className="progress-section"
     >
       <div class="grid lg:grid-cols-2 gap-12 items-start">
-        <Card title="Resumen del Presupuesto" className="animate-fade-in">
-          <div class="h-80 mb-4">
-            <canvas id="budgetChart"></canvas>
-          </div>
-          <p class="text-center font-bold text-xl text-criaga-red">
-            Total: 4.594.747,74 €
-          </p>
-        </Card>
-        
-        <div class="space-y-6">
-          <Card title="Datos Clave de la Estructura" className="animate-fade-in" style="animation-delay: 0.1s">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-              <div class="bg-gray-50 p-3 rounded-lg">
-                <strong class="text-criaga-red">Cimentación:</strong><br>
-                Zapatas corridas
-              </div>
-              <div class="bg-gray-50 p-3 rounded-lg">
-                <strong class="text-criaga-red">Hormigón Muros:</strong><br>
-                HA-30/F/12/XC4
-              </div>
-              <div class="bg-gray-50 p-3 rounded-lg">
-                <strong class="text-criaga-red">Acero:</strong><br>
-                B 500 S
-              </div>
-              <div class="bg-gray-50 p-3 rounded-lg">
-                <strong class="text-criaga-red">Cubierta:</strong><br>
-                Losa maciza H.A. 35 cm
-              </div>
-              <div class="bg-gray-50 p-3 rounded-lg">
-                <strong class="text-criaga-red">Acción Viento:</strong><br>
-                0.45 kN/m²
-              </div>
-              <div class="bg-gray-50 p-3 rounded-lg">
-                <strong class="text-criaga-red">Acción Nieve:</strong><br>
-                0.3 kN/m²
-              </div>
+        <AnimatedSection animation="slideLeft" client:load>
+          <Card title="Resumen del Presupuesto">
+            <div class="h-80 mb-4">
+              <canvas id="budgetChart"></canvas>
+            </div>
+            <div class="text-center">
+              <p class="font-bold text-xl text-criaga-red counter" data-target="4594748">
+                0 €
+              </p>
+              <div class="progress-bar bg-criaga-red h-1 w-full mt-2 rounded origin-left"></div>
             </div>
           </Card>
+        </AnimatedSection>
+        
+        <div class="space-y-6">
+          <AnimatedSection animation="slideRight" delay={0.2} client:load>
+            <Card title="Datos Clave de la Estructura">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                <div class="bg-gray-50 p-3 rounded-lg">
+                  <strong class="text-criaga-red">Cimentación:</strong><br>
+                  Zapatas corridas
+                </div>
+                <div class="bg-gray-50 p-3 rounded-lg">
+                  <strong class="text-criaga-red">Hormigón Muros:</strong><br>
+                  HA-30/F/12/XC4
+                </div>
+                <div class="bg-gray-50 p-3 rounded-lg">
+                  <strong class="text-criaga-red">Acero:</strong><br>
+                  B 500 S
+                </div>
+                <div class="bg-gray-50 p-3 rounded-lg">
+                  <strong class="text-criaga-red">Cubierta:</strong><br>
+                  Losa maciza H.A. 35 cm
+                </div>
+                <div class="bg-gray-50 p-3 rounded-lg">
+                  <strong class="text-criaga-red">Acción Viento:</strong><br>
+                  0.45 kN/m²
+                </div>
+                <div class="bg-gray-50 p-3 rounded-lg">
+                  <strong class="text-criaga-red">Acción Nieve:</strong><br>
+                  0.3 kN/m²
+                </div>
+              </div>
+            </Card>
+          </AnimatedSection>
           
-          <Card title="Cumplimiento Normativo (CTE)" className="animate-fade-in" style="animation-delay: 0.2s">
-            <Accordion 
-              client:load
-              items={[
-                {
-                  id: 'db-si',
-                  title: 'DB-SI: Seguridad en caso de Incendio',
-                  content: 'El proyecto cumple con las exigencias del DB-SI, considerando la granja un espacio exterior abierto. Se definen sectores de incendio para zonas cerradas como la sala de control (Riesgo Bajo). Se dota de extintores, B.I.E., hidrantes y sistema de detección y alarma. La estructura principal (muros y losa de hormigón) garantiza una resistencia al fuego R-90.'
-                },
-                {
-                  id: 'db-sua',
-                  title: 'DB-SUA: Seguridad de Utilización y Accesibilidad',
-                  content: 'Se garantiza la seguridad frente a caídas con pavimentos de clase 3 (Rd>45). Los desniveles se resuelven con rampas de pendiente controlada (<12%). Aunque no es de obligado cumplimiento por el uso agrario, el diseño de la planta baja es accesible. Se instala un sistema de protección contra el rayo de Nivel 3.'
-                },
-                {
-                  id: 'db-hs',
-                  title: 'DB-HS: Salubridad',
-                  content: 'Se asegura la protección frente a la humedad en muros y soleras en contacto con el terreno, y en la cubierta vegetal. La ventilación es principalmente natural. Se proyecta una red de saneamiento para purines con tratamiento y depuración por lagunaje, y una red separada para el aseo. El edificio se considera exento de cumplir la protección frente al radón por su condición de espacio abierto.'
-                },
-                {
-                  id: 'db-he',
-                  title: 'DB-HE: Ahorro de Energía',
-                  content: 'El proyecto está exento de cumplir las exigencias de limitación de consumo (HE0, HE1, HE2) por ser un edificio agrícola de baja demanda energética. No obstante, el diseño bioclimático (cubierta vegetal, ventilación natural) contribuye a un uso racional de la energía.'
-                }
-              ]}
-            />
-          </Card>
+          <AnimatedSection animation="slideRight" delay={0.4} client:load>
+            <Card title="Cumplimiento Normativo (CTE)">
+              <Accordion 
+                client:load
+                items={[
+                  {
+                    id: 'db-si',
+                    title: 'DB-SI: Seguridad en caso de Incendio',
+                    content: 'El proyecto cumple con las exigencias del DB-SI, considerando la granja un espacio exterior abierto. Se definen sectores de incendio para zonas cerradas como la sala de control (Riesgo Bajo). Se dota de extintores, B.I.E., hidrantes y sistema de detección y alarma. La estructura principal (muros y losa de hormigón) garantiza una resistencia al fuego R-90.'
+                  },
+                  {
+                    id: 'db-sua',
+                    title: 'DB-SUA: Seguridad de Utilización y Accesibilidad',
+                    content: 'Se garantiza la seguridad frente a caídas con pavimentos de clase 3 (Rd>45). Los desniveles se resuelven con rampas de pendiente controlada (<12%). Aunque no es de obligado cumplimiento por el uso agrario, el diseño de la planta baja es accesible. Se instala un sistema de protección contra el rayo de Nivel 3.'
+                  },
+                  {
+                    id: 'db-hs',
+                    title: 'DB-HS: Salubridad',
+                    content: 'Se asegura la protección frente a la humedad en muros y soleras en contacto con el terreno, y en la cubierta vegetal. La ventilación es principalmente natural. Se proyecta una red de saneamiento para purines con tratamiento y depuración por lagunaje, y una red separada para el aseo. El edificio se considera exento de cumplir la protección frente al radón por su condición de espacio abierto.'
+                  },
+                  {
+                    id: 'db-he',
+                    title: 'DB-HE: Ahorro de Energía',
+                    content: 'El proyecto está exento de cumplir las exigencias de limitación de consumo (HE0, HE1, HE2) por ser un edificio agrícola de baja demanda energética. No obstante, el diseño bioclimático (cubierta vegetal, ventilación natural) contribuye a un uso racional de la energía.'
+                  }
+                ]}
+              />
+            </Card>
+          </AnimatedSection>
         </div>
       </div>
     </Section>
 
-    <!-- Section 6: Pliego de Condiciones -->
+    <!-- Section 7: Pliego de Condiciones -->
     <Section 
       id="pliego" 
       title="Pliego de Condiciones"
       subtitle="Seleccione una unidad de obra para consultar sus especificaciones técnicas, normativa de aplicación y proceso de ejecución detallado."
     >
-      <div class="flex flex-wrap justify-center gap-4 mb-8">
-        <button class="pliego-btn bg-criaga-red text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-criaga-red-light transition-all duration-200" data-target="muro">
-          Muro de Hormigón
-        </button>
-        <button class="pliego-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-all duration-200" data-target="viga">
-          Viga de Hormigón
-        </button>
-        <button class="pliego-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-all duration-200" data-target="losa">
-          Losa Maciza
-        </button>
-      </div>
-      
-      <Card className="min-h-[400px]">
-        <div id="pliego-content">
-          <!-- Content will be injected by JavaScript -->
+      <AnimatedSection animation="fadeIn" client:load>
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+          <button class="pliego-btn bg-criaga-red text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-criaga-red-light transition-all duration-200 transform hover:-translate-y-1" data-target="muro">
+            Muro de Hormigón
+          </button>
+          <button class="pliego-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-all duration-200 transform hover:-translate-y-1" data-target="viga">
+            Viga de Hormigón
+          </button>
+          <button class="pliego-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-all duration-200 transform hover:-translate-y-1" data-target="losa">
+            Losa Maciza
+          </button>
         </div>
-      </Card>
+        
+        <Card className="min-h-[400px]">
+          <div id="pliego-content">
+            <!-- Content will be injected by JavaScript -->
+          </div>
+        </Card>
+      </AnimatedSection>
     </Section>
 
   </main>
@@ -285,25 +376,28 @@ import Accordion from '../components/Accordion';
     <div class="container mx-auto px-6 py-12">
       <div class="grid md:grid-cols-3 gap-8">
         <div>
-          <h3 class="text-xl font-bold font-serif text-criaga-red mb-4">CRIAGA</h3>
+          <Logo size="md" className="mb-4" />
           <p class="text-gray-600 leading-relaxed">
-            Centro de Cría de Razas Galegas - Un proyecto innovador para la revitalización 
-            del mundo rural gallego a través de la ganadería sostenible.
+            Un proyecto innovador para la revitalización del mundo rural gallego a través de la ganadería sostenible 
+            y la puesta en valor de las razas autóctonas.
           </p>
         </div>
         <div>
-          <h4 class="font-semibold text-criaga-red mb-4">Proyecto</h4>
+          <h4 class="font-semibold text-criaga-red mb-4">Navegación</h4>
           <ul class="space-y-2 text-gray-600">
             <li><a href="#vision" class="hover:text-criaga-red transition-colors">Visión General</a></li>
             <li><a href="#programa" class="hover:text-criaga-red transition-colors">Programa Ganadero</a></li>
             <li><a href="#diseno" class="hover:text-criaga-red transition-colors">Diseño Arquitectónico</a></li>
+            <li><a href="#galeria" class="hover:text-criaga-red transition-colors">Galería Multimedia</a></li>
             <li><a href="#analisis" class="hover:text-criaga-red transition-colors">Análisis Técnico</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="font-semibold text-criaga-red mb-4">Información</h4>
-          <p class="text-gray-600 text-sm leading-relaxed">
+          <h4 class="font-semibold text-criaga-red mb-4">Información del Proyecto</h4>
+          <p class="text-gray-600 text-sm leading-relaxed mb-4">
             Proyecto desarrollado por Pedro Citoula Pérez como Trabajo Fin de Máster.
+          </p>
+          <p class="text-gray-600 text-sm">
             Aplicación web interactiva para la exploración del proyecto CRIAGA.
           </p>
         </div>
@@ -313,6 +407,10 @@ import Accordion from '../components/Accordion';
       </div>
     </div>
   </footer>
+
+  <!-- Load GSAP and ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
   <!-- Scripts -->
   <script>
@@ -365,6 +463,10 @@ import Accordion from '../components/Accordion';
                     label: (context) => `${context.label}: ${context.parsed}%`
                   }
                 }
+              },
+              animation: {
+                animateRotate: true,
+                duration: 2000
               }
             }
           });
@@ -391,6 +493,10 @@ import Accordion from '../components/Accordion';
                     text: 'Superficie (m²)'
                   }
                 }
+              },
+              animation: {
+                duration: 2000,
+                easing: 'easeOutQuart'
               }
             }
           });
@@ -458,7 +564,7 @@ import Accordion from '../components/Accordion';
           const target = button.getAttribute('data-target');
           updatePliegoContent(target);
           
-          // Update button styles
+          // Update button styles with animation
           pliegoButtons.forEach(btn => {
             btn.classList.remove('bg-criaga-red', 'text-white');
             btn.classList.add('bg-gray-200', 'text-gray-700');
@@ -485,7 +591,7 @@ import Accordion from '../components/Accordion';
         });
       });
 
-      // Search functionality
+      // Enhanced search functionality
       const searchInput = document.getElementById('search-input');
       const searchResults = document.getElementById('search-results');
       
@@ -502,29 +608,36 @@ import Accordion from '../components/Accordion';
               return;
             }
             
-            // Simple search implementation
+            // Enhanced search implementation
             const sections = document.querySelectorAll('section[id]');
             const results = [];
             
             sections.forEach(section => {
               const title = section.querySelector('h2')?.textContent || '';
-              const content = section.textContent.toLowerCase();
+              const content = section.textContent?.toLowerCase() || '';
               
               if (content.includes(query)) {
+                const queryIndex = content.indexOf(query);
+                const relevance = title.toLowerCase().includes(query) ? 2 : 1;
+                
                 results.push({
                   title: title,
                   id: section.id,
-                  snippet: content.substring(content.indexOf(query) - 50, content.indexOf(query) + 100)
+                  snippet: content.substring(Math.max(0, queryIndex - 50), queryIndex + 100),
+                  relevance
                 });
               }
             });
             
+            // Sort by relevance
+            results.sort((a, b) => b.relevance - a.relevance);
+            
             if (results.length > 0) {
               searchResults.innerHTML = results.map(result => `
-                <div class="p-3 hover:bg-gray-50 rounded-lg cursor-pointer border-b border-gray-100 last:border-b-0">
+                <div class="p-3 hover:bg-gray-50 rounded-lg cursor-pointer border-b border-gray-100 last:border-b-0 transition-colors duration-200">
                   <a href="#${result.id}" class="block">
                     <h4 class="font-semibold text-criaga-red mb-1">${result.title}</h4>
-                    <p class="text-sm text-gray-600">${result.snippet}...</p>
+                    <p class="text-sm text-gray-600 line-clamp-2">${result.snippet}...</p>
                   </a>
                 </div>
               `).join('');
