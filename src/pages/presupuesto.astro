@@ -1,0 +1,159 @@
+---
+// src/pages/presupuesto.astro
+import Layout from '../layouts/Layout.astro';
+import ContentSection from '../components/ContentSection.astro';
+// Importar TableDisplay.astro si se usa para las tablas de presupuesto
+
+const pageTitle = "Presupuesto, Mediciones y Pliego de Condiciones";
+const currentPageUrl = "/presupuesto";
+
+const sidebarLinks = [
+  { text: "Precios Unitarios", href: "#precios-unitarios" },
+  { text: "Precios Descompuestos", href: "#precios-descompuestos" },
+  { text: "Mediciones", href: "#mediciones" },
+  { text: "Resumen del Presupuesto", href: "#resumen-presupuesto" },
+  { text: "Pliego de Condiciones", href: "#pliego-condiciones" }
+];
+---
+
+<Layout title={pageTitle} currentPage={currentPageUrl} sidebarLinks={sidebarLinks} showSidebar={true}>
+  <div class="page-header">
+    <h1>{pageTitle}</h1>
+  </div>
+
+  <ContentSection title="Introducción al Presupuesto" id="introduccion-presupuesto">
+    <p>Como se solicita el desarrollo de un capítulo completo de una parte representativa del proyecto, se realizará el desarrollo completo del capítulo estructura para las secciones de Precios Unitarios, Precios Descompuestos y Mediciones. El Resumen del Presupuesto y el Pliego de Condiciones se presentarán de forma más general.</p>
+  </ContentSection>
+
+  <ContentSection title="Precios Unitarios" id="precios-unitarios">
+    <p>A continuación, se detallan los precios unitarios de los materiales y mano de obra más relevantes para el capítulo de estructura.</p>
+    <!-- Aquí iría la tabla de Precios Unitarios del HTML original. -->
+    <!-- Ejemplo: <TableDisplay data={datosPreciosUnitarios} /> -->
+    <div class="table-container">
+        <p><em>(Tabla de Precios Unitarios del HTML original se insertará aquí adaptada al componente <code>TableDisplay</code> o como HTML directo estilizado)</em></p>
+        <table class="data-table">
+            <thead>
+                <tr><th>CÓDIGO</th><th>UNIDAD</th><th>EURO</th><th>DESCRIPCIÓN</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>mo043</td><td>h</td><td>23,39</td><td>Oficial 1ª ferrallista</td></tr>
+                <tr><td>mo044</td><td>h</td><td>23,39</td><td>Oficial 1ª encofrador.</td></tr>
+                <tr><td>mt07aco010c</td><td>kg</td><td>1,58</td><td>Ferralla elaborada en taller industrial con acero en barras corrugadas, UNE-EN 10080 B 500 S, de varios di&aacute;metros.</td></tr>
+                <!-- ... más filas de la tabla de precios unitarios ... -->
+            </tbody>
+        </table>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Precios Descompuestos" id="precios-descompuestos">
+    <p>Desglose de los precios para las unidades de obra principales de la estructura.</p>
+    <!-- Aquí irían las tablas de Precios Descompuestos del HTML original. -->
+    <div class="table-container">
+        <p><em>(Tabla de Precios Descompuestos EHN030b del HTML original se insertará aquí)</em></p>
+        <table class="data-table">
+            <thead>
+                <tr><th>CÓDIGO</th><th>CANTIDAD</th><th>UDS.</th><th>DESCRIPCIÓN</th><th>EURO</th><th>IMP. EURO</th></tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="2">EHN030b</td><td>m³</td><td colspan="3">Muro, n&uacute;cleo o pantalla de hormig&oacute;n armado...</td></tr>
+                <tr><td>mt07aco020d</td><td>8</td><td>Ud</td><td>Separador homologado para muros.</td><td>0,06</td><td>0,48</td></tr>
+                <!-- ... más filas ... -->
+                <tr><td>TOTAL</td><td>140,3</td><td></td><td></td><td>240,88&euro;</td><td>33.793,1&euro;</td></tr>
+            </tbody>
+        </table>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Mediciones" id="mediciones">
+    <p>Mediciones detalladas para las unidades de obra de la estructura.</p>
+    <!-- Aquí irían las tablas de Mediciones del HTML original. -->
+    <div class="table-container">
+        <p><em>(Tabla de Mediciones EHN030b del HTML original se insertará aquí)</em></p>
+        <table class="data-table">
+            <thead>
+                <tr><th></th><th>UDS.</th><th>LARGO</th><th>ANCHO</th><th>ALTO</th><th>PARCIAL</th><th>SUBTOTAL</th><th>EURO</th><th colspan="3">IMP. EURO</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>MR1</td><td>6</td><td>9</td><td>0,4</td><td>1,15</td><td>4,14</td><td>24,84</td><td rowspan="2"></td><td rowspan="2"></td><td rowspan="2"></td></tr>
+                <!-- ... más filas ... -->
+                <tr><td colspan="6">TOTAL</td><td>140,3</td><td colspan="2">240,88&euro;</td><td colspan="2">33.793,1&euro;</td></tr>
+            </tbody>
+        </table>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Resumen del Presupuesto" id="resumen-presupuesto">
+    <p>Resumen general del presupuesto del proyecto.</p>
+    <!-- Aquí iría la tabla de Resumen del Presupuesto del HTML original. -->
+    <div class="table-container">
+        <p><em>(Tabla de Resumen del Presupuesto del HTML original se insertará aquí)</em></p>
+        <table class="data-table">
+            <thead>
+                <tr><th>C&Oacute;DIGO</th><th>DESCRIPCI&Oacute;N</th><th>IMP. EURO</th><th>%</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>C01</td><td>Demoliciones</td><td>3.362,00 &euro;</td><td>0,11%</td></tr>
+                <!-- ... más filas ... -->
+                <tr><td colspan="2">Total ejecuci&oacute;n material</td><td>3.087.245,68 &euro;</td><td></td></tr>
+                <tr><td colspan="2">Gastos generales </td><td>524.831,76 &euro;</td><td>17,00%</td></tr>
+                <tr><td colspan="2">Beneficio Industrial</td><td>185.234,74 &euro;</td><td>6,00%</td></tr>
+                <tr><td colspan="2"></td><td>3.797.312,18 &euro;</td><td></td></tr>
+                <tr><td colspan="2">IVA</td><td>797.435,56 &euro;</td><td>21,00%</td></tr>
+                <tr><td colspan="2">Total presupuesto general</td><td>4.594.747,74 &euro;</td><td></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p>Asciende el presupuesto de ejecución por contrata con IVA a la expresada cantidad de <strong>CUATRO MILLONES, QUINIENTOS NOVENTA Y CUATRO MIL, SETECIENTOS CUARENTA Y SIETE EUROS CON 74 CÉNTIMOS</strong>.</p>
+  </ContentSection>
+
+  <ContentSection title="Pliego de Condiciones" id="pliego-condiciones">
+    <p>Extracto del pliego de condiciones técnicas particulares para la unidad de obra EHN030B (Muro de hormigón armado).</p>
+    <h4>Unidad de Obra EHN030B:</h4>
+    <p>Muro, núcleo o pantalla de hormigón armado, de 40 cm de espesor medio, realizado con hormigón HA-30/F/12/XC4 fabricado en central, y vertido con cubilote, y acero, UNE-EN 10080 B 500 S, con una cuantía aproximada de 51,4 kg/m³, ejecutado en condiciones complejas. Incluso alambre de atar y separadores.</p>
+    <h5>Características técnicas:</h5>
+    <p>Muro, núcleo o pantalla de hormigón armado, de 40 cm de espesor medio...</p>
+    <h5>Normativa de aplicación:</h5>
+    <p>Elaboración, transporte y puesta en obra del hormigón: Código Estructural.</p>
+    <h5>Criterio de medición en proyecto:</h5>
+    <p>Volumen medido sobre la sección teórica de cálculo, según documentación gráfica de Proyecto, deduciendo los huecos de superficie mayor de 2 m².</p>
+    <!-- ... Más contenido del pliego ... -->
+  </ContentSection>
+
+</Layout>
+
+<style>
+  .page-header {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 1rem;
+  }
+  .page-header h1 {
+    font-size: 2.8rem;
+    color: var(--color-primary);
+  }
+
+  .table-container {
+    overflow-x: auto; /* Para tablas anchas en pantallas pequeñas */
+    margin-bottom: 2em;
+  }
+
+  .data-table { /* Estilos generales para las tablas de datos */
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+  }
+  .data-table th, .data-table td {
+    border: 1px solid var(--color-table-border);
+    padding: 8px 10px;
+    text-align: left;
+  }
+  .data-table th {
+    background-color: var(--color-table-header-bg);
+    font-weight: bold;
+  }
+  .data-table td:nth-child(2), /* Cantidad */
+  .data-table td:nth-child(5), /* Euro */
+  .data-table td:nth-child(6)  /* IMP. EURO */ {
+    text-align: right;
+  }
+</style>

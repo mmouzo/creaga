@@ -1,0 +1,57 @@
+---
+// src/components/Navigation.astro
+export interface Link {
+    text: string;
+    href: string;
+}
+export interface Props {
+    navLinks: Link[];
+    currentPage?: string;
+}
+
+const { navLinks, currentPage } = Astro.props;
+---
+<nav>
+    <ul>
+        {navLinks.map(link => (
+            <li>
+                <a
+                    href={link.href}
+                    class:list={{ active: currentPage === link.href || (currentPage && currentPage.startsWith(link.href) && link.href !== "/") || (currentPage === "/" && link.href === "/") }}
+                >
+                    {link.text}
+                </a>
+            </li>
+        ))}
+    </ul>
+</nav>
+
+<style>
+    nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
+    nav ul li {
+        margin-left: 20px;
+    }
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-family: var(--font-secondary);
+        font-weight: 400; /* Regular weight for Aptos */
+        padding: 5px 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+    nav ul li a:hover {
+        background-color: rgba(255,255,255,0.2);
+        text-decoration: none;
+    }
+    nav ul li a.active {
+        font-weight: 700; /* Bold for active page */
+        background-color: rgba(255,255,255,0.1);
+        /* text-decoration: underline; */
+    }
+</style>

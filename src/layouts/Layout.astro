@@ -1,0 +1,87 @@
+---
+---
+// src/layouts/Layout.astro
+/**
+ * Layout principal para todas las páginas del sitio.
+ * Proporciona la estructura HTML base, incluyendo el <head>,
+ * el Header, el Footer y una estructura para el contenido principal
+ * que puede incluir una barra lateral de navegación.
+ *
+ * Props:
+ * - title (string, requerido): Título de la página, se usa en la etiqueta <title>.
+ * - description (string, opcional, default: "Documentación Técnica del Proyecto CRIAGA"):
+ *   Descripción para la metaetiqueta HTML.
+ * - currentPage (string, opcional): URL de la página actual, pasada al Header para
+ *   resaltar el enlace de navegación activo.
+ * - sidebarLinks (Array<{ text: string; href: string }>, opcional): Array de objetos
+ *   para generar los enlaces de la barra lateral de navegación. Cada objeto debe tener
+ *   `text` (texto del enlace) y `href` (URL o ancla).
+ * - showSidebar (boolean, opcional, default: false): Controla si la barra lateral
+ *   debe mostrarse en la página.
+ *
+ * Slots:
+ * - default: El contenido principal de la página se inserta aquí.
+ */
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SidebarNav from '../components/SidebarNav.astro';
+import '../styles/global.css';
+
+export interface Props {
+	title: string;
+	description?: string;
+    currentPage?: string; // Para el Header
+    sidebarLinks?: Array<{ text: string; href: string }>; // Para SidebarNav
+    showSidebar?: boolean; // Para controlar la visibilidad del sidebar
+}
+
+const { title, description = "Documentación Técnica del Proyecto CRIAGA", currentPage, sidebarLinks, showSidebar = false } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | CRIAGA</title>
+    <meta name="description" content={description} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <Header currentPage={currentPage} />
+    <div class="page-wrapper">
+        {showSidebar && sidebarLinks && sidebarLinks.length > 0 && (
+            <aside class="sidebar">
+                <SidebarNav subLinks={sidebarLinks} />
+            </aside>
+        )}
+        <main class="main-content" class:list={{ 'with-sidebar': showSidebar }}>
+            <slot />
+        </main>
+    </div>
+    <Footer />
+    <style is:global>
+        /* Las variables CSS y estilos globales ahora están en src/styles/global.css */
+        /* Este style block puede ser usado para estilos MUY específicos de Layout si es necesario, */
+        /* o incluso eliminarse si todo está en global.css */
+
+        .page-wrapper {
+            display: flex;
+            flex-grow: 1; /* Asegura que page-wrapper ocupe el espacio disponible */
+             /* padding-top: var(--header-height);  Ya no es necesario aquí si el header es sticky y el main-container maneja el padding */
+        }
+
+        /* Si el sidebar está presente, el main-content se ajustará automáticamente por flexbox.
+           Si no hay sidebar, .main-content usará su propio margin: auto para centrarse. */
+        .main-content.with-sidebar {
+           /* max-width: calc(100% - var(--sidebar-width) - 2rem); /* Opcional: si quieres que el contenido no se "pegue" al sidebar */
+        }
+    </style>
+</body>
+</html>

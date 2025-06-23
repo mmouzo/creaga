@@ -1,0 +1,65 @@
+---
+// src/components/Header.astro
+import Navigation from './Navigation.astro';
+export interface Props {
+    currentPage?: string;
+}
+
+const { currentPage } = Astro.props;
+
+const navLinks = [
+    { text: "Inicio", href: "/" },
+    { text: "Memoria Descriptiva", href: "/memoria-descriptiva" },
+    { text: "Memoria Urbanística", href: "/memoria-urbanistica" },
+    { text: "Memoria Estructural", href: "/memoria-estructural" },
+    { text: "Memoria Constructiva", href: "/memoria-constructiva" },
+    { text: "Presupuesto", href: "/presupuesto" }
+];
+---
+<header>
+    <div class="container">
+        <a href="/" class="logo-link">
+            <img src="/favicon.svg" alt="CRIAGA Logo" class="logo-img"/>
+            <span class="site-title">CRIAGA</span>
+        </a>
+        <Navigation navLinks={navLinks} currentPage={currentPage} />
+    </div>
+</header>
+
+<style>
+    header {
+        background-color: var(--color-primary);
+        color: white;
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        height: var(--header-height, 60px); /* Definir altura para el cálculo en Layout.astro */
+        display: flex;
+        align-items: center;
+    }
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .logo-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: white;
+    }
+    .logo-img {
+        height: 40px;
+        margin-right: 10px;
+    }
+    .site-title {
+        font-family: var(--font-primary);
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+</style>

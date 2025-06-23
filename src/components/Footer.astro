@@ -1,0 +1,30 @@
+---
+// src/components/Footer.astro
+const currentYear = new Date().getFullYear();
+---
+<footer>
+    <div class="container">
+        <p>&copy; {currentYear} CRIAGA. Desarrollado por Pedro Citoula Pérez.</p>
+        <p>Proyecto Fin de Máster - ETSAC, UDC.</p>
+    </div>
+</footer>
+
+<style>
+    footer {
+        background-color: var(--color-text-secondary);
+        color: white;
+        text-align: center;
+        padding: 1.5rem 0;
+        font-size: 0.9rem;
+        height: var(--footer-height, 80px); /* Definir altura para el cálculo en Layout.astro */
+    }
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    footer p {
+        margin: 0.3rem 0;
+         color: white; /* Asegurar que el texto del footer sea blanco */
+    }
+</style>

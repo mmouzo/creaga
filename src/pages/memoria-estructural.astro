@@ -1,0 +1,146 @@
+---
+// src/pages/memoria-estructural.astro
+import Layout from '../layouts/Layout.astro';
+import ContentSection from '../components/ContentSection.astro';
+// Importar otros componentes que se necesiten, como TableDisplay.astro
+
+const pageTitle = "Memoria Estructural";
+const currentPageUrl = "/memoria-estructural";
+
+const sidebarLinks = [
+  { text: "Justificación Solución", href: "#justificacion-solucion" },
+  { text: "Características Materiales", href: "#caracteristicas-materiales" },
+  { text: "Acciones en Cálculo", href: "#acciones-calculo" },
+  { text: "Combinaciones de Acciones", href: "#combinaciones-acciones" }
+];
+---
+
+<Layout title={pageTitle} currentPage={currentPageUrl} sidebarLinks={sidebarLinks} showSidebar={true}>
+  <div class="page-header">
+    <h1>{pageTitle}</h1>
+  </div>
+
+  <ContentSection title="Justificación de la Solución Adoptada" id="justificacion-solucion">
+    <p>Debido a las intenciones del proyecto de situar el edificio en el lugar donde la topografía cambia y pasa de tener una superficie llana en el oeste donde se encuentran los pastos a una topografía abrupta con monte y arbolado en el este de la parcela. Se busca situar un edificio longitudinal dirección norte- sur en el que las cuadras de descanso de los animales permitan mantener la mayor conexión directa con el territorio exterior de forma perpendicular a la topografía y sin obstruir las visuales del lugar ni alterar la escala del núcleo.</p>
+    <p>Como solución a estas ideas, el edificio se plantea como una serie de muros de hormigón armado en el sentido de la pendiente, entre los que se desarrolla el programa y que cuentan con una cubierta plana.</p>
+    <p>La topografía del emplazamiento da lugar a que una parte del programa como son los almacenes de alimento, garaje y sala de control se encuentren en el lugar más cerrado del edificio, cuyos muros hacen de contención del terreno. Esta solución permite que el edificio conecte el terreno existente con la cubierta vegetal de forma que el edificio se convierten en paisaje y parte de transición.</p>
+
+    <h3>Estructura</h3>
+    <p>La estructura del edificio cuenta con una serie de pórticos de hormigón armado formados por muros con vigas de canto en voladizo a este y oeste.</p>
+    <p>El pórtico tipo cuenta con un voladizo a ambos lados de forma asimétrica siendo mayor hacia el oeste por donde se encuentra el pasillo de acceso a las cuadras de los animales que permite el refugio del trabajador ante las inclemencias del tiempo y con un ancho que permita el paso del tractor y de un operario sin molestarse.</p>
+    <p>En la parte sur del edificio como se mencionó previamente los muros también forman parte de la contención del terreno y cierran el volumen en el este y sur.</p>
+    <p>Hacia el Norte el edificio cuenta con un desnivel de un metro para salvar la topografía y donde los muros cambian de orientación permitiendo la salida de los animales hacia el campo.</p>
+    <p>La cubierta formada por una losa maciza de hormigón armado mantiene la misma altura en todo el proyecto y viene dada por el espacio necesario para el almacenamiento de las alpacas necesarias para la alimentación de los animales que se colocarán en tres alturas y para permitir el paso del tractor bajo las vigas.</p>
+
+    <h3>Cimentación</h3>
+    <p id="h.mge5qadv8w2g">El proyecto se encuentra en una parcela en la que el tras la lectura del estudio geotécnico nos permite determinar que la cota resistente se encuentra a una profundidad entre 2,3 y 3,6 metros bajo rasante. La cimentación se realiza mediante zapatas corridas bajo los muros que se apoyan de forma directa sobre el terreno resistente mediante una capa de 10 cm de hormigón de limpieza. Y, en determinados casos, se dispondrán pozos de cimentación bajo las zapatas donde, debido a la variación de la cota del nivel geotécnico, se necesiten.</p>
+    <p>También se realizará una mejora del terreno mediante capas compactadas de zahorras graníticas en la toda la planta del proyecto para la ejecución del forjado del edificio, en este caso una solera.</p>
+
+    <h3>Método de Cálculo</h3>
+    <h4>Hormigón armado</h4>
+    <p>Para la obtención de las solicitaciones se ha considerado los principios de la Mecánica Racional y las teorías clásicas de la Resistencia de Materiales y Elasticidad...</p>
+
+    <h3>Cálculos por Ordenador</h3>
+    <p>Para la obtención de las solicitaciones y dimensionado de los elementos estructurales, se ha dispuesto de un programa informático de ordenador...</p>
+  </ContentSection>
+
+  <ContentSection title="Características de los Materiales a Utilizar" id="caracteristicas-materiales">
+    <p>Los materiales a utilizar, así como las características definitorias de los mismos, niveles de control previstos, así como los coeficientes de seguridad, se indican en el siguiente cuadro:</p>
+
+    <h4>Hormigón Armado</h4>
+    <h5>Hormigones</h5>
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr><th></th><th>Cimentación</th><th>Muros</th><th>Losa y vigas</th><th>Solera</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Resistencia Característica f<sub>ck</sub> (N/mm²)</td><td>30</td><td>30</td><td>30</td><td>30</td></tr>
+          <tr><td>Tipo de cemento (RC-16)</td><td>CEM I/32.5 N</td><td>CEM II/S/32.5 N</td><td>CEM I/32.5 N</td><td>CEM I/32.5 N</td></tr>
+          <tr><td>Cantidad cemento (kg/m³)</td><td>375/275</td><td>400/350</td><td>400/300</td><td>400/300</td></tr>
+          <tr><td>Tamaño máximo del árido (mm)</td><td>25</td><td>12</td><td>12</td><td>25</td></tr>
+          <tr><td>Tipo de ambiente</td><td>XC2</td><td>XA2</td><td>XC4</td><td>XC4</td></tr>
+          <tr><td>Consistencia</td><td>Fluida</td><td>Fluida</td><td>Fluida</td><td>Fluida</td></tr>
+          <tr><td>Asiento Cono de Abrams (cm)</td><td>10-15</td><td>10-15</td><td>10-15</td><td>10-15</td></tr>
+          <tr><td>Sistema de compactación</td><td>Vibrado</td><td>Vibrado</td><td>Vibrado</td><td>Vibrado</td></tr>
+          <tr><td>Nivel de Control Previsto</td><td>Estadístico</td><td>Estadístico</td><td>Estadístico</td><td>Estadístico</td></tr>
+          <tr><td>Coeficiente de Minoración</td><td>1.5</td><td>1.5</td><td>1.5</td><td>1.5</td></tr>
+          <tr><td>Resistencia de cálculo f<sub>cd</sub> (N/mm²)</td><td>20</td><td>20</td><td>20</td><td>20</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h5>Acero en barras</h5>
+     <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr><th></th><th>Cimentación</th><th>Muros</th><th>Losa y vigas</th><th>Solera</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Designación</td><td>B-500-S</td><td>B-500-S</td><td>B-500-S</td><td>B-500-S</td></tr>
+          <tr><td>Límite Elástico (N/mm²)</td><td>500</td><td>500</td><td>500</td><td>500</td></tr>
+          <tr><td>Nivel de Control Previsto</td><td>Normal</td><td>Normal</td><td>Normal</td><td>Normal</td></tr>
+          <tr><td>Coeficiente de Minoración</td><td>1.15</td><td>1.15</td><td>1.15</td><td>1.15</td></tr>
+          <tr><td>Resistencia de cálculo f<sub>yd</sub> (N/mm²)</td><td>434.78</td><td>434.78</td><td>434.78</td><td>434.78</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h5>Acero en mallazos</h5>
+    <div class="table-container">
+      <table class="data-table">
+          <thead>
+            <tr><th></th><th>Solera</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Designación</td><td>B-500-T</td></tr>
+            <tr><td>Límite Elástico (kp/cm²)</td><td>500</td></tr>
+          </tbody>
+      </table>
+    </div>
+
+    <h5>Ejecución</h5>
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr><th></th><th>Cimentación</th><th>Muros</th><th>Losa y vigas</th><th>Solera</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>A. Nivel de Control previsto</td><td>Normal</td><td>Normal</td><td>Normal</td><td>Normal</td></tr>
+          <tr><td>B. Coeficiente de Mayoración de las acciones desfavorables Permanentes/Variables</td><td>1.35/1.50</td><td>1.35/1.50</td><td>1.35/1.50</td><td>1.35/1.50</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Ensayos a Realizar</h4>
+    <p>Hormigón Armado. De acuerdo a los niveles de control previstos, se realizarán los ensayos pertinentes de los materiales, acero y hormigón según se indica en el Artículo 14 del Código Estructural.</p>
+
+    <h4>Asientos Admisibles y Límites de Deformación</h4>
+    <p>Asientos admisibles de la cimentación. De acuerdo al DB SE C, apartado 2.4.3 y Tablas 2.2 y 2.3 se fijan los valores límite basados en la distorsión angular y horizontal que resultan admisibles en función al tipo estructural...</p>
+  </ContentSection>
+
+  <ContentSection title="Acciones Adoptadas en el Cálculo" id="acciones-calculo">
+    <h3>Acciones Gravitatorias</h3>
+    <h4>Cargas Superficiales</h4>
+    <h5>Peso propio del forjado</h5>
+    <p>Se ha dispuesto los siguientes tipos de forjados: Losa de hormigón armado de 35 cm de espesor.</p>
+    <!-- ... más detalles y tablas ... -->
+  </ContentSection>
+
+  <ContentSection title="Combinaciones de Acciones Consideradas" id="combinaciones-acciones">
+    <!-- Contenido correspondiente -->
+  </ContentSection>
+
+</Layout>
+
+<style>
+  .page-header {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 1rem;
+  }
+  .page-header h1 {
+    font-size: 2.8rem;
+    color: var(--color-primary);
+  }
+</style>

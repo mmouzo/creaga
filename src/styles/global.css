@@ -1,0 +1,255 @@
+/* src/styles/global.css */
+
+:root {
+    --color-primary: #0f4761; /* Azul oscuro principal */
+    --color-secondary: #50a6c4; /* Azul/Verde agua secundario */
+    --color-text-primary: #333333; /* Negro suave para texto principal */
+    --color-text-secondary: #595959; /* Gris oscuro para texto secundario */
+    --color-background-light: #f4f6f8; /* Un gris muy claro para fondos de página, ligeramente diferente */
+    --color-background-content: #ffffff; /* Blanco para el fondo del contenido principal */
+    --color-border: #d1d9e0; /* Gris para bordes sutiles, ligeramente diferente */
+    --color-table-header-bg: #e9ecef; /* Un poco más oscuro para cabeceras de tabla */
+    --color-table-border: #ced4da;  /* Ligeramente más oscuro para bordes de tabla */
+    --color-link-hover: #0b384f; /* Azul más oscuro para hover de enlaces */
+
+    --font-primary: 'Play', sans-serif; /* Para títulos */
+    --font-secondary: 'Roboto', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Para cuerpo de texto - Roboto y Open Sans como alternativas web más comunes */
+
+    --header-height: 70px;
+    --footer-height: 100px;
+    --sidebar-width: 260px; /* Un poco más estrecho */
+    --content-max-width: 960px; /* Un poco más ancho */
+}
+
+/* Reseteo básico y estilos globales */
+html {
+    scroll-behavior: smooth; /* Desplazamiento suave para anclas */
+}
+
+body {
+    font-family: var(--font-secondary);
+    margin: 0;
+    background-color: var(--color-background-light);
+    color: var(--color-text-primary);
+    line-height: 1.7;
+    font-size: 16px; /* Base font size */
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Contenedor principal y layout */
+.main-container {
+    display: flex;
+    padding-top: var(--header-height); /* Espacio para el header fijo */
+    /* El .page-wrapper ahora está en Layout.astro y maneja el flex-grow */
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--color-background-content);
+    padding: 25px;
+    border-right: 1px solid var(--color-border);
+    height: calc(100vh - var(--header-height)); /* Altura completa menos el header */
+    overflow-y: auto;
+    position: sticky;
+    top: var(--header-height);
+    flex-shrink: 0; /* Evita que el sidebar se encoja */
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 30px 40px;
+    /* background-color: var(--color-background-content); Ya no es necesario si page-wrapper tiene el fondo */
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+    max-width: var(--content-max-width);
+    margin-left: auto; /* Centra el contenido si no hay sidebar o si el sidebar es sticky y no ocupa espacio en el flujo normal */
+    margin-right: auto;
+}
+
+.main-content.with-sidebar {
+     margin-left: 0; /* El sidebar empuja el contenido, por lo que no necesita margen auto */
+     /* Si el contenido total (sidebar + main) debe estar centrado, se manejaría en .page-wrapper */
+}
+
+
+/* Estilos para tipografía */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-primary);
+    color: var(--color-primary);
+    margin-top: 1.8em; /* Aumentar un poco el margen superior */
+    margin-bottom: 1em; /* Aumentar un poco el margen inferior */
+    line-height: 1.4; /* Ligeramente más espaciado */
+}
+
+h1 { font-size: 2.4rem; border-bottom: 2px solid var(--color-secondary); padding-bottom: 0.3em; }
+h2 { font-size: 2rem; } /* Ajuste en el componente ContentSection */
+h3 { font-size: 1.6rem; } /* Ajuste en el componente ContentSection */
+h4 { font-size: 1.3rem; font-style: italic; color: var(--color-text-secondary); } /* Ajuste en el componente ContentSection */
+h5 { font-size: 1.15rem; font-weight: bold; }
+h6 { font-size: 1rem; font-style: italic; color: var(--color-text-secondary); }
+
+p {
+    margin-bottom: 1.3em; /* Un poco más de espacio entre párrafos */
+}
+
+a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+a:hover {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+}
+
+ul, ol {
+    padding-left: 25px;
+    margin-bottom: 1.3em;
+}
+
+li {
+    margin-bottom: 0.6em; /* Un poco más de espacio entre items de lista */
+}
+
+blockquote {
+    border-left: 5px solid var(--color-secondary);
+    padding: 10px 20px;
+    margin: 1.5em 0;
+    background-color: #f1f5f9; /* Fondo sutil para destacar */
+    color: var(--color-text-secondary);
+    font-style: italic;
+    border-radius: 0 4px 4px 0;
+}
+
+blockquote p {
+    margin-bottom: 0.5em;
+}
+blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Estilos para tablas (básicos, se pueden mejorar en _tables.css) */
+/* Los estilos de tabla ahora están principalmente en TableDisplay.astro, pero podemos tener algunos globales */
+.data-table { /* Clase para tablas de datos generales si no usan TableDisplay */
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5em;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border-radius: 6px;
+    overflow: hidden; /* Para que el border-radius afecte a th/td */
+}
+.data-table th, .data-table td {
+    border: 1px solid var(--color-table-border);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+}
+.data-table th {
+    background-color: var(--color-table-header-bg);
+    font-family: var(--font-primary);
+    font-weight: 700;
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary); /* Línea más gruesa y de color primario */
+}
+
+.data-table tbody tr:nth-child(even) {
+    background-color: var(--color-background-light);
+}
+
+.data-table tbody tr:hover {
+    background-color: #e2e8f0; /* Un gris un poco más oscuro para hover */
+}
+
+.data-table caption {
+    caption-side: bottom;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    padding: 0.75em;
+    margin-top: 0.5em;
+}
+
+
+/* Clases de utilidad */
+.text-center {
+    text-align: center;
+}
+
+.img-caption {
+    font-size: 0.9rem; /* Un poco más grande */
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-top: 0.6em; /* Un poco más de espacio */
+    font-style: italic;
+}
+
+/* Para asegurar que el footer se quede abajo */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.page-wrapper { /* Anteriormente .main-container en Layout.astro */
+    flex-grow: 1;
+}
+
+/* Ajustes para impresión (opcional pero útil para documentación) */
+@media print {
+    body {
+        background-color: white;
+        font-size: 11pt; /* Ligeramente más pequeño para impresión */
+        color: black;
+    }
+    header, footer, .sidebar {
+        display: none !important;
+    }
+    .main-content, .page-wrapper {
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+        background-color: white !important;
+    }
+    a {
+        color: black !important;
+        text-decoration: none !important;
+    }
+    a[href^="http"]:after {
+        content: " (" attr(href) ")";
+        font-size: 0.9em;
+    }
+    img {
+        page-break-inside: avoid;
+        max-width: 100% !important; /* Asegurar que las imágenes no se desborden */
+    }
+    table, .data-table {
+        page-break-inside: auto;
+        font-size: 9pt; /* Reducir tamaño de fuente en tablas para impresión */
+    }
+    tr, figure {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+    blockquote {
+        border-left: 3px solid #ccc;
+        padding: 8px 15px;
+        background-color: #f9f9f9;
+    }
+    h1,h2,h3,h4,h5,h6 {
+        color: black !important;
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+}

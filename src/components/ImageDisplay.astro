@@ -1,0 +1,78 @@
+---
+---
+/**
+ * Componente ImageDisplay para mostrar imágenes de forma optimizada y con leyenda opcional.
+ *
+ * Props:
+ * - src (string, requerido): Ruta de la imagen.
+ * - alt (string, requerido): Texto alternativo para la imagen.
+ * - caption (string, opcional): Leyenda que se mostrará debajo de la imagen.
+ * - isCover (boolean, opcional, default: false): Si es true, aplica estilos para que la imagen
+ *   se comporte más como una imagen de portada o banner, ocupando más ancho.
+ * - width (string | number, opcional): Permite especificar un ancho explícito para la imagen (ej. "100px", 100).
+ * - height (string | number, opcional): Permite especificar una altura explícita para la imagen.
+ * - customClass (string, opcional): Clases CSS adicionales para aplicar al contenedor <figure>.
+ *
+ * Comportamiento:
+ * - Carga la imagen de forma diferida (loading="lazy") y la decodifica asíncronamente (decoding="async")
+ *   para mejorar el rendimiento de carga de la página.
+ * - Muestra una leyenda debajo de la imagen si se proporciona la prop `caption`.
+ * - Aplica estilos base para centrar la imagen, añadir bordes redondeados y una sombra sutil.
+ * - Si `isCover` es true, se aplican estilos adicionales para que la imagen pueda ocupar más espacio
+ *   y tenga una sombra más pronunciada, adecuada para imágenes destacadas.
+ */
+export interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  isCover?: boolean; // Para imágenes que deben ocupar más ancho, como portadas
+  width?: string | number; // Ancho explícito si es necesario
+  height?: string | number; // Alto explícito si es necesario
+  customClass?: string; // Clases adicionales para estilizado específico
+}
+
+const { src, alt, caption, isCover = false, width, height, customClass } = Astro.props;
+---
+
+<figure class:list={['image-container', { 'is-cover': isCover }, customClass]}>
+  <img
+    src={src}
+    alt={alt}
+    loading="lazy"
+    decoding="async"
+    style={{ width: width ? (typeof width === 'number' ? `${width}px` : width) : 'auto', height: height ? (typeof height === 'number' ? `${height}px` : height) : 'auto' }}
+  />
+  {caption && <figcaption class="img-caption">{caption}</figcaption>}
+</figure>
+
+<style>
+  .image-container {
+    margin: 1.5em auto; /* Centrar y dar margen */
+    max-width: 100%;
+    border-radius: 6px; /* Bordes redondeados suaves */
+    overflow: hidden; /* Para que el borde redondeado afecte a la imagen */
+  }
+
+  .image-container img {
+    display: block;
+    width: 100%; /* Por defecto, la imagen ocupa el ancho de su contenedor */
+    height: auto;
+    border-radius: 4px; /* Bordes redondeados para la imagen misma */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Sombra sutil */
+  }
+
+  .image-container.is-cover img {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: none; /* Anula el max-width general si es necesario */
+    object-fit: cover; /* Opcional: para asegurar que cubra el área si tiene dimensiones fijas */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  }
+
+  .img-caption {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-top: 0.75em;
+    padding: 0 0.5em;
+  }
+</style>

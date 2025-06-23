@@ -1,0 +1,99 @@
+---
+---
+/**
+ * Componente TableDisplay para envolver y estilizar tablas HTML.
+ *
+ * Props:
+ * - title (string, opcional): Un título que se mostrará encima de la tabla usando un <h4>.
+ * - customClass (string, opcional): Clases CSS adicionales para aplicar al contenedor principal del componente.
+ *
+ * Slots:
+ * - default: Se espera que el contenido de este slot sea una estructura de tabla HTML (`<table>`,
+ *   `<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>`, etc.). El componente proporciona un wrapper
+ *   y estilos, pero la estructura interna de la tabla se define donde se usa el componente.
+ *
+ * Comportamiento:
+ * - Envuelve la tabla en un `div.table-wrapper` que permite el desplazamiento horizontal
+ *   si la tabla es más ancha que el contenedor, asegurando la responsividad.
+ * - Aplica estilos base para mejorar la legibilidad y apariencia de la tabla, incluyendo
+ *   bordes, padding en celdas, fondo para encabezados y efecto hover en filas.
+ * - Permite un título opcional para la tabla.
+ */
+export interface Props {
+  title?: string;
+  customClass?: string;
+}
+
+const { title, customClass } = Astro.props;
+---
+
+<div class:list={["table-display-container", customClass]}>
+  {title && <h4 class="table-title">{title}</h4>}
+  <div class="table-wrapper">
+    <table>
+      <slot /> <!-- Aquí se insertará el contenido de la tabla (ej. <thead>, <tbody>) -->
+    </table>
+  </div>
+</div>
+
+<style>
+  .table-display-container {
+    margin: 2em 0;
+  }
+
+  .table-title {
+    font-family: var(--font-primary, 'Play', sans-serif);
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    margin-bottom: 0.8em;
+    text-align: left;
+  }
+
+  .table-wrapper {
+    overflow-x: auto; /* Permite scroll horizontal en tablas anchas */
+    background-color: #fff; /* Fondo para la tabla */
+    border: 1px solid var(--color-border, #e0e0e0);
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Evita que la tabla se comprima demasiado */
+  }
+
+  table :global(th),
+  table :global(td) {
+    border: 1px solid var(--color-table-border, #e0e0e0);
+    padding: 0.75em 1em; /* Aumentar padding para mejor legibilidad */
+    text-align: left;
+    vertical-align: top; /* Mejor alineación para celdas con mucho contenido */
+    font-size: 0.9rem;
+  }
+
+  table :global(thead th) {
+    background-color: var(--color-table-header-bg, #f2f2f2);
+    font-family: var(--font-primary, 'Play', sans-serif);
+    font-weight: 700;
+    color: var(--color-primary);
+    border-bottom-width: 2px; /* Línea más gruesa debajo de los encabezados */
+  }
+
+  table :global(tbody tr:nth-child(even)) {
+    background-color: var(--color-background-light, #f8f9fa); /* Rayado para filas pares */
+  }
+
+  table :global(tbody tr:hover) {
+    background-color: #e9ecef; /* Color de fondo al pasar el ratón */
+  }
+
+  table :global(caption) {
+    caption-side: bottom;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    padding: 0.5em;
+    margin-top: 0.5em;
+  }
+</style>

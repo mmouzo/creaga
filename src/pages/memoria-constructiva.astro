@@ -1,0 +1,102 @@
+---
+// src/pages/memoria-constructiva.astro
+import Layout from '../layouts/Layout.astro';
+import ContentSection from '../components/ContentSection.astro';
+// Importar otros componentes que se necesiten
+
+const pageTitle = "Memoria Constructiva";
+const currentPageUrl = "/memoria-constructiva";
+
+const sidebarLinks = [
+  { text: "Actuaciones Previas", href: "#actuaciones-previas" },
+  { text: "Acondicionamiento y Movimiento de Tierras", href: "#acondicionamiento-tierras" },
+  { text: "Sustentación del Edificio", href: "#sustentacion-edificio" },
+  { text: "Cumplimiento CTE", href: "#cumplimiento-cte" },
+  { text: "Presupuesto, Mediciones y Pliego", href: "#presupuesto-mediciones-pliego" }
+];
+---
+
+<Layout title={pageTitle} currentPage={currentPageUrl} sidebarLinks={sidebarLinks} showSidebar={true}>
+  <div class="page-header">
+    <h1>{pageTitle}</h1>
+  </div>
+
+  <ContentSection title="Actuaciones Previas" id="actuaciones-previas">
+    <h3>Implantación en Obra, Vallado y Medidas de Seguridad y Conservación</h3>
+    <p>Se atenderá a todas las medidas de seguridad y prevención especificadas en el Plan de seguridad aprobado.</p>
+    <p>Se tomarán las medidas necesarias de máxima conservación del ámbito colindante a la parcela, en este caso la carretera de acceso al no contar con mayores elementos de urbanización próximos.</p>
+    <p>Se vallarán perimetralmente los linderos que no cuenten con cierres de las otras propiedades, en este caso el margen este y oeste de la parcela.</p>
+    <p>El Plan de seguridad determinará los accesos y controles a la obra. Las zonas de acopio de materiales y de clasificación de residuos. La ubicación de casetas de obra para reuniones, vestuarios y aseos.</p>
+
+    <h3>Acometidas de Servicio Durante la Obra</h3>
+    <p>Se procederá a la acometida y entronque temporal de los servicios de instalaciones para el funcionamiento de la obra.</p>
+    <p>La acometida eléctrica se realizará temporalmente, siguiendo todas las medidas de seguridad necesarias, de manera aérea, desde el poste de suministro más cercano. Será necesaria la solicitud formal a la empresa eléctrica distribuidora para la ejecución del suministro definitivo, definiendo características, forma y ubicación.</p>
+    <p>La acometida de agua se realizará desde el punto destinado a tal fin, en las proximidades a la construcción preexistente en el margen oeste de la parcela. De igual manera se procederá a la conexión del saneamiento a la red municipal en el punto previsto para ello, en ese mismo lugar.</p>
+  </ContentSection>
+
+  <ContentSection title="Acondicionamiento, Replanteo y Movimiento de Tierras" id="acondicionamiento-tierras">
+    <h3>Acondicionamiento de la Parcela</h3>
+    <p>En la parcela se realizará un trabajo previo al inicio de las obras mediante un desbroce y la limpieza de todos los elementos preexistentes que se encuentren bajo la maleza...</p>
+    <h3>Replanteo</h3>
+    <p>La documentación gráfica adjunta en el proyecto contiene los datos necesarios para el correcto replanteo de la edificación...</p>
+    <h3>Movimiento de Tierras</h3>
+    <p>Validado el replanteo se procederá a la excavación del terreno hasta alcanzar los niveles de profundidad de cimentación previstos...</p>
+  </ContentSection>
+
+  <ContentSection title="Sustentación del Edificio" id="sustentacion-edificio">
+    <h3>Bases de Cálculo</h3>
+    <p>Mencionar los métodos y normativas utilizadas...</p>
+    <h3>Estudio Geotécnico</h3>
+    <p>Resumen de los hallazgos del estudio geotécnico...</p>
+    <h3>Sistema Estructural</h3>
+    <p>Descripción del sistema estructural adoptado...</p>
+    <h3>Sistema Envolvente</h3>
+    <p>Detalles del sistema de cerramiento y cubierta...</p>
+  </ContentSection>
+
+  <ContentSection title="Cumplimiento CTE" id="cumplimiento-cte">
+    <h3>Introducción</h3>
+    <p>Descripción general del cumplimiento del Código Técnico de la Edificación.</p>
+    <h4>DB-SE Seguridad Estructural</h4>
+    <p>Detalles del cumplimiento.</p>
+    <h4>NCSE-02: Norma Sismorresistente</h4>
+    <p>Justificación de la aplicabilidad o no.</p>
+    <h4>DB-SI Seguridad en caso de incendio</h4>
+    <p>Análisis de compartimentación, evacuación, etc.</p>
+    <h4>DB-SUA Seguridad de utilización y accesibilidad</h4>
+    <p>Medidas para garantizar la seguridad y accesibilidad.</p>
+    <h4>DB-HS Salubridad</h4>
+    <p>Aspectos de protección frente a humedad, calidad del aire, suministro de agua, etc.</p>
+    <h4>DB-HR Protección frente al Ruido</h4>
+    <p>Medidas de aislamiento y acondicionamiento acústico.</p>
+    <h4>DB-HE Ahorro de Energía</h4>
+    <p>Estrategias para la eficiencia energética del edificio.</p>
+  </ContentSection>
+
+  <ContentSection title="Presupuesto, Mediciones y Pliego de Condiciones" id="presupuesto-mediciones-pliego">
+    <p>Como se solicita el desarrollo de un capítulo completo de una parte representativa del proyecto, se realizará el desarrollo completo del capítulo estructura.</p>
+    <h3>Precios Unitarios</h3>
+    <!-- Tabla de precios unitarios -->
+    <h3>Precios Descompuestos</h3>
+    <!-- Tablas de precios descompuestos -->
+    <h3>Mediciones</h3>
+    <!-- Tablas de mediciones -->
+    <h3>Resumen del Presupuesto</h3>
+    <!-- Tabla resumen del presupuesto -->
+    <h3>Pliego de Condiciones</h3>
+    <p>Detalles del pliego de condiciones para la unidad de obra EHN030B y otras relevantes...</p>
+  </ContentSection>
+
+</Layout>
+
+<style>
+  .page-header {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 1rem;
+  }
+  .page-header h1 {
+    font-size: 2.8rem;
+    color: var(--color-primary);
+  }
+</style>

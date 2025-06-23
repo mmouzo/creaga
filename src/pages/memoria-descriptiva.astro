@@ -1,0 +1,355 @@
+---
+// src/pages/memoria-descriptiva.astro
+import Layout from '../layouts/Layout.astro';
+import ContentSection from '../components/ContentSection.astro';
+import ImageDisplay from '../components/ImageDisplay.astro';
+// Importar otros componentes que se necesiten, como TableDisplay.astro
+
+const pageTitle = "Memoria Descriptiva y Justificativa";
+const currentPageUrl = "/memoria-descriptiva";
+
+// Estructura de la sub-navegación para esta página
+const sidebarLinks = [
+  { text: "Agentes", href: "#agentes" },
+  { text: "Información Previa", href: "#informacion-previa" },
+  { text: "Análisis Territorial", href: "#analisis-territorial" },
+  { text: "Descripción del Proyecto", href: "#descripcion-proyecto" },
+  { text: "El Proyecto", href: "#el-proyecto" },
+  { text: "Parámetros Técnicos", href: "#parametros-tecnicos" },
+  { text: "Prestaciones del Edificio", href: "#prestaciones-edificio" }
+];
+---
+
+<Layout title={pageTitle} currentPage={currentPageUrl} sidebarLinks={sidebarLinks} showSidebar={true}>
+  <div class="page-header">
+    <h1>{pageTitle}</h1>
+  </div>
+
+  <ContentSection title="Agentes" id="agentes">
+    <p>El presente proyecto se redacta como parte del Trabajo Fin de Máster de la Escuela Técnica Superior de Arquitectura de A Coruña (ETSAC).</p>
+    <p><strong>Promotor:</strong> Escuela Técnica Superior de Arquitectura de A Coruña.</p>
+    <p><strong>Arquitecto, redactor de la presente memoria:</strong> Pedro Citoula Pérez</p>
+    <p><strong>Tipo de obra:</strong> Nueva construcción y rehabilitación.</p>
+  </ContentSection>
+
+  <ContentSection title="Información Previa: Antecedentes y Condicionantes de Partida" id="informacion-previa">
+    <p>En este proyecto se propone investigar una nueva ruralidad por medio del catalizador que supone la construcción de una Granja Agroganadera y con ella la consecuente puesta en valor de sus terrenos de pasto y cultivo. Como complemento a la Granja se propone también la incorporación de una mínima unidad de Vivienda para los encargados de la misma que actúe como anclaje con la comunidad existente. Completa el programa un pequeño Centro de Interpretación con espacios destinados a la divulgación, formación y exposición de las actividades que allí se realizan. La zona de actuación se deberá ubicar dentro del ámbito del lugar de Lusquiños, en la parroquia de Tomeza. Para ello será imprescindible un análisis de las realidades topográficas, ambientales, parcelario, construcciones y demás elementos tangibles e intangibles que el lugar posee.</p>
+
+    <h3>El Emplazamiento</h3>
+    <p>El programa se encuentra en el Lugar de Lusquiños, siguiendo río arriba el curso del río Gafos, en la parroquia pontevedresa de Tomeza.</p>
+    <p>Este núcleo es la representación de un medio rural con una estructura parcelaria y edificada todavía tradicional, que sobrevive en la periferia de la ciudad. Esta se encuentra tensionada por las infraestructuras cercanas como los viales de gran capacidad de entrada a la ciudad y la vía férrea. La expansión de la ciudad y la construcción de nuevas viviendas, que esta conlleva, están también rondando el núcleo por lo que pone en riesgo su carácter propio.</p>
+    <ImageDisplay src="/images/image128.png" alt="Ruta desde la estación de tren de Pontevedra hasta la ubicación final de la parcela" caption="Ruta realizada desde la estación de tren de Pontevedra hasta la ubicación final de la parcela." />
+    <ImageDisplay src="/images/image124.png" alt="Mapa del emplazamiento" caption="Mapa del emplazamiento general." />
+    <p>En este caso en el programa se nos propone un área de trabajo, pero no una parcela determinada, por lo que el primer paso fue delimitar el ámbito.</p>
+    <p>Durante la visita al lugar se realizó una ruta desde la estación de ferrocarril hasta el Lugar de Lusquiños. Esta se realizó por una senda peatonal creada por los caminantes a la par del margen del río Gafos.</p>
+    <div class="image-gallery cols-2">
+      <ImageDisplay src="/images/image123.png" alt="Entorno del río Gafos 1" />
+      <ImageDisplay src="/images/image126.png" alt="Entorno del río Gafos 2" />
+    </div>
+    <p>Como se puede observar la parte del río se encuentra distanciada del núcleo y a una cota levemente inferior.</p>
+    <p class="highlight">Es durante este recorrido cuando se observa como la mayoría de las construcciones se encuentran a ambos lados de la vía, que recorre el ámbito en la dirección norte – sur. Generalmente la vivienda se posiciona en el frente de la carretera, ocupando casi todo el ancho de la parcela y el resto de la vida se realiza en la parte trasera de la edificación, alejada de la vía, debido a las formas estrechas y alargadas del parcelario.</p>
+
+    <h3>La Parcela</h3>
+    <p>Debido a la fragmentación del parcelario en el ámbito elegido se opta por la unión de una serie de parcelas para poder llevar a cabo el proyecto...</p>
+    <!-- Aquí iría la tabla de superficies de parcelas, usando el componente TableDisplay -->
+    <ImageDisplay src="/images/image122.png" alt="Delimitación de parcelas" caption="Delimitación de parcelas seleccionadas." />
+
+    <h4>Geometría</h4>
+    <div class="image-text-layout">
+        <ImageDisplay src="/images/image121.png" alt="Parcela oeste" caption="Parcela del margen oeste." />
+        <p>La parcela del margen oeste cuenta con una geometría de forma triangular en la que la topografía es bastante plana. En este caso la base del tri&aacute;ngulo coincidir&iacute;a con la carretera principal, mientras que sus otros dos lados limitan con parcelas ocupadas con viviendas unifamiliares aisladas, cercada por una red por el norte y un muro de piedra por el sur que se juntan en el v&eacute;rtice oeste de la parcela, el punto m&aacute;s alto de esta.</p>
+    </div>
+    <div class="image-text-layout">
+        <ImageDisplay src="/images/image120.png" alt="Parcela este" caption="Parcela del margen este." />
+        <p>La parcela de mayor tama&ntilde;o, en el este, tiene una forma irregular. Esta cuenta con una topograf&iacute;a plana y sin grandes desniveles desde su margen oeste hasta la mitad, donde la topograf&iacute;a cambia y empieza a elevarse hacia el este. En ella existe un camino que da acceso desde la carretera a su parte central, donde se produce el cambio de la topograf&iacute;a, y tambi&eacute;n cuenta con acceso en su margen este mediante otro camino.</p>
+    </div>
+
+    <h4>Conectividad</h4>
+    <p>Ambos solares cuentan con conexiones a las infraestructuras públicas como son red de saneamiento, electricidad y agua, a mayores, en la parroquia también se cuenta con una red de agua vecinal.</p>
+    <div class="image-gallery cols-3">
+        <ImageDisplay src="/images/image119.png" alt="Conexiones y accesos 1" />
+        <ImageDisplay src="/images/image118.png" alt="Conexiones y accesos 2" />
+        <ImageDisplay src="/images/image117.png" alt="Conexiones y accesos 3" />
+    </div>
+
+    <h3>Edificaciones Preexistentes</h3>
+    <ImageDisplay src="/images/image116.png" alt="Edificación preexistente en buen estado" caption="Edificación en la parcela este, en buen estado." />
+    <p>En el margen suroeste, al borde de la carretera, en la parcela este se encuentra una edificación levantada con perpiaños de granito, esta cuenta con un bajo y primera planta se encuentra en muy buen estado de conservación tiene acceso directo a la vía, un cobertizo exterior abierto y un hórreo.</p>
+    <div class="image-gallery cols-2">
+        <ImageDisplay src="/images/image115.png" alt="Ruina en parcela oeste 1" />
+        <ImageDisplay src="/images/image100.png" alt="Ruina en parcela oeste 2" />
+    </div>
+    <p>Por otro lado, en la parcela oeste, enfrentada a la construcción anteriormente mencionada y también al borde de la carretera, en este caso, en el punto sureste de la parcela. Se encuentra una construcción en un estado ruinoso y lleno de maleza. De este podemos encontrar una pequeña estancia en pie y del volumen mayor la traza se aprecia por las piedras de los muros que la conformaban. El muro central entre ambas estancias y un trozo del muro norte también se encuentra en pie.</p>
+    <ImageDisplay src="/images/image99.png" alt="Vuelo americano de 1956-57" caption="Ambas construcciones en el vuelo americano de 1956-57." />
+    <p>En la parcela también se encontraron restos de emparrados en desuso, los cuales debido a su deterioro y mal estado de conservación se deciden cambiar por unos nuevos. De esta forma todo el acondicionamiento de la parcela se realizará de forma más sencilla, con la nueva plantación.</p>
+  </ContentSection>
+
+  <!-- Continuar con el resto de las secciones principales y subsecciones -->
+  <!-- Ejemplo para Análisis Territorial -->
+  <ContentSection title="Análisis Territorial" id="analisis-territorial">
+    <h4>Caminos</h4>
+    <p>Durante el análisis inicial del entorno se estudia la red parroquial histórica de caminos...</p>
+    <ImageDisplay src="/images/image98.png" alt="Red de caminos preexistentes" caption="Red de caminos preexistentes y su evolución." />
+
+    <h4>Agua</h4>
+    <p>También se realizó durante el primer cuatrimestre un trabajo de investigación sobre el cauce del río...</p>
+    <ImageDisplay src="/images/image112.png" alt="Análisis de la cuenca del río Tomeza" caption="Análisis de la cuenca del río Tomeza." />
+
+    <h4>Emparrados</h4>
+    <p>Durante la visita se hizo presente la existencia de un elemento típico de la cultura gallega...</p>
+    <ImageDisplay src="/images/image109.png" alt="Evolución de emparrados" caption="Evolución de la presencia de emparrados en la parroquia." />
+
+    <h4>Monte Comunal</h4>
+    <p>Por último, en cuanto al análisis del territorio parroquial me interesó investigar sobre la existencia o no del monte comunal...</p>
+    <ImageDisplay src="/images/image105.png" alt="Localización de montes comunales" caption="Localización de montes comunales en Pontevedra." />
+  </ContentSection>
+
+  <ContentSection title="Descripción del Proyecto" id="descripcion-proyecto">
+    <h3>DESCRIPCIÓN GENERAL</h3>
+    <p>Este proyecto se lleva adelante en diferentes fases:</p>
+    <ul>
+        <li><strong>Elección de la ubicación:</strong> Como se comentó anteriormente, se agrupan una serie de parcelas para contar con una generosa superficie en la que poder llevar a cabo este programa debido al poco espacio libre en el centro del núcleo.</li>
+        <li><strong>Búsqueda de información sobre los tipos de animales que se van a criar y sus necesidades:</strong> Con la propuesta de construcción de una granja agroganadera, el programa queda muy abierto por lo que se nos pide que se concrete con uno más específico y personal. Pese al autoconocimiento, previo al inicio de este proyecto, sobre el rural gallego y las granjas lo primero para ejecutar este trabajo es realizar una investigación sobre las necesidades específicas de este tema.</li>
+    </ul>
+    <p>El primer dilema que uno se encuentra al realizar una granja es ¿Qué tipo de actividad se quiere? Una producción intensiva y muy productiva en la que se utilice mucha tecnología donde pocas veces se cuenta con el bienestar animal manteniéndolos encerrados toda su vida y la cual tiene un mayor impacto ambiental.</p>
+    <p>En este caso se opta por la alternativa contraria, una producción extensiva que prima la cría de los animales en condiciones naturales, en libertad, aprovechando los recursos del entorno y generando menor impacto ambiental para conseguir una mayor calidad del producto.</p>
+    <p>La investigación sobre la producción extensiva de ganado se conecta con la ganadería ecológica de la cual se obtienen las bases para realizar este proyecto:</p>
+    <ul>
+        <li>La ganadería ecológica debe estar ligada al suelo, o lo que es lo mismo, disponer de <strong>tierras de pasto o cultivo</strong> para obtener en la propia unidad de producción la mayor parte de los alimentos para los animales, contribuyendo así al equilibrio de los sistemas agrícolas y utilizando recursos naturales renovables.</li>
+        <li>Se autoriza el pastoreo en <strong>pastos comunales</strong>.</li>
+        <li>Los animales deberán ser preferentemente de <strong>razas autóctonas</strong>, por su mayor adaptación a las condiciones del entorno, su vitalidad y su resistencia a las enfermedades, evitando así problemas sanitarios específicos asociados a las razas utilizadas en la ganadería intensiva.</li>
+        <li>La alimentación debe estar destinada a cubrir las necesidades de los animales, garantizando la calidad de la producción y no a incrementarla hasta el máximo. Se utilizarán alimentos ecológicos producidos en la unidad de producción, cuando no sean suficientes tienen que proceder de otras unidades de producción ecológica.</li>
+        <li>Los sistemas de cría se basarán en la <strong>utilización máxima de los pastos</strong>, según estén disponibles a lo largo del año.</li>
+        <li>Los terneros se alimentarán básicamente de leche natural, siempre que sea posible de la madre, y será obligatorio durante un período mínimo de tres meses para vacuno y de 45 días para ovino y caprino.</li>
+        <li>La producción ecológica se basa en la prevención de enfermedades, para ello se utilizarán razas o estirpes de animales adaptadas al medio, una adecuada combinación del uso de alimentos de alta calidad, con el acceso a los pastos de forma regular, y el manejo y mantenimiento de un número de animales acorde a las instalaciones de que disponga.</li>
+        <li>Si con estas medidas no es suficiente y los animales enferman la primera medida es atenderlos y, cuando sea necesario, separarlos del resto.</li>
+        <li>La <strong>reproducción</strong> de los animales deberá ser por <strong>métodos naturales</strong>, estando autorizada la inseminación artificial.</li>
+        <li>Los animales deben estar <strong>sueltos</strong>, salvo cuando sea necesario por motivos de seguridad o de bienestar y siempre que sea solamente durante períodos limitados.</li>
+        <li>Los animales deberán tener acceso a los pastos siempre que sea posible, en función de las condiciones climatológicas, del suelo y las de los propios animales. En los períodos en que no sea posible su salida a los pastos, deberán disponer de zonas de ejercicio de libre acceso si los locales de invernada no disponen de espacio suficiente para que se muevan libremente.</li>
+        <li>Los toros de más de un año pueden permanecer en los locales de la unidad de producción sin salir al pasto, pero deberán de disponer de un área de ejercicio a la que podrán acceder libremente.</li>
+    </ul>
+    <p>Las unidades de producción deberán disponer de <strong>alojamientos que sirvan de protección</strong> a los animales, no siendo obligatorios en zonas en que las condiciones climáticas posibiliten la vida de los animales al aire libre. Las instalaciones estarán diseñadas para respetar sus necesidades y cumplir las normas de bienestar animal:</p>
+    <ul>
+        <li>La <strong>ventilación e iluminación sean</strong> naturales y permitan mantener los alojamientos en condiciones que no sean perjudiciales para los terneros.</li>
+        <li>Los alojamientos, y en especial las partes en contacto con los animales, estarán diseñados de manera que no les causen daño y les permitan tenderse, levantarse y hacer ejercicio con regularidad.</li>
+        <li>Los alojamientos dispondrán de una <strong>superficie mínima</strong> por animal.</li>
+    </ul>
+    <p>Después de esta lectura es cuando se seleccionan las vacas de carne como el animal principal en la explotación y las cuales debido a sus características pueden pastar tanto en las zonas bajas como en el monte en zonas de pendiente.</p>
+    <p>En Galicia encontramos seis razas autóctonas de vacas:</p>
+
+    <div class="image-gallery cols-2">
+        <ImageDisplay src="/images/image103.png" alt="Vaca Cachena 1" caption="Cachena" />
+        <ImageDisplay src="/images/image85.png" alt="Vaca Cachena 2" caption="Cachena" />
+        <ImageDisplay src="/images/image84.png" alt="Vaca Caldelá 1" caption="Caldelá" />
+        <ImageDisplay src="/images/image83.png" alt="Vaca Caldelá 2" caption="Caldelá" />
+        <ImageDisplay src="/images/image82.png" alt="Vaca Frieiresa 1" caption="Frieiresa" />
+        <ImageDisplay src="/images/image97.png" alt="Vaca Frieiresa 2" caption="Frieiresa" />
+        <ImageDisplay src="/images/image95.png" alt="Vaca Limiá 1" caption="Limiá" />
+        <ImageDisplay src="/images/image93.png" alt="Vaca Limiá 2" caption="Limiá" />
+        <ImageDisplay src="/images/image92.png" alt="Vaca Rubia Galega 1" caption="Rubia Galega" />
+        <ImageDisplay src="/images/image91.png" alt="Vaca Rubia Galega 2" caption="Rubia Galega" />
+        <ImageDisplay src="/images/image89.png" alt="Vaca Vianesa 1" caption="Vianesa" />
+        <ImageDisplay src="/images/image61.png" alt="Vaca Vianesa 2" caption="Vianesa" />
+    </div>
+    <p>Fue durante esta investigación donde se deciden introducir las otras especies restantes autóctonas, la cabra y oveja, animales de menor tamaño que pueden convivir con la vaca y también realizar trabajos de limpieza en determinadas zonas donde la vaca no accede. Y la gallina como animal para la obtención de huevos ecológicos. Por lo que también se cuenta con:</p>
+    <div class="image-gallery cols-2">
+        <ImageDisplay src="/images/image60.png" alt="Cabra Galega 1" caption="Cabra Galega" />
+        <ImageDisplay src="/images/image59.png" alt="Cabra Galega 2" caption="Cabra Galega" />
+        <ImageDisplay src="/images/image58.png" alt="Oveja Galega 1" caption="Oveja Galega" />
+        <ImageDisplay src="/images/image57.png" alt="Oveja Galega 2" caption="Oveja Galega" />
+        <ImageDisplay src="/images/image73.png" alt="Galiña de Mos 1" caption="Galiña de Mos" />
+        <ImageDisplay src="/images/image71.png" alt="Galiña de Mos 2" caption="Galiña de Mos" />
+    </div>
+    <p>Es en este momento cuando el proyecto recibe nombre, se decide por Centro de Cría de Razas Galegas, <strong>CRIAGA</strong>.</p>
+    <p>Una vez seleccionadas las razas que van a formar parte del ganado y con la ayuda de la guía de ganadería ecológica se aplican las superficies mínimas por especie para los espacios interiores y de pastos:</p>
+    <p>Cada animal necesita estas superficies para considerarse ganadería ecológica, siendo las superficies de pastos por animal y año completo:</p>
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr><th></th><th>Macho</th><th>Hembra</th><th>Cría</th><th>Macho</th><th>Hembra</th><th>Cría</th></tr>
+                <tr><th></th><th colspan="3">Superficie m² interior</th><th colspan="3">Superficie m² de pastos</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Aviar</td><td>0,2</td><td>0,2</td><td>0,1</td><td>0,65</td><td>0,65</td><td>0,2</td></tr>
+                <tr><td>Bovino</td><td>10</td><td>5</td><td>5</td><td>5.000</td><td>4.000</td><td>4.000</td></tr>
+                <tr><td>Caprino</td><td>1,5</td><td>1,5</td><td>0,35</td><td>752</td><td>752</td><td>752</td></tr>
+                <tr><td>Ovino</td><td>1,5</td><td>1,5</td><td>0,35</td><td>752</td><td>752</td><td>752</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <ImageDisplay src="/images/image69.png" alt="Gráfico de superficies" caption="Estimación de superficies necesarias." />
+    <p>Con los datos anteriores se realiza una estimación de superficies necesarias para que el proyecto se ajuste a estas, se cuenta con una superficie inicial de 190.388 m² de pastos bajos y 170.500 m² de monte, un total de 360.888 m² de pastos anuales disponibles.</p>
+     <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr><th></th><th>MACHO</th><th>HEMBRA</th><th>CRÍAS por año</th><th>m² Interiores</th><th>m² Pastos</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Cachena</td><td>1</td><td>3</td><td>3-6</td><td>55</td><td>41.000</td></tr>
+                <tr><td>Caldelá</td><td>1</td><td>3</td><td>3-6</td><td>55</td><td>41.000</td></tr>
+                <tr><td>Frieiresa</td><td>1</td><td>3</td><td>3-6</td><td>55</td><td>41.000</td></tr>
+                <tr><td>Limiá</td><td>1</td><td>3</td><td>3-6</td><td>55</td><td>41.000</td></tr>
+                <tr><td>Rubia Gallega</td><td>1</td><td>3</td><td>3-6</td><td>55</td><td>41.000</td></tr>
+                <tr><td>Vienesa</td><td>1</td><td>3</td><td>3-6</td><td>55</td><td>41.000</td></tr>
+                <tr><td>Cabra</td><td>1</td><td>11</td><td>11-20</td><td>25</td><td>24.000</td></tr>
+                <tr><td>Oveja</td><td>1</td><td>11</td><td>11-20</td><td>25</td><td>24.000</td></tr>
+                <tr><td>Gallina</td><td>1</td><td>25</td><td>25</td><td>7,7</td><td>22</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p>En este caso obtenemos una superficie de pasto necesaria menor a la inicial, por lo que se podrá realizar una mayor rotación del ganado y dejar descansar más estas zonas para una mejor producción de hierba.</p>
+    <ImageDisplay src="/images/image67.png" alt="Gráfico de consumo de alimentos" caption="Estimación de consumo de alimentos." />
+    <p>Al tener los datos del número de animales que se instalarán inicialmente en la granja se calculan los espacios necesarios para las zonas de almacenaje del alimento...</p>
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr><th>Época</th><th>Especie</th><th>Pasto</th><th>Hierba Seca</th><th>Pienso</th><th>Silo</th></tr>
+            </thead>
+            <tbody>
+                <tr><td rowspan="3">Invierno - 200 días</td><td>Bovinos</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                <tr><td>Caprinos</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                <tr><td>Ovinos</td><td>X</td><td>X</td><td>X</td><td>X</td></tr>
+                <tr><td rowspan="3">Verano - 165 días</td><td>Bovinos</td><td>X</td><td>X</td><td>X</td><td></td></tr>
+                <tr><td>Caprinos</td><td>X</td><td>X</td><td>X</td><td></td></tr>
+                <tr><td>Ovinos</td><td>X</td><td>X</td><td>X</td><td></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p>Con estos datos obtenemos que se necesitarán un total de 580 m² para almacenar la hierba seca y 138 m³ de silo...</p>
+
+    <h3>INTENCIONES GENERALES DEL PROYECTO</h3>
+    <p>El planteamiento general del proyecto plantea varias partes como son:</p>
+    <ul>
+        <li><strong>Conexión:</strong> En cuanto a los caminos preexistentes, desaparecidos por el abandono del cultivo del campo y la llegada del vehículo privado a motor, se pretende generar una nueva conexión interna del núcleo y con la ciudad de Pontevedra...</li>
+        <li><strong>Recuperación de lo comunal como elemento productivo:</strong> En este caso, al contar con la existencia del monte comunal en el espacio cercano al proyecto que se encuentra desaprovechado y en desuso, se plantea la recuperación de su función tradicional...</li>
+        <li><strong>Recuperación de la vinicultura:</strong> Se plantea la coexistencia de la actividad vinícola y la ganadera, por considerarse actividades que pueden repercutir positivamente una en la otra...</li>
+    </ul>
+    <p>Con este proyecto se pretende recuperar el valor del lugar de Lusquiños, devolviéndole el uso a elementos que se perdieron con el tiempo, aportándoles una gestión comunal que beneficie a vecinos y agro-ganaderos.</p>
+  </ContentSection>
+
+  <ContentSection title="El Proyecto" id="el-proyecto">
+    <p>En la parcela oeste se propone restaurar y ampliar la construcción existente situando en ella la vivienda, ya que cuenta con fácil acceso y está próxima a las demás viviendas permitiendo una mayor relación vecinal.</p>
+    <h4>Plaza</h4>
+    <p>Debido a que por este lugar pasa el camino de Santiago, se propone realizar una zona de paso y descanso segura para los peregrinos...</p>
+    <h4>Vivienda</h4>
+    <p>La vivienda cuenta con dos volúmenes el principal, de mayor longitud y altura, está conformado por una parte preexistente, rehabilitada y ampliada con un nuevo volumen...</p>
+    <p>En la parcela este el programa se divide en tres. En esta se ubican la bodega y centro de visitantes, la granja y la zona de cultivos.</p>
+    <h4>Bodega y Centro de visitantes</h4>
+    <ImageDisplay src="/images/image66.png" alt="Bodega y Centro de Visitantes" caption="Esquema de la Bodega y Centro de Visitantes." />
+    <p>En el edificio preexistente se ubican la bodega y centro de visitantes...</p>
+    <h4>Granja</h4>
+    <ImageDisplay src="/images/image40.png" alt="Granja - Esquema General" caption="Esquema general de la Granja." />
+    <p>La granja, como edificio principal de este proyecto se propone como un elemento de conexión entre la zona baja y llana de los pastos y el monte...</p>
+    <ImageDisplay src="/images/image39.png" alt="Granja - Estructura" caption="Estructura de la Granja." />
+    <p>La estructura se diseña como una secuencia de muros paralelos y equidistantes en la dirección corta del edificio...</p>
+    <ImageDisplay src="/images/image38.png" alt="Granja - Cuadras" caption="Detalle de las cuadras." />
+    <p>En las cuadras se dispone para su cierre un muro bajo de hormigón y un panel de madera en la parte superior...</p>
+    <ImageDisplay src="/images/image37.png" alt="Granja - Zonas de servicio" caption="Zonas de servicio de la Granja." />
+    <p>Como el cuerpo se adapta a la topografía, se da lugar la necesidad de un muro de contención del terreno...</p>
+    <ImageDisplay src="/images/image36.png" alt="Granja - Cubierta ajardinada y gestión de agua" caption="Cubierta ajardinada y gestión de agua." />
+    <p>Este edificio, formado principalmente por muros, se cubre mediante la ejecución de un plano ajardinado...</p>
+    <h4>Proyecto y paisaje</h4>
+    <p>El proyecto cuenta con una base territorial, en este caso, los prados bajos y el monte comunal...</p>
+    <!-- Más contenido sobre el proyecto y paisaje -->
+  </ContentSection>
+
+  <ContentSection title="Parámetros que Determinan las Previsiones Técnicas a Considerar" id="parametros-tecnicos">
+    <p>A continuación, se describen los parámetros mínimos imprescindibles que tienen las soluciones propuestas en este proyecto.</p>
+    <h4>SISTEMA ESTRUCTURAL</h4>
+    <ul>
+        <li><strong>CIMENTACIÓN:</strong> Para el cálculo de las zapatas se tienen en cuenta las acciones debidas a las cargas transmitidas por los elementos portantes verticales...</li>
+        <li><strong>ESTRUCTURA PORTANTE:</strong>
+            <ul>
+                <li><strong>Muros de contención:</strong> Los muros se calculan con las cargas aplicadas por la estructura...</li>
+                <li><strong>Muros portantes:</strong> Los elementos portantes verticales se dimensionan con los esfuerzos originados por las vigas y forjados que soportan...</li>
+            </ul>
+        </li>
+        <li><strong>ESTRUCTURA PORTANTE HORIZONTAL:</strong> Los forjados (losas macizas) se consideran como paños cargados por las acciones gravitatorias...</li>
+    </ul>
+    <h4>SISTEMA DE ENVOLVENTE</h4>
+    <ul>
+        <li><strong>CUBIERTA:</strong> Los parámetros básicos que se han tenido en cuenta a la hora de la elección del sistema de cubierta son la zona climática...</li>
+        <li><strong>PARAMENTOS VERTICALES:</strong> Los parámetros básicos que se han tenido en cuenta a la hora de la elección del sistema de muros de contención son el grado de impermeabilidad...</li>
+        <li><strong>FORJADO:</strong> Los parámetros básicos que se han tenido en cuenta a la hora de la elección del sistema de la superficie horizontal de trabajo son el grado de impermeabilidad...</li>
+        <li><strong>ACABADOS:</strong> Los parámetros básicos que se han tenido en cuenta a la hora de la elección de los acabados son los criterios de funcionalidad...</li>
+    </ul>
+    <h4>SISTEMA DE SERVICIOS</h4>
+    <ul>
+        <li><strong>Suministro de agua:</strong> Se dispone de acometida de abastecimiento de agua apta para el consumo humano...</li>
+        <li><strong>Evacuación de aguas:</strong> Existe red de alcantarillado municipal disponible para su conexionado en las inmediaciones del solar.</li>
+        <li><strong>Suministro eléctrico:</strong> Se dispone de suministro eléctrico con potencia suficiente para la previsión de carga total del edificio proyectado.</li>
+        <li><strong>Recogida de residuos:</strong> El municipio dispone de sistema de recogida de basuras.</li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="Prestaciones del Edificio" id="prestaciones-edificio">
+    <p>El presente Proyecto Básico se redacta con la observancia de la siguiente normativa:</p>
+    <h4>SEGURIDAD</h4>
+    <ul>
+        <li><strong>DB-SE Seguridad estructural:</strong> De tal forma que se asegure que el edificio tiene un comportamiento estructural adecuado...</li>
+        <li><strong>DB-SI Seguridad en caso de incendio:</strong> De tal forma que se reduzca a límites aceptables el riesgo de que los usuarios de un edificio sufran daños...</li>
+        <li><strong>DB-SUA Seguridad de utilización y accesibilidad:</strong> De tal forma que se reduzcan a límites aceptables el riesgo de que los usuarios sufran daños inmediatos...</li>
+    </ul>
+    <h4>HABITABILIDAD</h4>
+    <ul>
+        <li><strong>DB-HS Salubridad:</strong> De tal forma que se reduzcan a límites aceptables el riesgo de que los usuarios, dentro de los edificios y en condiciones normales de utilización, padezcan molestias o enfermedades...</li>
+    </ul>
+    <h4>LIMITACIONES DE USO DEL EDIFICIO</h4>
+    <p>La edificación solo podrá destinarse a los usos previstos en el proyecto: granja agroganadera...</p>
+  </ContentSection>
+
+</Layout>
+
+<style>
+  .page-header {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 1rem;
+  }
+  .page-header h1 {
+    font-size: 2.8rem;
+    color: var(--color-primary);
+  }
+
+  .highlight {
+    background-color: #eef7ff; /* Un azul muy claro para destacar */
+    padding: 1em;
+    border-left: 5px solid var(--color-secondary);
+    margin: 1.5em 0;
+    border-radius: 4px;
+  }
+
+  .image-gallery {
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .image-gallery.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .image-gallery.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+  .image-text-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Ajustar según necesidad */
+    gap: 1.5rem;
+    align-items: start;
+    margin-bottom: 1.5rem;
+  }
+
+  .image-text-layout :global(img) { /* Para seleccionar la imagen dentro del componente ImageDisplay */
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  /* Media query para layout de una columna en pantallas pequeñas */
+  @media (max-width: 768px) {
+    .image-text-layout {
+      grid-template-columns: 1fr; /* Stack image and text */
+    }
+    .image-gallery.cols-2, .image-gallery.cols-3 {
+        grid-template-columns: 1fr;
+    }
+    .main-content {
+        padding: 20px;
+    }
+  }
+</style>

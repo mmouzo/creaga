@@ -1,0 +1,171 @@
+---
+// src/pages/memoria-urbanistica.astro
+import Layout from '../layouts/Layout.astro';
+import ContentSection from '../components/ContentSection.astro';
+import ImageDisplay from '../components/ImageDisplay.astro';
+
+const pageTitle = "Memoria Urbanística";
+const currentPageUrl = "/memoria-urbanistica";
+
+const sidebarLinks = [
+  { text: "Plan General de Ordenación", href: "#plan-general" },
+  { text: "Descripción del Ámbito", href: "#descripcion-ambito" },
+  { text: "Normativa Urbanística", href: "#normativa-urbanistica" },
+  { text: "Comparación Planeamiento y Proyecto", href: "#comparacion-planeamiento" }
+];
+---
+
+<Layout title={pageTitle} currentPage={currentPageUrl} sidebarLinks={sidebarLinks} showSidebar={true}>
+  <div class="page-header">
+    <h1>{pageTitle}</h1>
+  </div>
+
+  <ContentSection title="Plan General de Ordenación Urbana de Pontevedra" id="plan-general">
+    <p>Se elabora esta memoria urbanística en justificación del cumplimiento de la normativa para la ejecución de una construcción ganadera con dos edificios complementarios de uso centro de visitantes - bodega y vivienda para los ganaderos. El proyecto se realiza en Lusquiños, 36143 regida por los parámetros urbanísticos establecidos según el Plan General de Ordenación Urbana, también se aplica la Ley 2/2016, de 10 de febrero, del suelo de Galicia.</p>
+  </ContentSection>
+
+  <ContentSection title="Descripción del Ámbito" id="descripcion-ambito">
+    <p>El proyecto comprende las siguientes parcelas del núcleo:</p>
+    <!-- Aquí se podría insertar una tabla con las referencias catastrales y superficies -->
+    <!-- Ejemplo de cómo podría ser la tabla (necesitaría el componente TableDisplay y datos) -->
+    <!-- <TableDisplay tableData={datosParcelas} /> -->
+    <div class="table-container">
+      <!-- Esta tabla necesita ser estilizada correctamente. Se usará TableDisplay si es apropiado o estilos globales. -->
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>REF. CATASTRAL</th>
+            <th>SUPERFICIE (m²)</th>
+            <th>USO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>36900A090001020000QQ</td><td>518</td><td>Agrario</td></tr>
+          <tr><td>2</td><td>36900A090001030000QP</td><td>671</td><td>Agrario</td></tr>
+          <tr><td>3</td><td>36900A090001040000QL</td><td>877</td><td>Agrario</td></tr>
+          <tr><td>4</td><td>36900A090001050000QT</td><td>578</td><td>Agrario</td></tr>
+          <tr><td>5</td><td>36900A090001060000QF</td><td>900</td><td>Agrario</td></tr>
+          <tr><td>6</td><td>36900A090001070000QM</td><td>623</td><td>Agrario</td></tr>
+          <tr><td>7</td><td>36900A090001080000QO</td><td>960</td><td>Agrario</td></tr>
+          <tr><td>8</td><td>36900A090001090000QK</td><td>739</td><td>Agrario</td></tr>
+          <tr><td>9</td><td>36900A090001100000QM</td><td>945</td><td>Agrario</td></tr>
+          <tr><td>10</td><td>36900A090001110000QO</td><td>80</td><td>Agrario</td></tr>
+          <tr><td>11</td><td>36900A090001180000QE</td><td>948</td><td>Agrario</td></tr>
+          <tr><td>12</td><td>36900A090001190000QS</td><td>556</td><td>Agrario</td></tr>
+          <tr><td>13</td><td>36900A090001200000QJ</td><td>511</td><td>Agrario</td></tr>
+          <tr><td>14</td><td>36900A090001210000QE</td><td>486</td><td>Agrario</td></tr>
+          <tr><td>15</td><td>36900A090000910000QE</td><td>6.678</td><td>Agrario</td></tr>
+          <tr><td>16</td><td>36900A090000920000QS</td><td>14.468</td><td>Agrario</td></tr>
+          <tr><td>17</td><td>36900A090001290000QY</td><td>952</td><td>Agrario</td></tr>
+          <tr><td>18</td><td>36900A090001300000QA</td><td>804</td><td>Agrario</td></tr>
+          <tr><td>19</td><td>36900A090101310000QO</td><td>251</td><td>Agrario</td></tr>
+          <tr><td>20</td><td>36900A090201310000QZ</td><td>405</td><td>Agrario</td></tr>
+          <tr><td>21</td><td>36900A064002170000QL</td><td>3.989</td><td>Agrario</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>En su conjunto cuentan con una superficie total de 36.688,57 m². Estas se dividen en dos:</p>
+    <p>La parcela del margen oeste tiene una planta de geometría triangular en la que la topografía es bastante plana...</p>
+    <p>La parcela de mayor tamaño, en el este, tiene una forma irregular...</p>
+    <p>Ambos solares cuentan con conexiones a las infraestructuras públicas como son red de saneamiento, electricidad y agua, a mayores en la parroquia también se cuenta con una red de agua vecinal.</p>
+  </ContentSection>
+
+  <ContentSection title="Normativa Urbanística. Cumplimiento de la Ley 2/2016, del 10 de Febrero, del Suelo de Galicia" id="normativa-urbanistica">
+    <ImageDisplay src="/images/image50.png" alt="Extracto normativa" caption="Extracto del planeamiento urbanístico." />
+    <p>La normativa en vigor es el PGOU de 1989 determina que en el ámbito del núcleo de Lusquiños y concretamente en la parcela de proyecto hay dos tipos de suelo:</p>
+    <ul>
+      <li>Núcleos Rurales – Suelo no urbanizable</li>
+      <li>Suelo no urbanizable común</li>
+    </ul>
+    <p>En este caso, como indica la Disposición transitoria primera - Régimen de aplicación a los municipios con planeamiento no adaptado y a los municipios sin planeamiento, aplicable en el ayuntamiento de Pontevedra:</p>
+    <blockquote>
+      El planeamiento aprobado definitivamente con anterioridad a la entrada en vigor de la presente ley y no adaptado a la Ley 9/2002, de 30 de diciembre, de ordenación urbanística y protección del medio rural de Galicia, conservará su vigencia hasta su revisión o adaptación a la misma, conforme a las siguientes reglas...
+    </blockquote>
+    <h3>SECCIÓN 2.&ordf; NÚCLEOS RURALES</h3>
+    <h4>Subsección 1.&ordf; Delimitación y régimen</h4>
+    <p><strong>Artículo 24. Régimen y condiciones de edificación en el suelo de núcleo rural.</strong></p>
+    <p>Los terrenos que los planes generales incluyan en las áreas delimitadas como núcleos rurales de población serán destinados a los usos característicos, complementarios o compatibles con la edificación residencial en el medio rural y con las necesidades de la población residente en los mismos...</p>
+
+    <h4>Subsección 2.&ordf; Condiciones de uso</h4>
+    <p><strong>Artículo 25. Usos del suelo de núcleo rural.</strong></p>
+    <p>El uso característico de las edificaciones en los núcleos rurales será el residencial. Se considerarán como complementarios los usos terciarios o productivos, actividades turísticas y artesanales, pequeños talleres, invernaderos y equipamientos, así como aquellos que guarden relación directa con los tradicionalmente ligados al asentamiento rural de que trate o que den respuesta a las necesidades de la población residente en ellos.</p>
+
+    <h3>SECCIÓN 4.&ordf; SUELO RÚSTICO</h3>
+    <h4>Subsección 2.&ordf; Condiciones de uso</h4>
+    <p><strong>Artículo 35. Usos y actividades en suelo rústico</strong></p>
+    <ul>
+      <li>Muros de contención, así como vallado de fincas.</li>
+      <li>Construcciones e instalaciones agrícolas en general...</li>
+      <li>Construcciones e instalaciones destinadas al apoyo de la ganadería extensiva e intensiva...</li>
+      <!-- ... más puntos del artículo 35 ... -->
+    </ul>
+
+    <h4>Subsección 4.&ordf; Condiciones de edificaci&oacute;n</h4>
+    <p><strong>Artículo 39. Condiciones generales de las edificaciones en el suelo rústico.</strong></p>
+    <p>Garantizar el acceso rodado de uso público adecuado a la implantación, el abastecimiento de agua, la evacuación y el tratamiento de aguas residuales...</p>
+    <p>Cumplir las siguientes condiciones de edificación:</p>
+    <ul>
+        <li>Las características tipológicas, estéticas y constructivas y los materiales, colores y acabados serán acordes con el paisaje rural...</li>
+        <li>El volumen máximo de la edificación será similar al de las edificaciones tradicionales existentes...</li>
+    </ul>
+    <p>Cumplir las siguientes condiciones de posición e implantación:</p>
+    <ul>
+        <li>Deberá justificarse suficientemente la idoneidad del emplazamiento elegido...</li>
+        <li>La superficie mínima de la parcela sobre la que se situará la edificación será de 2.000 metros cuadrados.</li>
+        <!-- ... más puntos del artículo 39 ... -->
+    </ul>
+
+    <h3>EDIFICACIONES TRADICIONALES</h3>
+    <p><strong>Artículo 40. Edificaciones existentes de carácter tradicional.</strong></p>
+    <p>Las edificaciones tradicionales existentes en cualquier categoría de suelo de núcleo o de suelo rústico podrán ser destinadas a usos residenciales, terciarios o productivos...</p>
+  </ContentSection>
+
+  <ContentSection title="Comparación del Planeamiento y Proyecto" id="comparacion-planeamiento">
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>NORMATIVA</th>
+            <th>PROYECTO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>CALIFICACIÓN DEL SUELO</td><td colspan="2">Núcleos Rurales – Suelo no urbanizable / Suelo no urbanizable común</td></tr>
+          <tr><td>USO DEL SUELO</td><td>Agrario</td><td>Granja/Centro de visitantes – Bodega / Vivienda</td></tr>
+          <tr><td>SUPERFICIE DE PARCELA</td><td>2.000 m² (mínimo)</td><td>36.688,57 m²</td></tr>
+          <tr><td>SUPERFICIE MÁXIMA CONSTRUCCIÓN</td><td>60%</td><td>3655,62 m² / 36.688,57 m² = 9,96 %</td></tr>
+          <tr><td>SUPERFICIE URBANIZACIÓN</td><td>No especifica</td><td>2.150 m² / 36.688,57 m² = 5,86%</td></tr>
+          <tr><td>NÚMERO DE PLANTAS</td><td>Bajo + 1</td><td>Bajo</td></tr>
+          <tr><td>ALTURA MÁXIMA EDIFICACIÓN</td><td>7 m</td><td>5,15 m</td></tr>
+          <tr><td>PENDIENTE MÁXIMA CUBIERTA</td><td>No especifica</td><td>Plana</td></tr>
+          <tr><td>SERVICIOS EXISTENTES</td><td colspan="2">Suministro de agua, Evacuación de aguas, Suministro eléctrico, Recogida de residuos</td></tr>
+          <tr><td>SERVICIOS A REALIZAR</td><td colspan="2">Conexiones nuevas de suministro de agua, saneamiento y electricidad</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </ContentSection>
+
+</Layout>
+
+<style>
+  .page-header {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 1rem;
+  }
+  .page-header h1 {
+    font-size: 2.8rem;
+    color: var(--color-primary);
+  }
+
+  blockquote {
+    border-left: 4px solid var(--color-secondary);
+    padding-left: 1rem;
+    margin-left: 0;
+    margin-right: 0;
+    font-style: italic;
+    color: var(--color-text-secondary);
+  }
+</style>

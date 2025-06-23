@@ -1,0 +1,96 @@
+---
+---
+/**
+ * Componente ContentSection para estructurar bloques de contenido principales en una página.
+ *
+ * Props:
+ * - title (string, opcional): Título que se mostrará al inicio de la sección utilizando un <h2>.
+ * - id (string, opcional): Identificador HTML para la sección, útil para la navegación por anclas.
+ * - customClass (string, opcional): Clases CSS adicionales para aplicar al elemento <section>.
+ *
+ * Slots:
+ * - default: El contenido principal de la sección (párrafos, imágenes, tablas, otros componentes)
+ *   se inserta aquí.
+ *
+ * Comportamiento:
+ * - Renderiza un elemento <section> HTML5.
+ * - Si se proporciona un `title`, lo muestra como un encabezado <h2> estilizado.
+ * - El contenido pasado a través del slot se envuelve en un <div class="section-content">
+ *   para permitir estilizado específico del contenido interno si es necesario.
+ * - Aplica un borde inferior para separar visualmente las secciones, excepto a la última
+ *   sección de su tipo en un contenedor.
+ * - Permite la aplicación de estilos globales a h3 y h4 dentro de su contenido para mantener
+ *   una jerarquía visual consistente para subsecciones.
+ */
+export interface Props {
+  title?: string;
+  id?: string; // Para anclas de navegación
+  customClass?: string; // Clases adicionales
+}
+
+const { title, id, customClass } = Astro.props;
+---
+
+<section id={id} class:list={["content-section", customClass]}>
+  {title && <h2 class="section-title">{title}</h2>}
+  <div class="section-content">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .content-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border, #e0e0e0);
+  }
+
+  .content-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .section-title {
+    font-family: var(--font-primary, 'Play', sans-serif);
+    color: var(--color-primary, #0f4761);
+    font-size: 2rem; /* Un poco más pequeño que h1 de página */
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    /* border-bottom: 1px solid var(--color-secondary, #50a6c4); */
+  }
+
+  .section-content {
+    /* Estilos específicos para el contenido dentro de la sección si son necesarios */
+  }
+
+  .section-content :global(h3) { /* Estilo para sub-subtítulos dentro de una ContentSection */
+    font-size: 1.6rem;
+    color: var(--color-primary);
+    margin-top: 1.8em;
+    margin-bottom: 1em;
+    /* border-bottom: 1px dashed var(--color-border); */
+    /* padding-bottom: 0.4em; */
+  }
+
+  .section-content :global(h4) {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--color-text-secondary);
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+  }
+
+  .section-content :global(p),
+  .section-content :global(ul),
+  .section-content :global(ol),
+  .section-content :global(table) {
+    max-width: 800px; /* Mejorar legibilidad del texto */
+    /* margin-left: auto;
+    margin-right: auto; */
+  }
+  .section-content :global(ul),
+  .section-content :global(ol) {
+    padding-left: 25px;
+  }
+</style>

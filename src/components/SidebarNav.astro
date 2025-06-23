@@ -1,0 +1,65 @@
+---
+// src/components/SidebarNav.astro
+export interface SubLink {
+    text: string;
+    href: string; // Usualmente anclas #id_seccion
+}
+export interface Props {
+    subLinks: SubLink[];
+}
+
+const { subLinks } = Astro.props;
+---
+<nav class="sidebar-navigation">
+    <h4>Índice de la sección</h4>
+    <ul>
+        {subLinks.map(link => (
+            <li>
+                <a href={link.href}>{link.text}</a>
+            </li>
+        ))}
+    </ul>
+</nav>
+
+<style>
+    .sidebar-navigation {
+        padding: 0px;
+    }
+    .sidebar-navigation h4 {
+        font-family: var(--font-primary);
+        color: var(--color-primary);
+        font-size: 1.1rem;
+        margin-top: 0;
+        margin-bottom: 15px;
+        border-bottom: 1px solid var(--color-border);
+        padding-bottom: 10px;
+    }
+    .sidebar-navigation ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .sidebar-navigation ul li {
+        margin-bottom: 10px;
+    }
+    .sidebar-navigation ul li a {
+        text-decoration: none;
+        color: var(--color-text-secondary);
+        font-family: var(--font-secondary);
+        font-size: 0.95rem;
+        display: block;
+        padding: 5px 10px;
+        border-radius: 4px;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .sidebar-navigation ul li a:hover {
+        background-color: var(--color-secondary);
+        color: white;
+        text-decoration: none;
+    }
+    .sidebar-navigation ul li a.active { /* Estilo para el enlace activo si se implementa JS para ello */
+        background-color: var(--color-primary);
+        color: white;
+        font-weight: bold;
+    }
+</style>
