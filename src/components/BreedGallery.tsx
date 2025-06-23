@@ -1,53 +1,42 @@
-import { useState } from 'react';
-
-interface Breed {
-  id: string;
-  name: string;
-  image: string;
-  description: string;
-}
-
-const breeds: Breed[] = [
-  {
-    id: 'cachena',
-    name: 'Cachena',
-    image: '/images/image1.png',
-    description: 'Raza autóctona de pequeño tamaño, muy rústica y adaptada al monte gallego. Excelente para la limpieza de monte y prevención de incendios.'
-  },
-  {
-    id: 'caldela',
-    name: 'Caldelá',
-    image: '/images/image2.png',
-    description: 'Raza de aptitud cárnica, bien adaptada a las condiciones climáticas de Galicia. Conocida por su docilidad y facilidad de parto.'
-  },
-  {
-    id: 'frieiresa',
-    name: 'Frieiresa',
-    image: '/images/image3.png',
-    description: 'Raza de gran rusticidad, tradicionalmente utilizada para trabajo y producción de carne. Muy resistente a enfermedades.'
-  },
-  {
-    id: 'limia',
-    name: 'Limiá',
-    image: '/images/image4.png',
-    description: 'Raza originaria de la comarca de A Limia, de gran valor genético y perfectamente adaptada al pastoreo extensivo.'
-  },
-  {
-    id: 'rubia',
-    name: 'Rubia Galega',
-    image: '/images/image5.png',
-    description: 'La raza bovina más representativa de Galicia, de gran tamaño y excelente producción cárnica. Símbolo de la ganadería gallega.'
-  },
-  {
-    id: 'vianesa',
-    name: 'Vianesa',
-    image: '/images/image6.png',
-    description: 'Raza de montaña, muy rústica y adaptada a terrenos difíciles. Excelente madre y de gran longevidad.'
-  }
-];
+import { useState, useEffect } from 'react';
+import { breedsData, type BreedData } from '../data/breedsData';
+import InteractiveChart from './InteractiveChart'; // Importar el componente de gráfico
 
 export default function BreedGallery() {
-  const [selectedBreed, setSelectedBreed] = useState<Breed>(breeds[0]);
+  const [selectedBreed, setSelectedBreed] = useState<BreedData>(breedsData[0]);
+
+  const superficiesData = {
+    labels: ['Carballeira', 'Viñedos', 'Zona Ext. Vacas', 'Granja', 'Eira', 'Caminos', 'Cultivos', 'Invernaderos'],
+    datasets: [{
+      label: 'Superficie (m²)',
+      data: [12359.98, 4993.75, 4181.67, 2989.32, 2287.89, 1511.95, 1449.79, 432.00],
+      backgroundColor: '#BF4A3F',
+      borderColor: '#8C1D18',
+      borderWidth: 1
+    }]
+  };
+
+  const superficiesOptions = {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false }
+    },
+    scales: {
+      x: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Superficie (m²)'
+        }
+      }
+    },
+    animation: {
+      duration: 2000,
+      easing: 'easeOutQuart'
+    }
+  };
 
   return (
     <div className="grid lg:grid-cols-2 gap-8 items-start">
@@ -58,7 +47,7 @@ export default function BreedGallery() {
         
         {/* Breed Selection Buttons */}
         <div className="flex flex-wrap justify-center gap-2 mb-6">
-          {breeds.map((breed) => (
+          {breedsData.map((breed) => (
             <button
               key={breed.id}
               onClick={() => setSelectedBreed(breed)}
@@ -78,7 +67,7 @@ export default function BreedGallery() {
           <div className="mb-4 overflow-hidden rounded-lg">
             <img
               src={selectedBreed.image}
-              alt={`Imagen de ${selectedBreed.name}`}
+              alt={selectedBreed.alt} // Usar el campo alt de BreedData
               className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
               loading="lazy"
             />
@@ -92,15 +81,19 @@ export default function BreedGallery() {
         </div>
       </div>
       
-      {/* Chart placeholder - will be replaced with actual chart */}
+      {/* Chart using InteractiveChart component */}
       <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
         <h3 className="text-xl font-bold font-serif text-criaga-red mb-4 text-center">
           Distribución de Superficies
         </h3>
-        <div className="h-96 flex items-center justify-center bg-gray-50 rounded-lg">
-          <div id="superficies-chart-container" className="w-full h-full">
-            <canvas id="superficiesChart"></canvas>
-          </div>
+        <div className="h-96">
+          <InteractiveChart
+            id="superficiesChart"
+            type="bar"
+            data={superficiesData}
+            options={superficiesOptions}
+            className="w-full h-full"
+          />
         </div>
       </div>
     </div>

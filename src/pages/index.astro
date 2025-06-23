@@ -12,17 +12,22 @@ import Accordion from '../components/Accordion';
 import ImageGallery from '../components/ImageGallery';
 import AnimatedSection from '../components/AnimatedSection';
 import ScrollAnimations from '../components/ScrollAnimations';
+import PliegoCondiciones from '../components/PliegoCondiciones'; // Importar el nuevo componente
+import { breedsData } from '../data/breedsData';
+import InteractiveChart from '../components/InteractiveChart.astro';
 
-// Gallery data
-const galleryImages = [
-  // Razas Autóctonas
-  { id: '1', src: '/images/image1.png', alt: 'Vaca Cachena', category: 'Razas', title: 'Vaca Cachena', description: 'Raza autóctona de pequeño tamaño, muy rústica y adaptada al monte gallego.', metadata: { type: 'Bovino', location: 'Galicia' } },
-  { id: '2', src: '/images/image2.png', alt: 'Vaca Caldelá', category: 'Razas', title: 'Vaca Caldelá', description: 'Raza de aptitud cárnica, bien adaptada a las condiciones climáticas de Galicia.', metadata: { type: 'Bovino', location: 'Galicia' } },
-  { id: '3', src: '/images/image3.png', alt: 'Vaca Frieiresa', category: 'Razas', title: 'Vaca Frieiresa', description: 'Raza de gran rusticidad, tradicionalmente utilizada para trabajo y producción de carne.', metadata: { type: 'Bovino', location: 'Galicia' } },
-  { id: '4', src: '/images/image4.png', alt: 'Vaca Limiá', category: 'Razas', title: 'Vaca Limiá', description: 'Raza originaria de la comarca de A Limia, de gran valor genético.', metadata: { type: 'Bovino', location: 'A Limia' } },
-  { id: '5', src: '/images/image5.png', alt: 'Rubia Galega', category: 'Razas', title: 'Rubia Galega', description: 'La raza bovina más representativa de Galicia, de gran tamaño y excelente producción cárnica.', metadata: { type: 'Bovino', location: 'Galicia' } },
-  { id: '6', src: '/images/image6.png', alt: 'Vaca Vianesa', category: 'Razas', title: 'Vaca Vianesa', description: 'Raza de montaña, muy rústica y adaptada a terrenos difíciles.', metadata: { type: 'Bovino', location: 'Viana do Bolo' } },
-  
+// Gallery data - Mapear desde breedsData para las imágenes de razas
+const breedGalleryImages = breedsData.map(breed => ({
+  id: breed.id,
+  src: breed.image,
+  alt: breed.alt,
+  category: 'Razas', // Categoría fija para estas imágenes
+  title: breed.title,
+  description: breed.description,
+  metadata: breed.metadata
+}));
+
+const otherGalleryImages = [
   // Proceso de Diseño
   { id: '7', src: '/images/image7.png', alt: 'Preexistencias', category: 'Diseño', title: 'Análisis de Preexistencias', description: 'Estado inicial del terreno con edificaciones en ruinas.', metadata: { type: 'Análisis', location: 'Lusquiños' } },
   { id: '8', src: '/images/image8.png', alt: 'Volumen inicial', category: 'Diseño', title: 'Concepto Volumétrico', description: 'Idea inicial del volumen longitudinal para la granja.', metadata: { type: 'Concepto', location: 'Lusquiños' } },
@@ -46,7 +51,44 @@ const galleryImages = [
   { id: '20', src: '/images/image20.png', alt: 'Detalle cubierta', category: 'Construcción', title: 'Detalle de Cubierta', description: 'Sistema de cubierta vegetal sobre losa de hormigón.', metadata: { type: 'Detalle', location: 'Lusquiños' } }
 ];
 
+const galleryImages = [...breedGalleryImages, ...otherGalleryImages];
 const galleryCategories = ['Razas', 'Diseño', 'Instalaciones', 'Documentación', 'Construcción'];
+
+// Datos para el gráfico de presupuesto
+const budgetChartData = {
+  labels: ['Acond. Terreno', 'Estructuras', 'Urbanización', 'Instalaciones', 'Cimentaciones', 'Otros'],
+  datasets: [{
+    label: 'Distribución del Presupuesto',
+    data: [27.42, 22.28, 14.21, 12.27, 9.70, 14.12],
+    backgroundColor: ['#8C1D18', '#A6231D', '#BF4A3F', '#D97566', '#F2A499', '#E5E5E5'],
+    borderColor: '#FCFBF8',
+    borderWidth: 3,
+    hoverOffset: 8
+  }]
+};
+
+const budgetChartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: 'right',
+      labels: {
+        font: { family: "'Inter', sans-serif" },
+        padding: 20
+      }
+    },
+    tooltip: {
+      callbacks: {
+        label: (context: any) => `${context.label}: ${context.parsed}%`
+      }
+    }
+  },
+  animation: {
+    animateRotate: true,
+    duration: 2000
+  }
+};
 ---
 
 <Layout title="CRIAGA - Centro de Cría de Razas Galegas">
@@ -266,7 +308,14 @@ const galleryCategories = ['Razas', 'Diseño', 'Instalaciones', 'Documentación'
         <AnimatedSection animation="slideLeft" client:load>
           <Card title="Resumen del Presupuesto">
             <div class="h-80 mb-4">
-              <canvas id="budgetChart"></canvas>
+              <InteractiveChart
+                id="budgetChart"
+                type="doughnut"
+                data={budgetChartData}
+                options={budgetChartOptions}
+                className="w-full h-full"
+                client:load
+              />
             </div>
             <div class="text-center">
               <p class="font-bold text-xl text-criaga-red counter" data-target="4594748">
@@ -349,22 +398,8 @@ const galleryCategories = ['Razas', 'Diseño', 'Instalaciones', 'Documentación'
       subtitle="Seleccione una unidad de obra para consultar sus especificaciones técnicas, normativa de aplicación y proceso de ejecución detallado."
     >
       <AnimatedSection animation="fadeIn" client:load>
-        <div class="flex flex-wrap justify-center gap-4 mb-8">
-          <button class="pliego-btn bg-criaga-red text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-criaga-red-light transition-all duration-200 transform hover:-translate-y-1" data-target="muro">
-            Muro de Hormigón
-          </button>
-          <button class="pliego-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-all duration-200 transform hover:-translate-y-1" data-target="viga">
-            Viga de Hormigón
-          </button>
-          <button class="pliego-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-all duration-200 transform hover:-translate-y-1" data-target="losa">
-            Losa Maciza
-          </button>
-        </div>
-        
         <Card className="min-h-[400px]">
-          <div id="pliego-content">
-            <!-- Content will be injected by JavaScript -->
-          </div>
+          <PliegoCondiciones client:load />
         </Card>
       </AnimatedSection>
     </Section>
@@ -409,174 +444,11 @@ const galleryCategories = ['Razas', 'Diseño', 'Instalaciones', 'Documentación'
   </footer>
 
   <!-- Load GSAP and ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- GSAP y ScrollTrigger serán importados por los componentes que los usan -->
 
   <!-- Scripts -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Chart data
-      const budgetData = {
-        labels: ['Acond. Terreno', 'Estructuras', 'Urbanización', 'Instalaciones', 'Cimentaciones', 'Otros'],
-        datasets: [{
-          label: 'Distribución del Presupuesto',
-          data: [27.42, 22.28, 14.21, 12.27, 9.70, 14.12],
-          backgroundColor: ['#8C1D18', '#A6231D', '#BF4A3F', '#D97566', '#F2A499', '#E5E5E5'],
-          borderColor: '#FCFBF8',
-          borderWidth: 3,
-          hoverOffset: 8
-        }]
-      };
-
-      const superficiesData = {
-        labels: ['Carballeira', 'Viñedos', 'Zona Ext. Vacas', 'Granja', 'Eira', 'Caminos', 'Cultivos', 'Invernaderos'],
-        datasets: [{
-          label: 'Superficie (m²)',
-          data: [12359.98, 4993.75, 4181.67, 2989.32, 2287.89, 1511.95, 1449.79, 432.00],
-          backgroundColor: '#BF4A3F',
-          borderColor: '#8C1D18',
-          borderWidth: 1
-        }]
-      };
-
-      // Initialize charts
-      if (window.Chart) {
-        // Budget Chart
-        const ctxBudget = document.getElementById('budgetChart');
-        if (ctxBudget) {
-          new Chart(ctxBudget.getContext('2d'), {
-            type: 'doughnut',
-            data: budgetData,
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  position: 'right',
-                  labels: {
-                    font: { family: "'Inter', sans-serif" },
-                    padding: 20
-                  }
-                },
-                tooltip: {
-                  callbacks: {
-                    label: (context) => `${context.label}: ${context.parsed}%`
-                  }
-                }
-              },
-              animation: {
-                animateRotate: true,
-                duration: 2000
-              }
-            }
-          });
-        }
-
-        // Superficies Chart
-        const ctxSuperficies = document.getElementById('superficiesChart');
-        if (ctxSuperficies) {
-          new Chart(ctxSuperficies.getContext('2d'), {
-            type: 'bar',
-            data: superficiesData,
-            options: {
-              indexAxis: 'y',
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: { display: false }
-              },
-              scales: {
-                x: {
-                  beginAtZero: true,
-                  title: {
-                    display: true,
-                    text: 'Superficie (m²)'
-                  }
-                }
-              },
-              animation: {
-                duration: 2000,
-                easing: 'easeOutQuart'
-              }
-            }
-          });
-        }
-      }
-
-      // Pliego functionality
-      const pliegoData = {
-        muro: {
-          title: 'Unidad EHN030B: Muro de hormigón armado',
-          content: `
-            <p class="mb-4"><strong>Descripción:</strong> Muro de hormigón armado de 40 cm de espesor medio, realizado con hormigón HA-30/F/12/XC4 fabricado en central y vertido con cubilote. Armado con acero UNE-EN 10080 B 500 S (cuantía aprox. 51,4 kg/m³).</p>
-            <p class="mb-4"><strong>Normativa:</strong> Elaboración, transporte y puesta en obra del hormigón según el Código Estructural.</p>
-            <h4 class="font-semibold mb-2 text-criaga-red">Proceso de Ejecución:</h4>
-            <ol class="list-decimal list-inside space-y-1 text-gray-700">
-              <li>Replanteo y comprobación de armaduras de espera.</li>
-              <li>Colocación de armadura principal con separadores homologados.</li>
-              <li>Vertido y compactación del hormigón, evitando la disgregación.</li>
-              <li>Curado del hormigón para garantizar la resistencia.</li>
-            </ol>
-          `
-        },
-        viga: {
-          title: 'Unidad EHV030: Viga de hormigón armado',
-          content: `
-            <p class="mb-4"><strong>Descripción:</strong> Viga descolgada de hormigón armado, realizada con hormigón HA-25/F/20/X0 fabricado en central y vertido con cubilote. Armado con acero UNE-EN 10080 B 500 S (cuantía aprox. 112,7 kg/m³).</p>
-            <p class="mb-4"><strong>Normativa:</strong> Código Estructural y NTE-EME (Encofrados).</p>
-            <h4 class="font-semibold mb-2 text-criaga-red">Proceso de Ejecución:</h4>
-            <ol class="list-decimal list-inside space-y-1 text-gray-700">
-              <li>Montaje de sistema de encofrado con superficie tratada.</li>
-              <li>Colocación de la armadura con separadores, asegurando recubrimientos.</li>
-              <li>Vertido y compactación del hormigón.</li>
-            </ol>
-          `
-        },
-        losa: {
-          title: 'Unidad EHL030: Losa maciza de hormigón armado',
-          content: `
-            <p class="mb-4"><strong>Descripción:</strong> Losa maciza horizontal de 35 cm de canto, realizada con hormigón HA-25/F/20/X0. Armado con acero UNE-EN 10080 B 500 S (cuantía aprox. 28,7 kg/m²).</p>
-            <p class="mb-4"><strong>Normativa:</strong> Código Estructural y NTE-EME (Encofrados).</p>
-            <h4 class="font-semibold mb-2 text-criaga-red">Proceso de Ejecución:</h4>
-            <ol class="list-decimal list-inside space-y-1 text-gray-700">
-              <li>Montaje de sistema de encofrado continuo sobre puntales.</li>
-              <li>Colocación de armaduras (inferior, superior, de reparto) con separadores.</li>
-              <li>Vertido continuo y compactación del hormigón.</li>
-            </ol>
-          `
-        }
-      };
-
-      const pliegoButtons = document.querySelectorAll('.pliego-btn');
-      const pliegoContent = document.getElementById('pliego-content');
-
-      function updatePliegoContent(target) {
-        if (pliegoContent && pliegoData[target]) {
-          pliegoContent.innerHTML = `
-            <h3 class="text-2xl font-bold font-serif text-criaga-red mb-6">${pliegoData[target].title}</h3>
-            ${pliegoData[target].content}
-          `;
-        }
-      }
-
-      pliegoButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          const target = button.getAttribute('data-target');
-          updatePliegoContent(target);
-          
-          // Update button styles with animation
-          pliegoButtons.forEach(btn => {
-            btn.classList.remove('bg-criaga-red', 'text-white');
-            btn.classList.add('bg-gray-200', 'text-gray-700');
-          });
-          button.classList.remove('bg-gray-200', 'text-gray-700');
-          button.classList.add('bg-criaga-red', 'text-white');
-        });
-      });
-
-      // Initialize with first option
-      updatePliegoContent('muro');
-
       // Smooth scrolling for anchor links
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {

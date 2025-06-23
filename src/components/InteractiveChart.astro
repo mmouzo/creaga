@@ -1,0 +1,89 @@
+---
+// src/components/InteractiveChart.astro
+import type { ChartConfiguration, ChartTypeRegistry } from 'chart.js';
+
+interface Props<TType extends keyof ChartTypeRegistry = keyof ChartTypeRegistry> {
+  id: string;
+  type: TType;
+  data: ChartConfiguration<TType>['data'];
+  options?: ChartConfiguration<TType>['options'];
+  className?: string;
+}
+
+const { id, type, data, options, className } = Astro.props;
+
+const chartConfig = {
+  type,
+  data,
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        labels: {
+          font: {
+            family: "'Inter', sans-serif"
+          }
+        }
+      },
+      tooltip: {
+        backgroundColor: 'rgba(140, 29, 24, 0.9)',
+        titleColor: '#FCFBF8',
+        bodyColor: '#FCFBF8',
+        borderColor: '#8C1D18',
+        borderWidth: 1,
+      }
+    },
+    ...options // User-provided options will override defaults
+  }
+};
+---
+
+<div class:list={["relative", className]}>
+  <canvas id={id}></canvas>
+</div>
+
+<script define:vars={{ chartId: id, config: chartConfig }}>
+  import { Chart, registerables } from 'chart.js';
+  Chart.register(...registerables);
+
+  const canvas = document.getElementById(chartId);
+  let chartInstance = null;
+
+  function createChart() {
+    if (canvas instanceof HTMLCanvasElement) {
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        if (chartInstance) {
+          chartInstance.destroy();
+        }
+        chartInstance = new Chart(ctx, config);
+      } else {
+        console.error(`Failed to get 2D context for canvas with id "${chartId}"`);
+      }
+    } else {
+      console.error(`Canvas element with id "${chartId}" not found or is not a canvas.`);
+    }
+  }
+
+  // Initial chart creation
+  createChart();
+
+  // Optional: Handle HMR for Astro development if props change
+  // This is a basic example; more robust HMR might require deeper integration
+  if (import.meta.hot) {
+    import.meta.hot.on('astro:after-swap', () => {
+      // Re-fetch the canvas element as the DOM might have changed
+      const newCanvas = document.getElementById(chartId);
+      if (newCanvas instanceof HTMLCanvasElement && newCanvas !== canvas) {
+         // If canvas element itself is replaced, we might need to re-initialize fully
+         // For simplicity, this example assumes the canvas id remains stable
+         // and we just need to update or recreate the chart.
+      }
+      // Recreate chart with potentially updated config
+      // Note: 'config' in define:vars is serialized. If it's very large or complex,
+      // other state management or event-based updates might be better.
+      createChart();
+    });
+  }
+</script>
