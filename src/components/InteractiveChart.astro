@@ -1,48 +1,48 @@
-import { useEffect, useRef } from 'react';
-
-interface ChartProps {
-  readonly id: string;
-  readonly type: 'doughnut' | 'bar' | 'line' | 'pie';
-  readonly data: any;
-  readonly options?: any;
-  readonly className?: string;
-  readonly height?: number;
+---
+interface Props {
+  id: string;
+  type: 'doughnut' | 'bar' | 'line' | 'pie';
+  data: any;
+  options?: any;
+  className?: string;
+  height?: number;
 }
 
-export default function InteractiveChart({ 
+const { 
   id, 
   type, 
   data, 
   options = {}, 
   className = '', 
   height = 400 
-}: ChartProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const chartRef = useRef<any>(null);
+} = Astro.props;
+---
 
-  useEffect(() => {
-    if (!canvasRef.current) return;
+<div 
+  class={`chart-wrapper relative w-full transition-all duration-300 ease-in-out ${className}`} 
+  style={`height: ${height}px`}
+>
+  <canvas 
+    id={id}
+    class="w-full h-full transition-all duration-200 ease-in-out hover:drop-shadow-lg"
+    aria-label={`Gráfico ${type} - ${id}`}
+  ></canvas>
+</div>
 
-    // Wait for Chart.js to be available
+<script is:inline define:vars={{ id, type, data, options, height }}>
+  document.addEventListener('DOMContentLoaded', function() {
     const initChart = () => {
-      // @ts-ignore - Chart.js is loaded via CDN
       const Chart = window.Chart;
-      if (!Chart) {
-        console.error('Chart.js not loaded');
-        return;
-      }
+      if (!Chart) return;
 
-      const ctx = canvasRef.current?.getContext('2d');
+      const canvas = document.getElementById(id);
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
-      // Destroy existing chart
-      if (chartRef.current) {
-        chartRef.current.destroy();
-        chartRef.current = null;
-      }
-
       // Simplified approach for debugging tooltips
-      const finalOptions: any = {
+      const finalOptions = {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
@@ -55,7 +55,7 @@ export default function InteractiveChart({
             }
           },
           tooltip: {
-            enabled: true,  // Explicitly enable tooltips
+            enabled: true,
             mode: 'nearest',
             intersect: false
           }
@@ -98,11 +98,11 @@ export default function InteractiveChart({
           bodyFont: { family: "'Inter', sans-serif", size: 13, weight: '500' },
           footerFont: { family: "'Inter', sans-serif", size: 11, style: 'italic' },
           callbacks: {
-            title: function(context: any) {
+            title: function(context) {
               const item = context[0];
               return `${item.label} - ${item.parsed}%`;
             },
-            label: function(context: any) {
+            label: function(context) {
               if (id === 'budgetChart') {
                 const cost = (context.parsed * 30872.46 / 100).toFixed(0);
                 return `💰 Importe: ${cost} €`;
@@ -112,7 +112,7 @@ export default function InteractiveChart({
               }
               return `${context.label}: ${context.parsed}%`;
             },
-            afterLabel: function(context: any) {
+            afterLabel: function(context) {
               if (id === 'budgetChart') {
                 const descriptions = [
                   'Movimiento de tierras y preparación del terreno',
@@ -148,7 +148,7 @@ export default function InteractiveChart({
         finalOptions.interaction = { intersect: false, mode: 'point' };
         finalOptions.elements = {
           arc: {
-            hoverBackgroundColor: function(context: any) {
+            hoverBackgroundColor: function(context) {
               const originalColor = context.dataset.backgroundColor[context.dataIndex];
               if (originalColor.includes('#')) {
                 const hex = originalColor.replace('#', '');
@@ -165,9 +165,9 @@ export default function InteractiveChart({
           }
         };
 
-        finalOptions.onHover = (event: any, activeElements: any[]) => {
-          if (canvasRef.current) {
-            canvasRef.current.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
+        finalOptions.onHover = (event, activeElements) => {
+          if (canvas) {
+            canvas.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
           }
         };
       }
@@ -203,29 +203,14 @@ export default function InteractiveChart({
       }
 
       try {
-        // Debug: Log all options for debugging
-        console.log('=== CHART DEBUG ===');
-        console.log('Chart type:', type);
-        console.log('Chart ID:', id);
-        console.log('Input options:', options);
-        console.log('Final options:', finalOptions);
-        console.log('Tooltip config:', finalOptions.plugins?.tooltip);
-        console.log('==================');
-        
         // Create new chart
-        chartRef.current = new Chart(ctx, {
+        const chart = new Chart(ctx, {
           type,
           data,
           options: finalOptions
         });
-        
-        // Additional debug after chart creation
-        if (chartRef.current && (type === 'doughnut' || type === 'pie')) {
-          console.log('Chart created successfully:', chartRef.current);
-          console.log('Chart options applied:', chartRef.current.options);
-        }
       } catch (error) {
-        console.error('Error creating chart:', error);
+        // Silent fail - chart not critical
       }
     };
 
@@ -244,30 +229,5 @@ export default function InteractiveChart({
       // Cleanup interval after 5 seconds
       setTimeout(() => clearInterval(checkChart), 5000);
     }
-
-    return () => {
-      if (chartRef.current) {
-        chartRef.current.destroy();
-        chartRef.current = null;
-      }
-    };
-  }, [type, data, options, id]);
-
-  return (
-    <div className={`relative w-full transition-all duration-300 ease-in-out ${className}`} style={{ height: `${height}px` }}>
-      <canvas 
-        ref={canvasRef} 
-        id={id}
-        className="w-full h-full transition-all duration-200 ease-in-out hover:drop-shadow-lg"
-        aria-label={`Gráfico ${type} - ${id}`}
-      />
-    </div>
-  );
-}
-
-// Declare Chart.js on window for TypeScript
-declare global {
-  interface Window {
-    Chart: any;
-  }
-}
+  });
+</script>

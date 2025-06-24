@@ -1,0 +1,197 @@
+---
+import InteractiveChart from './InteractiveChart.astro';
+
+interface Breed {
+  id: string;
+  name: string;
+  image: string;
+  description: string;
+}
+
+const breeds: Breed[] = [
+  {
+    id: 'cachena',
+    name: 'Cachena',
+    image: '/images/image1.png',
+    description: 'Raza autóctona de pequeño tamaño, muy rústica y adaptada al monte gallego. Excelente para la limpieza de monte y prevención de incendios.'
+  },
+  {
+    id: 'caldela',
+    name: 'Caldelá',
+    image: '/images/image2.png',
+    description: 'Raza de aptitud cárnica, bien adaptada a las condiciones climáticas de Galicia. Conocida por su docilidad y facilidad de parto.'
+  },
+  {
+    id: 'frieiresa',
+    name: 'Frieiresa',
+    image: '/images/image3.png',
+    description: 'Raza de gran rusticidad, tradicionalmente utilizada para trabajo y producción de carne. Muy resistente a enfermedades.'
+  },
+  {
+    id: 'limia',
+    name: 'Limiá',
+    image: '/images/image4.png',
+    description: 'Raza originaria de la comarca de A Limia, de gran valor genético y perfectamente adaptada al pastoreo extensivo.'
+  },
+  {
+    id: 'rubia',
+    name: 'Rubia Galega',
+    image: '/images/image5.png',
+    description: 'La raza bovina más representativa de Galicia, de gran tamaño y excelente producción cárnica. Símbolo de la ganadería gallega.'
+  },
+  {
+    id: 'vianesa',
+    name: 'Vianesa',
+    image: '/images/image6.png',
+    description: 'Raza de montaña, muy rústica y adaptada a terrenos difíciles. Excelente madre y de gran longevidad.'
+  }
+];
+
+const superficiesData = {
+  labels: ['Carballeira', 'Viñedos', 'Zona Ext. Vacas', 'Granja', 'Eira', 'Caminos', 'Cultivos', 'Invernaderos'],
+  datasets: [{
+    label: 'Superficie (m²)',
+    data: [12359.98, 4993.75, 4181.67, 2989.32, 2287.89, 1511.95, 1449.79, 432.00],
+    backgroundColor: '#BF4A3F',
+    borderColor: '#8C1D18',
+    borderWidth: 1
+  }]
+};
+---
+
+<div class="grid lg:grid-cols-2 gap-8 items-start">
+  <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+    <h3 class="text-xl font-bold font-serif text-criaga-red mb-6 text-center">
+      Razas Autóctonas
+    </h3>
+    
+    <!-- Breed Selection Buttons -->
+    <div class="flex flex-wrap justify-center gap-2 mb-6">
+      {breeds.map((breed, index) => (
+        <button
+          class={`breed-button px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+            index === 0
+              ? 'bg-criaga-red text-white shadow-md'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          }`}
+          data-breed-id={breed.id}
+        >
+          {breed.name}
+        </button>
+      ))}
+    </div>
+    
+    <!-- Selected Breed Display -->
+    <div class="breed-display text-center">
+      {breeds.map((breed, index) => (
+        <div 
+          class={`breed-content ${index === 0 ? 'active' : 'hidden'}`}
+          data-breed-content={breed.id}
+        >
+          <div class="mb-4 overflow-hidden rounded-lg">
+            <img
+              src={breed.image}
+              alt={`Imagen de ${breed.name}`}
+              class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+          <h4 class="text-xl font-bold font-serif text-criaga-red mb-2">
+            {breed.name}
+          </h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            {breed.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+  
+  <!-- Chart Section -->
+  <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+    <h3 class="text-xl font-bold font-serif text-criaga-red mb-4 text-center">
+      Distribución de Superficies
+    </h3>
+    <InteractiveChart
+      id="breed-gallery-superficies-chart"
+      type="bar"
+      data={superficiesData}
+      options={{
+        indexAxis: 'y',
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Superficie (m²)'
+            }
+          }
+        }
+      }}
+      height={384}
+    />
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Breed Gallery Functionality
+    const breedButtons = document.querySelectorAll('.breed-button');
+    const breedContents = document.querySelectorAll('.breed-content');
+    
+    breedButtons.forEach(button => {
+      button.addEventListener('click', function(this: HTMLElement) {
+        const breedId = this.getAttribute('data-breed-id');
+        
+        // Update button states
+        breedButtons.forEach(btn => {
+          btn.classList.remove('bg-criaga-red', 'text-white', 'shadow-md');
+          btn.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+        });
+        
+        this.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+        this.classList.add('bg-criaga-red', 'text-white', 'shadow-md');
+        
+        // Update content display
+        breedContents.forEach(content => {
+          content.classList.add('hidden');
+          content.classList.remove('active');
+        });
+        
+        const targetContent = document.querySelector(`[data-breed-content="${breedId}"]`);
+        if (targetContent) {
+          targetContent.classList.remove('hidden');
+          targetContent.classList.add('active');
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .breed-content {
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .breed-content.active {
+    animation: fadeInBreed 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeInBreed {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .breed-button:hover {
+    transform: translateY(-1px);
+  }
+</style>

@@ -5,18 +5,18 @@ import TableOfContents from '../components/TableOfContents.astro';
 import Section from '../components/Section.astro';
 import Card from '../components/Card.astro';
 import Logo from '../components/Logo.astro';
-import BreedGallery from '../components/BreedGallery';
+import BreedGallery from '../components/BreedGallery.astro';
 import DesignEvolution from '../components/DesignEvolution.astro';
-import InteractiveChart from '../components/InteractiveChart';
-import Accordion from '../components/Accordion';
-import AnimatedSection from '../components/AnimatedSection';
-import ScrollAnimations from '../components/ScrollAnimations';
+import InteractiveChart from '../components/InteractiveChart.astro';
+import Accordion from '../components/Accordion.astro';
+import AnimatedSection from '../components/AnimatedSection.astro';
+import ScrollAnimations from '../components/ScrollAnimations.astro';
 ---
 
 <Layout title="CRIAGA - Centro de Cría de Razas Galegas">
   <Navigation />
   <TableOfContents />
-  <ScrollAnimations client:load />
+  <ScrollAnimations />
   
   <main class="container mx-auto px-6 py-12 max-w-7xl">
     
@@ -34,7 +34,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
       
       <!-- Content with higher z-index -->
       <div class="relative z-10 max-w-4xl mx-auto">
-        <AnimatedSection animation="fadeIn" client:load>
+        <AnimatedSection animation="fadeIn">
           <h1 class="text-6xl md:text-7xl font-bold font-serif text-criaga-red mb-4 relative z-20">
             CRIAGA
           </h1>
@@ -43,14 +43,14 @@ import ScrollAnimations from '../components/ScrollAnimations';
           </h2>
         </AnimatedSection>
         
-        <AnimatedSection animation="slideUp" delay={0.3} client:load>
+        <AnimatedSection animation="slideUp" delay={0.3}>
           <p class="text-xl md:text-2xl text-gray-600 mb-8 relative z-20">
             Un proyecto innovador para investigar una nueva ruralidad
           </p>
         </AnimatedSection>
         
         
-        <AnimatedSection animation="scale" delay={0.9} client:load>
+        <AnimatedSection animation="scale" delay={0.9}>
           <div class="flex flex-wrap justify-center gap-4 relative z-20">
             <a 
               href="#vision" 
@@ -78,7 +78,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
     >
       <!-- Introducción Expandida -->
       <div class="mb-16">
-        <AnimatedSection animation="fadeIn" client:load>
+        <AnimatedSection animation="fadeIn">
           <div class="bg-gradient-to-br from-criaga-red/5 to-criaga-gray/5 rounded-2xl p-8 mb-12">
             <div class="grid md:grid-cols-2 gap-8 items-center">
               <div>
@@ -112,7 +112,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
 
       <!-- Objetivos Principales -->
       <div class="mb-16">
-        <AnimatedSection animation="slideUp" client:load>
+        <AnimatedSection animation="slideUp">
           <h3 class="text-2xl font-bold font-serif text-criaga-red mb-8 text-center">
             Objetivos del Proyecto
           </h3>
@@ -162,7 +162,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
 
       <!-- Componentes del Proyecto -->
       <div class="mb-16">
-        <AnimatedSection animation="fadeIn" client:load>
+        <AnimatedSection animation="fadeIn">
           <h3 class="text-2xl font-bold font-serif text-criaga-red mb-8 text-center">
             Componentes del Proyecto
           </h3>
@@ -255,7 +255,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
 
       <!-- Innovación en Ganadería Ecológica -->
       <div class="mb-16">
-        <AnimatedSection animation="slideUp" client:load>
+        <AnimatedSection animation="slideUp">
           <div class="bg-white rounded-2xl p-8 shadow-lg">
             <h3 class="text-2xl font-bold font-serif text-criaga-red mb-6 text-center">
               Principios de la Ganadería Ecológica
@@ -310,7 +310,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
 
       <!-- Impacto Territorial -->
       <div class="mb-12">
-        <AnimatedSection animation="fadeIn" client:load>
+        <AnimatedSection animation="fadeIn">
           <div class="bg-gradient-to-r from-criaga-red/10 to-criaga-gray/10 rounded-2xl p-8">
             <h3 class="text-2xl font-bold font-serif text-criaga-red mb-6 text-center">
               Impacto en el Territorio
@@ -342,7 +342,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
       className="reveal-section"
     >
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <AnimatedSection animation="slideUp" delay={0} client:load>
+        <AnimatedSection animation="slideUp" delay={0}>
           <Card className="text-center h-full">
             <div class="mb-4">
               <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -359,7 +359,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
           </Card>
         </AnimatedSection>
         
-        <AnimatedSection animation="slideUp" delay={0.1} client:load>
+        <AnimatedSection animation="slideUp" delay={0.1}>
           <Card className="text-center h-full">
             <div class="mb-4">
               <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -376,7 +376,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
           </Card>
         </AnimatedSection>
         
-        <AnimatedSection animation="slideUp" delay={0.2} client:load>
+        <AnimatedSection animation="slideUp" delay={0.2}>
           <Card className="text-center h-full">
             <div class="mb-4">
               <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -393,7 +393,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
           </Card>
         </AnimatedSection>
         
-        <AnimatedSection animation="slideUp" delay={0.3} client:load>
+        <AnimatedSection animation="slideUp" delay={0.3}>
           <Card className="text-center h-full">
             <div class="mb-4">
               <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -418,8 +418,8 @@ import ScrollAnimations from '../components/ScrollAnimations';
       title="Programa Ganadero y de Espacios"
       subtitle="El programa se dimensiona para cumplir con los requisitos de la ganadería ecológica, primando el bienestar de las razas autóctonas y el aprovechamiento sostenible del entorno."
     >
-      <AnimatedSection animation="fadeIn" client:load>
-        <BreedGallery client:load />
+      <AnimatedSection animation="fadeIn">
+        <BreedGallery />
       </AnimatedSection>
     </Section>
 
@@ -429,7 +429,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
       title="Evolución del Diseño Arquitectónico"
       subtitle="La arquitectura del proyecto busca una integración total con el entorno. La granja se concibe como un elemento que conecta la zona baja de pastos con el monte, fusionándose con la topografía."
     >
-      <AnimatedSection animation="slideUp" client:load>
+      <AnimatedSection animation="slideUp">
         <DesignEvolution />
       </AnimatedSection>
     </Section>
@@ -442,7 +442,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
       className="progress-section"
     >
       <!-- Resumen Económico Principal -->
-      <AnimatedSection animation="fadeIn" client:load>
+      <AnimatedSection animation="fadeIn">
         <Card title="Resumen Económico del Proyecto" className="text-center mb-12">
           <div class="grid md:grid-cols-3 gap-8 mb-8">
             <div class="text-center">
@@ -474,7 +474,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
 
       <div class="grid lg:grid-cols-2 gap-12 items-start">
         <!-- Distribución del Presupuesto -->
-        <AnimatedSection animation="slideLeft" client:load>
+        <AnimatedSection animation="slideLeft">
           <Card title="Distribución del Presupuesto por Capítulos">
             <InteractiveChart
               id="budgetChart"
@@ -548,13 +548,13 @@ import ScrollAnimations from '../components/ScrollAnimations';
                 }
               }}
               height={350}
-              client:load
+             
             />
           </Card>
         </AnimatedSection>
 
         <!-- Distribución de Superficies -->
-        <AnimatedSection animation="slideRight" client:load>
+        <AnimatedSection animation="slideRight">
           <Card title="Distribución de Superficies del Proyecto">
             <InteractiveChart
               id="superficiesChart"
@@ -585,7 +585,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
                 }
               }}
               height={350}
-              client:load
+             
             />
           </Card>
         </AnimatedSection>
@@ -594,7 +594,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
       <!-- Análisis Comparativo -->
       <div class="grid lg:grid-cols-2 gap-12 mt-12">
         <!-- Desglose de Costes por Área -->
-        <AnimatedSection animation="slideUp" delay={0.2} client:load>
+        <AnimatedSection animation="slideUp" delay={0.2}>
           <Card title="Análisis de Costes por Área Funcional">
             <InteractiveChart
               id="costAreasChart"
@@ -709,13 +709,13 @@ import ScrollAnimations from '../components/ScrollAnimations';
                 }
               }}
               height={300}
-              client:load
+             
             />
           </Card>
         </AnimatedSection>
 
         <!-- Timeline de Inversión -->
-        <AnimatedSection animation="slideUp" delay={0.4} client:load>
+        <AnimatedSection animation="slideUp" delay={0.4}>
           <Card title="Cronograma de Inversión Estimado">
             <InteractiveChart
               id="timelineChart"
@@ -754,7 +754,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
                 }
               }}
               height={300}
-              client:load
+             
             />
           </Card>
         </AnimatedSection>
@@ -762,7 +762,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
 
       <!-- Datos Técnicos Clave -->
       <div class="grid lg:grid-cols-2 gap-12 mt-12">
-        <AnimatedSection animation="slideLeft" delay={0.2} client:load>
+        <AnimatedSection animation="slideLeft" delay={0.2}>
           <Card title="Datos Clave de la Estructura">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
               <div class="bg-gray-50 p-3 rounded-lg">
@@ -793,7 +793,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
           </Card>
         </AnimatedSection>
         
-        <AnimatedSection animation="slideRight" delay={0.4} client:load>
+        <AnimatedSection animation="slideRight" delay={0.4}>
           <Card title="Indicadores de Sostenibilidad">
             <div class="space-y-4">
               <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
@@ -819,10 +819,10 @@ import ScrollAnimations from '../components/ScrollAnimations';
       
       <!-- Normativa y Cumplimiento -->
       <div class="mt-12">
-        <AnimatedSection animation="fadeIn" delay={0.6} client:load>
+        <AnimatedSection animation="fadeIn" delay={0.6}>
           <Card title="Cumplimiento Normativo (CTE)">
             <Accordion 
-              client:load
+             
               items={[
                 {
                   id: 'db-si',
@@ -857,7 +857,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
       title="Pliego de Condiciones"
       subtitle="Seleccione una unidad de obra para consultar sus especificaciones técnicas, normativa de aplicación y proceso de ejecución detallado."
     >
-      <AnimatedSection animation="fadeIn" client:load>
+      <AnimatedSection animation="fadeIn">
         <div class="flex flex-wrap justify-center gap-4 mb-8">
           <button class="pliego-btn bg-criaga-red text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-criaga-red-light transition-all duration-200 transform hover:-translate-y-1" data-target="muro">
             Muro de Hormigón
