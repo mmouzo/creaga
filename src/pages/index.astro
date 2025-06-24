@@ -5,18 +5,18 @@ import TableOfContents from '../components/TableOfContents.astro';
 import Section from '../components/Section.astro';
 import Card from '../components/Card.astro';
 import Logo from '../components/Logo.astro';
-import BreedGallery from '../components/BreedGallery';
+import BreedGallery from '../components/BreedGallery.astro';
 import DesignEvolution from '../components/DesignEvolution.astro';
-import InteractiveChart from '../components/InteractiveChart';
-import Accordion from '../components/Accordion';
-import AnimatedSection from '../components/AnimatedSection';
-import ScrollAnimations from '../components/ScrollAnimations';
+import InteractiveChart from '../components/InteractiveChart.astro';
+import Accordion from '../components/Accordion.astro';
+import AnimatedSection from '../components/AnimatedSection.astro';
+import ScrollAnimations from '../components/ScrollAnimations.astro';
 ---
 
 <Layout title="CRIAGA - Centro de Cría de Razas Galegas">
   <Navigation />
   <TableOfContents />
-  <ScrollAnimations client:load />
+  <ScrollAnimations />
   
   <main class="container mx-auto px-6 py-12 max-w-7xl">
     
@@ -34,7 +34,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
       
       <!-- Content with higher z-index -->
       <div class="relative z-10 max-w-4xl mx-auto">
-        <AnimatedSection animation="fadeIn" client:load>
+        <AnimatedSection animation="fadeIn">
           <h1 class="text-6xl md:text-7xl font-bold font-serif text-criaga-red mb-4 relative z-20">
             CRIAGA
           </h1>
@@ -43,20 +43,14 @@ import ScrollAnimations from '../components/ScrollAnimations';
           </h2>
         </AnimatedSection>
         
-        <AnimatedSection animation="slideUp" delay={0.3} client:load>
+        <AnimatedSection animation="slideUp" delay={0.3}>
           <p class="text-xl md:text-2xl text-gray-600 mb-8 relative z-20">
             Un proyecto innovador para investigar una nueva ruralidad
           </p>
         </AnimatedSection>
         
-        <AnimatedSection animation="slideUp" delay={0.6} client:load>
-          <p class="text-lg text-gray-700 leading-relaxed mb-12 relative z-20">
-            CRIAGA busca poner en valor las razas autóctonas gallegas, los terrenos de pasto y cultivo, 
-            y actuar como un catalizador para la revitalización de la comunidad rural de Lusquiños, Pontevedra.
-          </p>
-        </AnimatedSection>
         
-        <AnimatedSection animation="scale" delay={0.9} client:load>
+        <AnimatedSection animation="scale" delay={0.9}>
           <div class="flex flex-wrap justify-center gap-4 relative z-20">
             <a 
               href="#vision" 
@@ -79,62 +73,264 @@ import ScrollAnimations from '../components/ScrollAnimations';
     <Section 
       id="vision" 
       title="Visión General del Proyecto"
-      subtitle="CRIAGA integra tres elementos fundamentales: la granja como núcleo productivo, la vivienda como anclaje comunitario, y el centro de visitantes como espacio de divulgación y formación."
+      subtitle="CRIAGA representa una nueva ruralidad que integra ganadería ecológica, conservación del patrimonio y revitalización comunitaria en el corazón de Galicia."
       className="reveal-section"
     >
-      <div class="grid md:grid-cols-3 gap-8 cards-container">
-        <Card title="La Granja" className="animate-card">
-          <div class="mb-4">
-            <img 
-              src="/images/image12.png" 
-              alt="Vista de la granja" 
-              class="w-full h-32 object-cover rounded-lg mb-4" 
-              loading="lazy"
-              width="400"
-              height="128"
-            >
+      <!-- Introducción Expandida -->
+      <div class="mb-16">
+        <AnimatedSection animation="fadeIn">
+          <div class="bg-gradient-to-br from-criaga-red/5 to-criaga-gray/5 rounded-2xl p-8 mb-12">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h3 class="text-2xl font-bold font-serif text-criaga-red mb-4">
+                  Una Propuesta Integral para el Rural Gallego
+                </h3>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                  CRIAGA (Centro de Cría de Razas Galegas) surge como respuesta a la necesidad de 
+                  investigar nuevas formas de ruralidad que honren la tradición mientras abrazan 
+                  la innovación sostenible.
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                  Ubicado en el lugar de Lusquiños, parroquia de Tomeza, Pontevedra, este proyecto 
+                  busca ser un catalizador para la puesta en valor de terrenos de pasto y cultivo, 
+                  actuando como anclaje con la comunidad existente.
+                </p>
+              </div>
+              <div class="relative">
+                <img 
+                  src="/images/image127.png" 
+                  alt="Logo CRIAGA en contexto rural" 
+                  class="w-full rounded-lg shadow-lg" 
+                  loading="lazy"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
+              </div>
+            </div>
           </div>
-          <p class="text-gray-600 leading-relaxed">
-            El núcleo del proyecto. Un espacio para la cría extensiva y ecológica de seis razas 
-            de vacas gallegas, además de cabras, ovejas y gallinas, integrando el bienestar animal 
-            con el paisaje natural.
-          </p>
-        </Card>
+        </AnimatedSection>
+      </div>
+
+      <!-- Objetivos Principales -->
+      <div class="mb-16">
+        <AnimatedSection animation="slideUp">
+          <h3 class="text-2xl font-bold font-serif text-criaga-red mb-8 text-center">
+            Objetivos del Proyecto
+          </h3>
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-criaga-red mb-2">Conservación</h4>
+              <p class="text-sm text-gray-600">Preservar razas autóctonas gallegas mediante ganadería ecológica</p>
+            </div>
+            
+            <div class="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-criaga-red mb-2">Comunidad</h4>
+              <p class="text-sm text-gray-600">Revitalizar el tejido social rural y crear espacios de encuentro</p>
+            </div>
+            
+            <div class="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-criaga-red mb-2">Educación</h4>
+              <p class="text-sm text-gray-600">Divulgar conocimiento sobre ganadería sostenible y patrimonio rural</p>
+            </div>
+            
+            <div class="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-criaga-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-criaga-red mb-2">Sostenibilidad</h4>
+              <p class="text-sm text-gray-600">Promover prácticas agrícolas y ganaderas respetuosas con el medio</p>
+            </div>
+          </div>
+        </AnimatedSection>
+      </div>
+
+      <!-- Componentes del Proyecto -->
+      <div class="mb-16">
+        <AnimatedSection animation="fadeIn">
+          <h3 class="text-2xl font-bold font-serif text-criaga-red mb-8 text-center">
+            Componentes del Proyecto
+          </h3>
+        </AnimatedSection>
         
-        <Card title="La Vivienda" className="animate-card">
-          <div class="mb-4">
-            <img 
-              src="/images/image13.png" 
-              alt="Vista de la vivienda" 
-              class="w-full h-32 object-cover rounded-lg mb-4" 
-              loading="lazy"
-              width="400"
-              height="128"
-            >
+        <div class="grid md:grid-cols-3 gap-8 cards-container">
+          <Card title="Centro de Cría de Ganado" className="animate-card">
+            <div class="mb-4">
+              <img 
+                src="/images/image12.png" 
+                alt="Vista de la granja" 
+                class="w-full h-40 object-cover rounded-lg mb-4" 
+                loading="lazy"
+                width="400"
+                height="160"
+              >
+            </div>
+            <div class="space-y-3">
+              <p class="text-gray-700 leading-relaxed font-medium">
+                <strong class="text-criaga-red">Ganadería Ecológica Extensiva</strong>
+              </p>
+              <p class="text-gray-600 leading-relaxed text-sm">
+                Cría de razas autóctonas gallegas: Frieiresa, Cachena, Caldelá, Limiá, Vianesa, Morenas de Galicia, 
+                junto con Ovejas Gallegas y Gallinas de Mos.
+              </p>
+              <ul class="text-gray-600 text-sm space-y-1">
+                <li>• Producción ligada al suelo y pastos naturales</li>
+                <li>• Bienestar animal como prioridad</li>
+                <li>• Aprovechamiento de recursos del entorno</li>
+                <li>• Superficie total: 190.388 m²</li>
+              </ul>
+            </div>
+          </Card>
+          
+          <Card title="Vivienda y Plaza Comunitaria" className="animate-card">
+            <div class="mb-4">
+              <img 
+                src="/images/image13.png" 
+                alt="Vista de la vivienda" 
+                class="w-full h-40 object-cover rounded-lg mb-4" 
+                loading="lazy"
+                width="400"
+                height="160"
+              >
+            </div>
+            <div class="space-y-3">
+              <p class="text-gray-700 leading-relaxed font-medium">
+                <strong class="text-criaga-red">Anclaje con la Comunidad</strong>
+              </p>
+              <p class="text-gray-600 leading-relaxed text-sm">
+                Rehabilitación y ampliación de construcción preexistente para crear un punto de encuentro vecinal.
+              </p>
+              <ul class="text-gray-600 text-sm space-y-1">
+                <li>• Vivienda para encargados de la granja</li>
+                <li>• Plaza pública con emparrado para sombra</li>
+                <li>• Área de descanso para peregrinos del Camino de Santiago</li>
+                <li>• Huerto de frutales para autoabastecimiento</li>
+              </ul>
+            </div>
+          </Card>
+          
+          <Card title="Centro de Interpretación" className="animate-card">
+            <div class="mb-4">
+              <img 
+                src="/images/image14.png" 
+                alt="Centro de visitantes" 
+                class="w-full h-40 object-cover rounded-lg mb-4" 
+                loading="lazy"
+                width="400"
+                height="160"
+              >
+            </div>
+            <div class="space-y-3">
+              <p class="text-gray-700 leading-relaxed font-medium">
+                <strong class="text-criaga-red">Divulgación y Formación</strong>
+              </p>
+              <p class="text-gray-600 leading-relaxed text-sm">
+                Espacios dedicados a la divulgación, formación y exposición de las actividades agropecuarias.
+              </p>
+              <ul class="text-gray-600 text-sm space-y-1">
+                <li>• Salas de exposición y formación</li>
+                <li>• Bodega para viticultura experimental</li>
+                <li>• Variedades Caiño Blanco y Tinto</li>
+                <li>• Actividades educativas y culturales</li>
+              </ul>
+            </div>
+          </Card>
+        </div>
+      </div>
+
+      <!-- Innovación en Ganadería Ecológica -->
+      <div class="mb-16">
+        <AnimatedSection animation="slideUp">
+          <div class="bg-white rounded-2xl p-8 shadow-lg">
+            <h3 class="text-2xl font-bold font-serif text-criaga-red mb-6 text-center">
+              Principios de la Ganadería Ecológica
+            </h3>
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <h4 class="text-lg font-semibold text-criaga-gray mb-4">Fundamentos Técnicos</h4>
+                <ul class="space-y-2 text-gray-600">
+                  <li class="flex items-start">
+                    <span class="text-criaga-red mr-2">•</span>
+                    Producción ligada al suelo con tierras de pasto y cultivo propias
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-criaga-red mr-2">•</span>
+                    Uso de razas autóctonas adaptadas al entorno gallego
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-criaga-red mr-2">•</span>
+                    Alimentación ecológica producida en la misma unidad
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-criaga-red mr-2">•</span>
+                    Maximización del uso de pastos naturales
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-criaga-gray mb-4">Bienestar Animal</h4>
+                <ul class="space-y-2 text-gray-600">
+                  <li class="flex items-start">
+                    <span class="text-criaga-red mr-2">•</span>
+                    Animales en libertad con acceso permanente a pastos
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-criaga-red mr-2">•</span>
+                    Reproducción por métodos naturales
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-criaga-red mr-2">•</span>
+                    Prevención de enfermedades mediante manejo adecuado
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-criaga-red mr-2">•</span>
+                    Espacios suficientes según normativa ecológica
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <p class="text-gray-600 leading-relaxed">
-            Una unidad de vivienda mínima para los encargados, diseñada para anclarse con la 
-            comunidad existente, rehabilitando y ampliando una construcción preexistente con 
-            criterios de sostenibilidad.
-          </p>
-        </Card>
-        
-        <Card title="Centro de Visitantes" className="animate-card">
-          <div class="mb-4">
-            <img 
-              src="/images/image14.png" 
-              alt="Centro de visitantes" 
-              class="w-full h-32 object-cover rounded-lg mb-4" 
-              loading="lazy"
-              width="400"
-              height="128"
-            >
+        </AnimatedSection>
+      </div>
+
+      <!-- Impacto Territorial -->
+      <div class="mb-12">
+        <AnimatedSection animation="fadeIn">
+          <div class="bg-gradient-to-r from-criaga-red/10 to-criaga-gray/10 rounded-2xl p-8">
+            <h3 class="text-2xl font-bold font-serif text-criaga-red mb-6 text-center">
+              Impacto en el Territorio
+            </h3>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+              <div>
+                <div class="text-3xl font-bold text-criaga-red mb-2">190.388 m²</div>
+                <div class="text-gray-600">Superficie total del proyecto</div>
+              </div>
+              <div>
+                <div class="text-3xl font-bold text-criaga-red mb-2">6 + 3</div>
+                <div class="text-gray-600">Razas de ganado (vacas + otras especies)</div>
+              </div>
+              <div>
+                <div class="text-3xl font-bold text-criaga-red mb-2">100%</div>
+                <div class="text-gray-600">Ganadería ecológica certificada</div>
+              </div>
+            </div>
           </div>
-          <p class="text-gray-600 leading-relaxed">
-            Un espacio para la divulgación, formación y exposición, incluyendo una bodega para 
-            recuperar la viticultura local con variedades autóctonas como Caiño Blanco y Tinto.
-          </p>
-        </Card>
+        </AnimatedSection>
       </div>
     </Section>
 
@@ -146,7 +342,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
       className="reveal-section"
     >
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <AnimatedSection animation="slideUp" delay={0} client:load>
+        <AnimatedSection animation="slideUp" delay={0}>
           <Card className="text-center h-full">
             <div class="mb-4">
               <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -163,7 +359,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
           </Card>
         </AnimatedSection>
         
-        <AnimatedSection animation="slideUp" delay={0.1} client:load>
+        <AnimatedSection animation="slideUp" delay={0.1}>
           <Card className="text-center h-full">
             <div class="mb-4">
               <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -180,7 +376,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
           </Card>
         </AnimatedSection>
         
-        <AnimatedSection animation="slideUp" delay={0.2} client:load>
+        <AnimatedSection animation="slideUp" delay={0.2}>
           <Card className="text-center h-full">
             <div class="mb-4">
               <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -197,7 +393,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
           </Card>
         </AnimatedSection>
         
-        <AnimatedSection animation="slideUp" delay={0.3} client:load>
+        <AnimatedSection animation="slideUp" delay={0.3}>
           <Card className="text-center h-full">
             <div class="mb-4">
               <div class="w-16 h-16 bg-criaga-red/10 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -222,8 +418,8 @@ import ScrollAnimations from '../components/ScrollAnimations';
       title="Programa Ganadero y de Espacios"
       subtitle="El programa se dimensiona para cumplir con los requisitos de la ganadería ecológica, primando el bienestar de las razas autóctonas y el aprovechamiento sostenible del entorno."
     >
-      <AnimatedSection animation="fadeIn" client:load>
-        <BreedGallery client:load />
+      <AnimatedSection animation="fadeIn">
+        <BreedGallery />
       </AnimatedSection>
     </Section>
 
@@ -233,7 +429,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
       title="Evolución del Diseño Arquitectónico"
       subtitle="La arquitectura del proyecto busca una integración total con el entorno. La granja se concibe como un elemento que conecta la zona baja de pastos con el monte, fusionándose con la topografía."
     >
-      <AnimatedSection animation="slideUp" client:load>
+      <AnimatedSection animation="slideUp">
         <DesignEvolution />
       </AnimatedSection>
     </Section>
@@ -246,7 +442,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
       className="progress-section"
     >
       <!-- Resumen Económico Principal -->
-      <AnimatedSection animation="fadeIn" client:load>
+      <AnimatedSection animation="fadeIn">
         <Card title="Resumen Económico del Proyecto" className="text-center mb-12">
           <div class="grid md:grid-cols-3 gap-8 mb-8">
             <div class="text-center">
@@ -278,7 +474,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
 
       <div class="grid lg:grid-cols-2 gap-12 items-start">
         <!-- Distribución del Presupuesto -->
-        <AnimatedSection animation="slideLeft" client:load>
+        <AnimatedSection animation="slideLeft">
           <Card title="Distribución del Presupuesto por Capítulos">
             <InteractiveChart
               id="budgetChart"
@@ -352,13 +548,13 @@ import ScrollAnimations from '../components/ScrollAnimations';
                 }
               }}
               height={350}
-              client:load
+             
             />
           </Card>
         </AnimatedSection>
 
         <!-- Distribución de Superficies -->
-        <AnimatedSection animation="slideRight" client:load>
+        <AnimatedSection animation="slideRight">
           <Card title="Distribución de Superficies del Proyecto">
             <InteractiveChart
               id="superficiesChart"
@@ -389,7 +585,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
                 }
               }}
               height={350}
-              client:load
+             
             />
           </Card>
         </AnimatedSection>
@@ -398,7 +594,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
       <!-- Análisis Comparativo -->
       <div class="grid lg:grid-cols-2 gap-12 mt-12">
         <!-- Desglose de Costes por Área -->
-        <AnimatedSection animation="slideUp" delay={0.2} client:load>
+        <AnimatedSection animation="slideUp" delay={0.2}>
           <Card title="Análisis de Costes por Área Funcional">
             <InteractiveChart
               id="costAreasChart"
@@ -513,13 +709,13 @@ import ScrollAnimations from '../components/ScrollAnimations';
                 }
               }}
               height={300}
-              client:load
+             
             />
           </Card>
         </AnimatedSection>
 
         <!-- Timeline de Inversión -->
-        <AnimatedSection animation="slideUp" delay={0.4} client:load>
+        <AnimatedSection animation="slideUp" delay={0.4}>
           <Card title="Cronograma de Inversión Estimado">
             <InteractiveChart
               id="timelineChart"
@@ -558,7 +754,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
                 }
               }}
               height={300}
-              client:load
+             
             />
           </Card>
         </AnimatedSection>
@@ -566,7 +762,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
 
       <!-- Datos Técnicos Clave -->
       <div class="grid lg:grid-cols-2 gap-12 mt-12">
-        <AnimatedSection animation="slideLeft" delay={0.2} client:load>
+        <AnimatedSection animation="slideLeft" delay={0.2}>
           <Card title="Datos Clave de la Estructura">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
               <div class="bg-gray-50 p-3 rounded-lg">
@@ -597,7 +793,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
           </Card>
         </AnimatedSection>
         
-        <AnimatedSection animation="slideRight" delay={0.4} client:load>
+        <AnimatedSection animation="slideRight" delay={0.4}>
           <Card title="Indicadores de Sostenibilidad">
             <div class="space-y-4">
               <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
@@ -623,10 +819,10 @@ import ScrollAnimations from '../components/ScrollAnimations';
       
       <!-- Normativa y Cumplimiento -->
       <div class="mt-12">
-        <AnimatedSection animation="fadeIn" delay={0.6} client:load>
+        <AnimatedSection animation="fadeIn" delay={0.6}>
           <Card title="Cumplimiento Normativo (CTE)">
             <Accordion 
-              client:load
+             
               items={[
                 {
                   id: 'db-si',
@@ -661,7 +857,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
       title="Pliego de Condiciones"
       subtitle="Seleccione una unidad de obra para consultar sus especificaciones técnicas, normativa de aplicación y proceso de ejecución detallado."
     >
-      <AnimatedSection animation="fadeIn" client:load>
+      <AnimatedSection animation="fadeIn">
         <div class="flex flex-wrap justify-center gap-4 mb-8">
           <button class="pliego-btn bg-criaga-red text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-criaga-red-light transition-all duration-200 transform hover:-translate-y-1" data-target="muro">
             Muro de Hormigón

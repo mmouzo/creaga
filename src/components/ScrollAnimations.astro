@@ -1,7 +1,9 @@
-import { useEffect } from 'react';
+---
+// This component doesn't render anything visible, it just sets up scroll animations
+---
 
-export default function ScrollAnimations() {
-  useEffect(() => {
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
     if (typeof window !== 'undefined' && window.gsap) {
       const gsap = window.gsap;
       
@@ -96,15 +98,55 @@ export default function ScrollAnimations() {
           );
         });
       }
+    } else {
+      // Fallback CSS animations if GSAP is not available
+      const cards = document.querySelectorAll('.animate-card');
+      cards.forEach((card, index) => {
+        if (card instanceof HTMLElement) {
+          card.style.animationDelay = `${index * 0.1}s`;
+        }
+        card.classList.add('animate-fadeInUp');
+      });
+      
+      const revealSections = document.querySelectorAll('.reveal-section');
+      revealSections.forEach(section => {
+        const children = section.children;
+        Array.from(children).forEach((child, index) => {
+          if (child instanceof HTMLElement) {
+            child.style.animationDelay = `${index * 0.1}s`;
+          }
+          child.classList.add('animate-fadeInUp');
+        });
+      });
     }
-  }, []);
+  });
+</script>
 
-  return null;
-}
-
-// Declare ScrollTrigger on window for TypeScript
-declare global {
-  interface Window {
-    ScrollTrigger: any;
+<style>
+  /* Fallback CSS animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-}
+  
+  .animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+  
+  /* Initial state for cards without GSAP */
+  .animate-card {
+    opacity: 1;
+  }
+  
+  /* Intersection Observer fallback for scroll animations */
+  .reveal-section > * {
+    opacity: 1;
+  }
+</style>

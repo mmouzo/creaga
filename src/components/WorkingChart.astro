@@ -1,0 +1,96 @@
+---
+// Working Chart Component
+---
+
+<div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+  <h3 class="text-xl font-bold font-serif text-criaga-red mb-4 text-center">
+    Distribución de Superficies
+  </h3>
+  <div class="chart-container w-full" style="height: 384px;">
+    <canvas id="superficies-chart-final" class="w-full h-full"></canvas>
+  </div>
+</div>
+
+<script is:inline>
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(() => {
+    if (!window.Chart) return;
+    
+    const canvas = document.getElementById('superficies-chart-final');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    const data = {
+      labels: ['Carballeira', 'Viñedos', 'Zona Ext. Vacas', 'Granja', 'Eira', 'Caminos', 'Cultivos', 'Invernaderos'],
+      datasets: [{
+        label: 'Superficie (m²)',
+        data: [12359.98, 4993.75, 4181.67, 2989.32, 2287.89, 1511.95, 1449.79, 432.00],
+        backgroundColor: '#BF4A3F',
+        borderColor: '#8C1D18',
+        borderWidth: 1
+      }]
+    };
+    
+    try {
+      const chart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          indexAxis: 'y',
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              enabled: true,
+              backgroundColor: 'rgba(140, 29, 24, 0.96)',
+              titleColor: '#FCFBF8',
+              bodyColor: '#FCFBF8',
+              borderColor: '#8C1D18',
+              borderWidth: 2,
+              cornerRadius: 12,
+              displayColors: true,
+              padding: 16,
+              titleFont: { family: "'Inter', sans-serif", size: 16, weight: 'bold' },
+              bodyFont: { family: "'Inter', sans-serif", size: 13, weight: '500' }
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Superficie (m²)'
+              },
+              grid: {
+                color: '#E5E5E5'
+              },
+              ticks: {
+                font: {
+                  family: "'Inter', sans-serif"
+                },
+                color: '#333333'
+              }
+            },
+            y: {
+              grid: {
+                color: '#E5E5E5'
+              },
+              ticks: {
+                font: {
+                  family: "'Inter', sans-serif"
+                },
+                color: '#333333'
+              }
+            }
+          }
+        }
+      });
+    } catch (error) {
+      // Silent fail - chart not critical
+    }
+  }, 500);
+});
+</script>

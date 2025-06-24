@@ -1,0 +1,120 @@
+---
+interface AccordionItem {
+  id: string;
+  title: string;
+  content: string;
+}
+
+interface Props {
+  items: AccordionItem[];
+  allowMultiple?: boolean;
+}
+
+const { items, allowMultiple = false } = Astro.props;
+---
+
+<div class="accordion-container space-y-3" data-allow-multiple={allowMultiple}>
+  {items.map((item) => (
+    <div
+      class="accordion-item bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden"
+      data-item-id={item.id}
+    >
+      <button
+        class="accordion-trigger w-full flex justify-between items-center p-4 text-left hover:bg-gray-50 transition-colors duration-200"
+        aria-expanded="false"
+        data-target={item.id}
+      >
+        <span class="font-semibold text-criaga-red pr-4">
+          {item.title}
+        </span>
+        <svg
+          class="accordion-icon w-5 h-5 text-gray-500 transition-transform duration-200 flex-shrink-0"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width={2}
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+      
+      <div
+        class="accordion-content transition-all duration-300 ease-in-out max-h-0 opacity-0 overflow-hidden"
+        data-content={item.id}
+      >
+        <div class="px-4 pb-4 text-gray-700 leading-relaxed">
+          <div set:html={item.content} />
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const accordionContainers = document.querySelectorAll('.accordion-container');
+    
+    accordionContainers.forEach(container => {
+      const allowMultiple = container.getAttribute('data-allow-multiple') === 'true';
+      const triggers = container.querySelectorAll('.accordion-trigger');
+      
+      triggers.forEach(trigger => {
+        trigger.addEventListener('click', function(this: HTMLElement) {
+          const targetId = this.getAttribute('data-target');
+          if (!targetId) return;
+          
+          const item = container.querySelector(`[data-item-id="${targetId}"]`);
+          if (!item) return;
+          
+          const content = item.querySelector('.accordion-content') as HTMLElement;
+          const icon = this.querySelector('.accordion-icon') as HTMLElement;
+          if (!content || !icon) return;
+          
+          const isOpen = this.getAttribute('aria-expanded') === 'true';
+          
+          if (!allowMultiple) {
+            // Close all other items
+            const allTriggers = container.querySelectorAll('.accordion-trigger');
+            const allContents = container.querySelectorAll('.accordion-content');
+            const allIcons = container.querySelectorAll('.accordion-icon');
+            
+            allTriggers.forEach(t => t.setAttribute('aria-expanded', 'false'));
+            allContents.forEach(c => {
+              c.classList.remove('max-h-96', 'opacity-100');
+              c.classList.add('max-h-0', 'opacity-0');
+            });
+            allIcons.forEach(i => i.classList.remove('rotate-180'));
+          }
+          
+          if (!isOpen) {
+            // Open this item
+            this.setAttribute('aria-expanded', 'true');
+            content.classList.remove('max-h-0', 'opacity-0');
+            content.classList.add('max-h-96', 'opacity-100');
+            icon.classList.add('rotate-180');
+          } else if (allowMultiple) {
+            // Close this item (only if multiple allowed)
+            this.setAttribute('aria-expanded', 'false');
+            content.classList.remove('max-h-96', 'opacity-100');
+            content.classList.add('max-h-0', 'opacity-0');
+            icon.classList.remove('rotate-180');
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .accordion-icon {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .accordion-content {
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+</style>
