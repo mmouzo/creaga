@@ -6,7 +6,7 @@ import Section from '../components/Section.astro';
 import Card from '../components/Card.astro';
 import Logo from '../components/Logo.astro';
 import BreedGallery from '../components/BreedGallery';
-import DesignSlider from '../components/DesignSlider';
+import DesignEvolution from '../components/DesignEvolution.astro';
 import InteractiveChart from '../components/InteractiveChart';
 import Accordion from '../components/Accordion';
 import AnimatedSection from '../components/AnimatedSection';
@@ -65,10 +65,10 @@ import ScrollAnimations from '../components/ScrollAnimations';
               Explorar Proyecto
             </a>
             <a 
-              href="/galeria" 
+              href="#entorno" 
               class="border-2 border-criaga-red text-criaga-red px-8 py-3 rounded-lg font-semibold hover:bg-criaga-red hover:text-white transition-all duration-300"
             >
-              Ver Galería
+              Conocer Más
             </a>
           </div>
         </AnimatedSection>
@@ -85,7 +85,14 @@ import ScrollAnimations from '../components/ScrollAnimations';
       <div class="grid md:grid-cols-3 gap-8 cards-container">
         <Card title="La Granja" className="animate-card">
           <div class="mb-4">
-            <img src="/images/image12.png" alt="Vista de la granja" class="w-full h-32 object-cover rounded-lg mb-4" loading="lazy">
+            <img 
+              src="/images/image12.png" 
+              alt="Vista de la granja" 
+              class="w-full h-32 object-cover rounded-lg mb-4" 
+              loading="lazy"
+              width="400"
+              height="128"
+            >
           </div>
           <p class="text-gray-600 leading-relaxed">
             El núcleo del proyecto. Un espacio para la cría extensiva y ecológica de seis razas 
@@ -96,7 +103,14 @@ import ScrollAnimations from '../components/ScrollAnimations';
         
         <Card title="La Vivienda" className="animate-card">
           <div class="mb-4">
-            <img src="/images/image13.png" alt="Vista de la vivienda" class="w-full h-32 object-cover rounded-lg mb-4" loading="lazy">
+            <img 
+              src="/images/image13.png" 
+              alt="Vista de la vivienda" 
+              class="w-full h-32 object-cover rounded-lg mb-4" 
+              loading="lazy"
+              width="400"
+              height="128"
+            >
           </div>
           <p class="text-gray-600 leading-relaxed">
             Una unidad de vivienda mínima para los encargados, diseñada para anclarse con la 
@@ -107,7 +121,14 @@ import ScrollAnimations from '../components/ScrollAnimations';
         
         <Card title="Centro de Visitantes" className="animate-card">
           <div class="mb-4">
-            <img src="/images/image14.png" alt="Centro de visitantes" class="w-full h-32 object-cover rounded-lg mb-4" loading="lazy">
+            <img 
+              src="/images/image14.png" 
+              alt="Centro de visitantes" 
+              class="w-full h-32 object-cover rounded-lg mb-4" 
+              loading="lazy"
+              width="400"
+              height="128"
+            >
           </div>
           <p class="text-gray-600 leading-relaxed">
             Un espacio para la divulgación, formación y exposición, incluyendo una bodega para 
@@ -213,7 +234,7 @@ import ScrollAnimations from '../components/ScrollAnimations';
       subtitle="La arquitectura del proyecto busca una integración total con el entorno. La granja se concibe como un elemento que conecta la zona baja de pastos con el monte, fusionándose con la topografía."
     >
       <AnimatedSection animation="slideUp" client:load>
-        <DesignSlider client:load />
+        <DesignEvolution />
       </AnimatedSection>
     </Section>
 
@@ -224,109 +245,413 @@ import ScrollAnimations from '../components/ScrollAnimations';
       subtitle="El proyecto se fundamenta en un riguroso análisis técnico, cumpliendo con toda la normativa vigente, y se define con un presupuesto detallado que asegura su viabilidad."
       className="progress-section"
     >
+      <!-- Resumen Económico Principal -->
+      <AnimatedSection animation="fadeIn" client:load>
+        <Card title="Resumen Económico del Proyecto" className="text-center mb-12">
+          <div class="grid md:grid-cols-3 gap-8 mb-8">
+            <div class="text-center">
+              <div class="text-4xl font-bold text-criaga-red mb-2 counter" data-target="3087245">
+                3.087.245,68 €
+              </div>
+              <div class="text-sm uppercase tracking-wider text-gray-500">Ejecución Material</div>
+            </div>
+            <div class="text-center">
+              <div class="text-4xl font-bold text-criaga-red mb-2 counter" data-target="4594747">
+                4.594.747,74 €
+              </div>
+              <div class="text-sm uppercase tracking-wider text-gray-500">Presupuesto Total (IVA inc.)</div>
+            </div>
+            <div class="text-center">
+              <div class="text-4xl font-bold text-criaga-red mb-2">
+                36.688,57 m²
+              </div>
+              <div class="text-sm uppercase tracking-wider text-gray-500">Superficie Total</div>
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="inline-block px-6 py-3 bg-criaga-red/10 rounded-lg">
+              <span class="text-lg font-medium text-criaga-red">Coste por m²: 125,23 €/m²</span>
+            </div>
+          </div>
+        </Card>
+      </AnimatedSection>
+
       <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <!-- Distribución del Presupuesto -->
         <AnimatedSection animation="slideLeft" client:load>
-          <Card title="Resumen del Presupuesto">
+          <Card title="Distribución del Presupuesto por Capítulos">
             <InteractiveChart
               id="budgetChart"
               type="doughnut"
               data={{
-                labels: ['Acond. Terreno', 'Estructuras', 'Urbanización', 'Instalaciones', 'Cimentaciones', 'Otros'],
+                labels: ['Acond. Terreno', 'Estructuras', 'Urbanización', 'Instalaciones', 'Cimentaciones', 'Cubiertas', 'Aislamientos', 'Carpinterías', 'Otros'],
                 datasets: [{
                   label: 'Distribución del Presupuesto',
-                  data: [27.42, 22.28, 14.21, 12.27, 9.70, 14.12],
-                  backgroundColor: ['#8C1D18', '#A6231D', '#BF4A3F', '#D97566', '#F2A499', '#E5E5E5'],
+                  data: [27.42, 22.28, 14.21, 12.27, 9.70, 5.80, 2.94, 3.37, 2.01],
+                  backgroundColor: ['#8C1D18', '#A6231D', '#BF4A3F', '#D97566', '#F2A499', '#E5A584', '#E5B384', '#E5C284', '#E5E5E5'],
                   borderColor: '#FCFBF8',
                   borderWidth: 3,
-                  hoverOffset: 8
+                  hoverOffset: 12,
+                  // Datos adicionales para tooltips detallados
+                  detailedInfo: [
+                    { description: 'Movimiento de tierras y preparación del terreno', cost: 8464.02, unit: '€' },
+                    { description: 'Estructuras principales de hormigón y acero', cost: 6878.63, unit: '€' },
+                    { description: 'Viales, senderos y áreas de acceso', cost: 4386.79, unit: '€' },
+                    { description: 'Electricidad, fontanería y sistemas técnicos', cost: 3788.02, unit: '€' },
+                    { description: 'Cimentaciones y zapatas de estructuras', cost: 2994.62, unit: '€' },
+                    { description: 'Cubiertas y sistemas de impermeabilización', cost: 1790.58, unit: '€' },
+                    { description: 'Aislamientos térmicos y acústicos', cost: 907.65, unit: '€' },
+                    { description: 'Ventanas, puertas y elementos de cierre', cost: 1040.40, unit: '€' },
+                    { description: 'Partidas menores y varios', cost: 620.41, unit: '€' }
+                  ]
                 }]
               }}
               options={{
                 plugins: {
                   legend: {
-                    position: 'right'
+                    position: 'bottom',
+                    labels: {
+                      padding: 20,
+                      usePointStyle: true,
+                      pointStyle: 'circle'
+                    }
                   },
                   tooltip: {
                     callbacks: {
-                      label: (context) => `${context.label}: ${context.parsed}%`
+                      title: (context: any) => {
+                        const dataIndex = context[0].dataIndex;
+                        return `${context[0].label} - ${context[0].parsed}%`;
+                      },
+                      label: function(context: any) {
+                        console.log('🚀 DOUGHNUT TOOLTIP TRIGGERED:', context);
+                        const cost = (context.parsed * 30872.46 / 100).toFixed(0);
+                        return `TEST: ${context.label} - ${context.parsed}% (${cost} €)`;
+                      },
+                      afterLabel: (context: any) => {
+                        const dataIndex = context.dataIndex;
+                        const detailedInfo = context.dataset.detailedInfo[dataIndex];
+                        const m2Cost = (detailedInfo.cost / 246.63).toFixed(2); // €/m² basado en superficie total
+                        
+                        return [
+                          '',
+                          `📋 ${detailedInfo.description}`,
+                          '',
+                          `� Coste por m²: ${m2Cost} €/m²`,
+                          `📊 ${context.parsed}% del presupuesto total`,
+                          '',
+                          `🏗️ Proyecto CRIAGA - Centro de Recuperación`,
+                          `🌲 Enfoque en sostenibilidad y biodiversidad`
+                        ];
+                      }
+                    }
+                  }
+                },
+                interaction: {
+                  intersect: false,
+                  mode: 'nearest'
+                }
+              }}
+              height={350}
+              client:load
+            />
+          </Card>
+        </AnimatedSection>
+
+        <!-- Distribución de Superficies -->
+        <AnimatedSection animation="slideRight" client:load>
+          <Card title="Distribución de Superficies del Proyecto">
+            <InteractiveChart
+              id="superficiesChart"
+              type="bar"
+              data={{
+                labels: ['Carballeira', 'Viñedos', 'Zona Ext. Vacas', 'Granja', 'Eira', 'Caminos', 'Cultivos', 'Invernaderos'],
+                datasets: [{
+                  label: 'Superficie (m²)',
+                  data: [12359.98, 4993.75, 4181.67, 2989.32, 2287.89, 1511.95, 1449.79, 432.00],
+                  backgroundColor: ['#8C1D18', '#A6231D', '#BF4A3F', '#D97566', '#F2A499', '#E5A584', '#E5B384', '#E5C284'],
+                  borderColor: '#8C1D18',
+                  borderWidth: 1
+                }]
+              }}
+              options={{
+                indexAxis: 'y',
+                plugins: {
+                  legend: { display: false }
+                },
+                scales: {
+                  x: {
+                    beginAtZero: true,
+                    title: {
+                      display: true,
+                      text: 'Superficie (m²)'
                     }
                   }
                 }
               }}
-              height={320}
+              height={350}
               client:load
             />
-            <div class="text-center mt-4">
-              <p class="font-bold text-xl text-criaga-red counter" data-target="4594748">
-                4.594.747,74 €
-              </p>
-              <div class="progress-bar bg-criaga-red h-1 w-full mt-2 rounded origin-left"></div>
+          </Card>
+        </AnimatedSection>
+      </div>
+
+      <!-- Análisis Comparativo -->
+      <div class="grid lg:grid-cols-2 gap-12 mt-12">
+        <!-- Desglose de Costes por Área -->
+        <AnimatedSection animation="slideUp" delay={0.2} client:load>
+          <Card title="Análisis de Costes por Área Funcional">
+            <InteractiveChart
+              id="costAreasChart"
+              type="pie"
+              data={{
+                labels: ['Infraestructura', 'Edificaciones', 'Paisajismo', 'Instalaciones', 'Acabados'],
+                datasets: [{
+                  label: 'Coste por Área',
+                  data: [41.63, 28.08, 14.21, 12.27, 3.81],
+                  backgroundColor: ['#8C1D18', '#A6231D', '#BF4A3F', '#D97566', '#F2A499'],
+                  borderColor: '#FCFBF8',
+                  borderWidth: 2,
+                  hoverOffset: 10,
+                  // Datos adicionales para tooltips detallados
+                  detailedInfo: [
+                    { 
+                      description: 'Acondicionamiento de terreno, cimentaciones y estructuras básicas',
+                      items: ['Movimiento de tierras', 'Cimentaciones', 'Estructuras principales'],
+                      cost: 12848.27,
+                      unit: '€'
+                    },
+                    { 
+                      description: 'Construcción de edificaciones y estructuras complementarias',
+                      items: ['Estructuras de hormigón', 'Cubiertas', 'Carpinterías'],
+                      cost: 8668.21,
+                      unit: '€'
+                    },
+                    { 
+                      description: 'Urbanización y ordenación paisajística del entorno',
+                      items: ['Viales y senderos', 'Jardinería', 'Mobiliario urbano'],
+                      cost: 4386.79,
+                      unit: '€'
+                    },
+                    { 
+                      description: 'Instalaciones técnicas y sistemas de servicios',
+                      items: ['Electricidad', 'Fontanería', 'Telecomunicaciones'],
+                      cost: 3788.02,
+                      unit: '€'
+                    },
+                    { 
+                      description: 'Acabados finales y elementos decorativos',
+                      items: ['Aislamientos', 'Revestimientos', 'Detalles finales'],
+                      cost: 1176.46,
+                      unit: '€'
+                    }
+                  ]
+                }]
+              }}
+              options={{
+                plugins: {
+                  legend: {
+                    position: 'right',
+                    labels: {
+                      padding: 25,
+                      usePointStyle: true,
+                      pointStyle: 'rectRounded',
+                      font: {
+                        size: 13
+                      }
+                    }
+                  },
+                  tooltip: {
+                    callbacks: {
+                      title: (context: any) => {
+                        return `🏗️ ${context[0].label}`;
+                      },
+                      label: (context: any) => {
+                        const cost = context.dataset.detailedInfo[context.dataIndex].cost;
+                        return `💰 Coste: ${cost.toLocaleString('es-ES')} € (${context.parsed}%)`;
+                      },
+                      afterLabel: (context: any) => {
+                        const dataIndex = context.dataIndex;
+                        const detailedInfo = context.dataset.detailedInfo[dataIndex];
+                        const impactInfo = [
+                          '🌱 Contribución sostenible',
+                          '♻️ Materiales reciclables', 
+                          '🌿 Integración paisajística',
+                          '⚡ Eficiencia energética',
+                          '✨ Acabados ecológicos'
+                        ];
+                        
+                        const lines = [
+                          '',
+                          `📝 ${detailedInfo.description}`,
+                          ''
+                        ];
+                        
+                        // Añadir elementos incluidos
+                        lines.push('🔧 Incluye:');
+                        detailedInfo.items.forEach((item: string) => {
+                          lines.push(`   • ${item}`);
+                        });
+                        
+                        lines.push('');
+                        lines.push(`${impactInfo[dataIndex]}`);
+                        lines.push(`📊 ${context.parsed}% del coste total del proyecto`);
+                        
+                        return lines;
+                      },
+                      footer: () => {
+                        return [
+                          'Presupuesto total: 30.872,46 €',
+                          'Superficie: 246,63 m² | Coste/m²: 125,23 €'
+                        ];
+                      }
+                    }
+                  }
+                },
+                interaction: {
+                  intersect: false,
+                  mode: 'nearest'
+                }
+              }}
+              height={300}
+              client:load
+            />
+          </Card>
+        </AnimatedSection>
+
+        <!-- Timeline de Inversión -->
+        <AnimatedSection animation="slideUp" delay={0.4} client:load>
+          <Card title="Cronograma de Inversión Estimado">
+            <InteractiveChart
+              id="timelineChart"
+              type="line"
+              data={{
+                labels: ['Mes 1-3', 'Mes 4-6', 'Mes 7-9', 'Mes 10-12', 'Mes 13-15', 'Mes 16-18'],
+                datasets: [{
+                  label: 'Inversión Acumulada (%)',
+                  data: [15, 35, 55, 75, 90, 100],
+                  borderColor: '#8C1D18',
+                  backgroundColor: 'rgba(140, 29, 24, 0.1)',
+                  borderWidth: 3,
+                  fill: true,
+                  tension: 0.4
+                }]
+              }}
+              options={{
+                plugins: {
+                  legend: { display: false }
+                },
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: {
+                      display: true,
+                      text: 'Porcentaje de Inversión (%)'
+                    }
+                  },
+                  x: {
+                    title: {
+                      display: true,
+                      text: 'Fase del Proyecto'
+                    }
+                  }
+                }
+              }}
+              height={300}
+              client:load
+            />
+          </Card>
+        </AnimatedSection>
+      </div>
+
+      <!-- Datos Técnicos Clave -->
+      <div class="grid lg:grid-cols-2 gap-12 mt-12">
+        <AnimatedSection animation="slideLeft" delay={0.2} client:load>
+          <Card title="Datos Clave de la Estructura">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <strong class="text-criaga-red">Cimentación:</strong><br>
+                Zapatas corridas
+              </div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <strong class="text-criaga-red">Hormigón Muros:</strong><br>
+                HA-30/F/12/XC4
+              </div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <strong class="text-criaga-red">Acero:</strong><br>
+                B 500 S
+              </div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <strong class="text-criaga-red">Cubierta:</strong><br>
+                Losa maciza H.A. 35 cm
+              </div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <strong class="text-criaga-red">Acción Viento:</strong><br>
+                0.45 kN/m²
+              </div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <strong class="text-criaga-red">Acción Nieve:</strong><br>
+                0.3 kN/m²
+              </div>
             </div>
           </Card>
         </AnimatedSection>
         
-        <div class="space-y-6">
-          <AnimatedSection animation="slideRight" delay={0.2} client:load>
-            <Card title="Datos Clave de la Estructura">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                <div class="bg-gray-50 p-3 rounded-lg">
-                  <strong class="text-criaga-red">Cimentación:</strong><br>
-                  Zapatas corridas
-                </div>
-                <div class="bg-gray-50 p-3 rounded-lg">
-                  <strong class="text-criaga-red">Hormigón Muros:</strong><br>
-                  HA-30/F/12/XC4
-                </div>
-                <div class="bg-gray-50 p-3 rounded-lg">
-                  <strong class="text-criaga-red">Acero:</strong><br>
-                  B 500 S
-                </div>
-                <div class="bg-gray-50 p-3 rounded-lg">
-                  <strong class="text-criaga-red">Cubierta:</strong><br>
-                  Losa maciza H.A. 35 cm
-                </div>
-                <div class="bg-gray-50 p-3 rounded-lg">
-                  <strong class="text-criaga-red">Acción Viento:</strong><br>
-                  0.45 kN/m²
-                </div>
-                <div class="bg-gray-50 p-3 rounded-lg">
-                  <strong class="text-criaga-red">Acción Nieve:</strong><br>
-                  0.3 kN/m²
-                </div>
+        <AnimatedSection animation="slideRight" delay={0.4} client:load>
+          <Card title="Indicadores de Sostenibilidad">
+            <div class="space-y-4">
+              <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                <span class="font-medium">Superficie Vegetal</span>
+                <span class="text-green-600 font-bold">67.2%</span>
               </div>
-            </Card>
-          </AnimatedSection>
-          
-          <AnimatedSection animation="slideRight" delay={0.4} client:load>
-            <Card title="Cumplimiento Normativo (CTE)">
-              <Accordion 
-                client:load
-                items={[
-                  {
-                    id: 'db-si',
-                    title: 'DB-SI: Seguridad en caso de Incendio',
-                    content: 'El proyecto cumple con las exigencias del DB-SI, considerando la granja un espacio exterior abierto. Se definen sectores de incendio para zonas cerradas como la sala de control (Riesgo Bajo). Se dota de extintores, B.I.E., hidrantes y sistema de detección y alarma. La estructura principal (muros y losa de hormigón) garantiza una resistencia al fuego R-90.'
-                  },
-                  {
-                    id: 'db-sua',
-                    title: 'DB-SUA: Seguridad de Utilización y Accesibilidad',
-                    content: 'Se garantiza la seguridad frente a caídas con pavimentos de clase 3 (Rd>45). Los desniveles se resuelven con rampas de pendiente controlada (<12%). Aunque no es de obligado cumplimiento por el uso agrario, el diseño de la planta baja es accesible. Se instala un sistema de protección contra el rayo de Nivel 3.'
-                  },
-                  {
-                    id: 'db-hs',
-                    title: 'DB-HS: Salubridad',
-                    content: 'Se asegura la protección frente a la humedad en muros y soleras en contacto con el terreno, y en la cubierta vegetal. La ventilación es principalmente natural. Se proyecta una red de saneamiento para purines con tratamiento y depuración por lagunaje, y una red separada para el aseo. El edificio se considera exento de cumplir la protección frente al radón por su condición de espacio abierto.'
-                  },
-                  {
-                    id: 'db-he',
-                    title: 'DB-HE: Ahorro de Energía',
-                    content: 'El proyecto está exento de cumplir las exigencias de limitación de consumo (HE0, HE1, HE2) por ser un edificio agrícola de baja demanda energética. No obstante, el diseño bioclimático (cubierta vegetal, ventilación natural) contribuye a un uso racional de la energía.'
-                  }
-                ]}
-              />
-            </Card>
-          </AnimatedSection>
-        </div>
+              <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                <span class="font-medium">Gestión de Residuos</span>
+                <span class="text-blue-600 font-bold">0.22%</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-orange-50 rounded-lg">
+                <span class="font-medium">Eficiencia Energética</span>
+                <span class="text-orange-600 font-bold">A+</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
+                <span class="font-medium">Ratio m²/Animal</span>
+                <span class="text-purple-600 font-bold">150 m²</span>
+              </div>
+            </div>
+          </Card>
+        </AnimatedSection>
+      </div>
+      
+      <!-- Normativa y Cumplimiento -->
+      <div class="mt-12">
+        <AnimatedSection animation="fadeIn" delay={0.6} client:load>
+          <Card title="Cumplimiento Normativo (CTE)">
+            <Accordion 
+              client:load
+              items={[
+                {
+                  id: 'db-si',
+                  title: 'DB-SI: Seguridad en caso de Incendio',
+                  content: 'El proyecto cumple con las exigencias del DB-SI, considerando la granja un espacio exterior abierto. Se definen sectores de incendio para zonas cerradas como la sala de control (Riesgo Bajo). Se dota de extintores, B.I.E., hidrantes y sistema de detección y alarma. La estructura principal (muros y losa de hormigón) garantiza una resistencia al fuego R-90.'
+                },
+                {
+                  id: 'db-sua',
+                  title: 'DB-SUA: Seguridad de Utilización y Accesibilidad',
+                  content: 'Se garantiza la seguridad frente a caídas con pavimentos de clase 3 (Rd>45). Los desniveles se resuelven con rampas de pendiente controlada (<12%). Aunque no es de obligado cumplimiento por el uso agrario, el diseño de la planta baja es accesible. Se instala un sistema de protección contra el rayo de Nivel 3.'
+                },
+                {
+                  id: 'db-hs',
+                  title: 'DB-HS: Salubridad',
+                  content: 'Se asegura la protección frente a la humedad en muros y soleras en contacto con el terreno, y en la cubierta vegetal. La ventilación es principalmente natural. Se proyecta una red de saneamiento para purines con tratamiento y depuración por lagunaje, y una red separada para el aseo. El edificio se considera exento de cumplir la protección frente al radón por su condición de espacio abierto.'
+                },
+                {
+                  id: 'db-he',
+                  title: 'DB-HE: Ahorro de Energía',
+                  content: 'El proyecto está exento de cumplir las exigencias de limitación de consumo (HE0, HE1, HE2) por ser un edificio agrícola de baja demanda energética. No obstante, el diseño bioclimático (cubierta vegetal, ventilación natural) contribuye a un uso racional de la energía.'
+                }
+              ]}
+            />
+          </Card>
+        </AnimatedSection>
       </div>
     </Section>
 
@@ -376,8 +701,8 @@ import ScrollAnimations from '../components/ScrollAnimations';
             <li><a href="#vision" class="hover:text-criaga-red transition-colors">Visión General</a></li>
             <li><a href="#programa" class="hover:text-criaga-red transition-colors">Programa Ganadero</a></li>
             <li><a href="#diseno" class="hover:text-criaga-red transition-colors">Diseño Arquitectónico</a></li>
-            <li><a href="/galeria" class="hover:text-criaga-red transition-colors">Galería Multimedia</a></li>
             <li><a href="#analisis" class="hover:text-criaga-red transition-colors">Análisis Técnico</a></li>
+            <li><a href="#pliego" class="hover:text-criaga-red transition-colors">Pliego Técnico</a></li>
           </ul>
         </div>
         <div>
@@ -446,11 +771,11 @@ import ScrollAnimations from '../components/ScrollAnimations';
       const pliegoButtons = document.querySelectorAll('.pliego-btn');
       const pliegoContent = document.getElementById('pliego-content');
 
-      function updatePliegoContent(target) {
-        if (pliegoContent && pliegoData[target]) {
+      function updatePliegoContent(target: string) {
+        if (pliegoContent && pliegoData[target as keyof typeof pliegoData]) {
           pliegoContent.innerHTML = `
-            <h3 class="text-2xl font-bold font-serif text-criaga-red mb-6">${pliegoData[target].title}</h3>
-            ${pliegoData[target].content}
+            <h3 class="text-2xl font-bold font-serif text-criaga-red mb-6">${pliegoData[target as keyof typeof pliegoData].title}</h3>
+            ${pliegoData[target as keyof typeof pliegoData].content}
           `;
         }
       }
@@ -458,15 +783,17 @@ import ScrollAnimations from '../components/ScrollAnimations';
       pliegoButtons.forEach(button => {
         button.addEventListener('click', () => {
           const target = button.getAttribute('data-target');
-          updatePliegoContent(target);
-          
-          // Update button styles with animation
-          pliegoButtons.forEach(btn => {
-            btn.classList.remove('bg-criaga-red', 'text-white');
-            btn.classList.add('bg-gray-200', 'text-gray-700');
-          });
-          button.classList.remove('bg-gray-200', 'text-gray-700');
-          button.classList.add('bg-criaga-red', 'text-white');
+          if (target) {
+            updatePliegoContent(target);
+            
+            // Update button styles with animation
+            pliegoButtons.forEach(btn => {
+              btn.classList.remove('bg-criaga-red', 'text-white');
+              btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            button.classList.remove('bg-gray-200', 'text-gray-700');
+            button.classList.add('bg-criaga-red', 'text-white');
+          }
         });
       });
 
@@ -475,9 +802,9 @@ import ScrollAnimations from '../components/ScrollAnimations';
 
       // Smooth scrolling for anchor links
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', function (this: HTMLAnchorElement, e) {
           e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
+          const target = document.querySelector(this.getAttribute('href') || '');
           if (target) {
             target.scrollIntoView({
               behavior: 'smooth',

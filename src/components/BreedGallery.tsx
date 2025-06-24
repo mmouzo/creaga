@@ -62,14 +62,14 @@ export default function BreedGallery() {
   };
 
   return (
-    <div class="grid lg:grid-cols-2 gap-8 items-start">
-      <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
-        <h3 class="text-xl font-bold font-serif text-criaga-red mb-6 text-center">
+    <div className="grid lg:grid-cols-2 gap-8 items-start">
+      <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+        <h3 className="text-xl font-bold font-serif text-criaga-red mb-6 text-center">
           Razas Autóctonas
         </h3>
         
         {/* Breed Selection Buttons */}
-        <div class="flex flex-wrap justify-center gap-2 mb-6">
+        <div className="flex flex-wrap justify-center gap-2 mb-6">
           {breeds.map((breed) => (
             <button
               key={breed.id}
@@ -86,8 +86,8 @@ export default function BreedGallery() {
         </div>
         
         {/* Selected Breed Display */}
-        <div class="text-center animate-fade-in">
-          <div class="mb-4 overflow-hidden rounded-lg">
+        <div className="text-center animate-fade-in">
+          <div className="mb-4 overflow-hidden rounded-lg">
             <img
               src={selectedBreed.image}
               alt={`Imagen de ${selectedBreed.name}`}
@@ -95,18 +95,18 @@ export default function BreedGallery() {
               loading="lazy"
             />
           </div>
-          <h4 class="text-xl font-bold font-serif text-criaga-red mb-2">
+          <h4 className="text-xl font-bold font-serif text-criaga-red mb-2">
             {selectedBreed.name}
           </h4>
-          <p class="text-gray-600 text-sm leading-relaxed">
+          <p className="text-gray-600 text-sm leading-relaxed">
             {selectedBreed.description}
           </p>
         </div>
       </div>
       
       {/* Chart Section */}
-      <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
-        <h3 class="text-xl font-bold font-serif text-criaga-red mb-4 text-center">
+      <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+        <h3 className="text-xl font-bold font-serif text-criaga-red mb-4 text-center">
           Distribución de Superficies
         </h3>
         <InteractiveChart

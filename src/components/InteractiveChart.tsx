@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
 
 interface ChartProps {
-  id: string;
-  type: 'doughnut' | 'bar' | 'line' | 'pie';
-  data: any;
-  options?: any;
-  className?: string;
-  height?: number;
+  readonly id: string;
+  readonly type: 'doughnut' | 'bar' | 'line' | 'pie';
+  readonly data: any;
+  readonly options?: any;
+  readonly className?: string;
+  readonly height?: number;
 }
 
 export default function InteractiveChart({ 
@@ -41,56 +41,139 @@ export default function InteractiveChart({
         chartRef.current = null;
       }
 
-      // Default options with CRIAGA theme
-      const defaultOptions = {
+      // Simplified approach for debugging tooltips
+      const finalOptions: any = {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
           legend: {
             labels: {
-              font: {
-                family: "'Inter', sans-serif",
-                size: 12
-              },
+              font: { family: "'Inter', sans-serif", size: 12 },
               color: '#333333',
               padding: 15,
               usePointStyle: true
             }
           },
           tooltip: {
-            backgroundColor: 'rgba(140, 29, 24, 0.95)',
-            titleColor: '#FCFBF8',
-            bodyColor: '#FCFBF8',
-            borderColor: '#8C1D18',
-            borderWidth: 1,
-            cornerRadius: 8,
-            displayColors: true,
-            titleFont: {
-              family: "'Inter', sans-serif",
-              size: 14,
-              weight: 'bold'
-            },
-            bodyFont: {
-              family: "'Inter', sans-serif",
-              size: 12
-            }
+            enabled: true,  // Explicitly enable tooltips
+            mode: 'nearest',
+            intersect: false
           }
-        },
-        animation: {
-          duration: 1500,
-          easing: 'easeOutQuart'
-        },
-        ...options
+        }
       };
 
-      // Type-specific options
+      // Apply ALL custom options - letting them completely override defaults
+      if (options && typeof options === 'object') {
+        Object.keys(options).forEach(key => {
+          if (key === 'plugins' && options.plugins) {
+            Object.keys(options.plugins).forEach(plugin => {
+              if (!finalOptions.plugins[plugin]) {
+                finalOptions.plugins[plugin] = {};
+              }
+              finalOptions.plugins[plugin] = { ...finalOptions.plugins[plugin], ...options.plugins[plugin] };
+            });
+          } else {
+            finalOptions[key] = options[key];
+          }
+        });
+      }
+
+      // Type-specific options with working tooltips
       if (type === 'doughnut' || type === 'pie') {
-        defaultOptions.plugins.legend.position = 'right';
-        defaultOptions.cutout = type === 'doughnut' ? '60%' : '0%';
+        finalOptions.plugins.legend.position = 'right';
+        finalOptions.cutout = type === 'doughnut' ? '60%' : '0%';
+        
+        // Configure tooltips specifically for circular charts
+        finalOptions.plugins.tooltip = {
+          enabled: true,
+          backgroundColor: 'rgba(140, 29, 24, 0.96)',
+          titleColor: '#FCFBF8',
+          bodyColor: '#FCFBF8',
+          borderColor: '#8C1D18',
+          borderWidth: 2,
+          cornerRadius: 12,
+          displayColors: true,
+          padding: 16,
+          titleFont: { family: "'Inter', sans-serif", size: 16, weight: 'bold' },
+          bodyFont: { family: "'Inter', sans-serif", size: 13, weight: '500' },
+          footerFont: { family: "'Inter', sans-serif", size: 11, style: 'italic' },
+          callbacks: {
+            title: function(context: any) {
+              const item = context[0];
+              return `${item.label} - ${item.parsed}%`;
+            },
+            label: function(context: any) {
+              if (id === 'budgetChart') {
+                const cost = (context.parsed * 30872.46 / 100).toFixed(0);
+                return `💰 Importe: ${cost} €`;
+              } else if (id === 'costAreasChart') {
+                const cost = (context.parsed * 30872.46 / 100).toFixed(0);
+                return `💰 Coste: ${cost} € (${context.parsed}%)`;
+              }
+              return `${context.label}: ${context.parsed}%`;
+            },
+            afterLabel: function(context: any) {
+              if (id === 'budgetChart') {
+                const descriptions = [
+                  'Movimiento de tierras y preparación del terreno',
+                  'Estructuras principales de hormigón y acero', 
+                  'Viales, senderos y áreas de acceso',
+                  'Electricidad, fontanería y sistemas técnicos',
+                  'Cimentaciones y zapatas de estructuras',
+                  'Cubiertas y sistemas de impermeabilización',
+                  'Aislamientos térmicos y acústicos',
+                  'Ventanas, puertas y elementos de cierre',
+                  'Partidas menores y varios'
+                ];
+                return ['', `📋 ${descriptions[context.dataIndex]}`, '', '🏗️ Proyecto CRIAGA - Centro de Recuperación'];
+              } else if (id === 'costAreasChart') {
+                const areas = [
+                  'Infraestructura básica del proyecto',
+                  'Construcción de edificaciones',
+                  'Ordenación paisajística',
+                  'Sistemas técnicos y servicios', 
+                  'Acabados y detalles finales'
+                ];
+                return ['', `📝 ${areas[context.dataIndex]}`, '', '🌱 Enfoque sostenible y ecológico'];
+              }
+              return [];
+            },
+            footer: function() {
+              return ['Presupuesto total: 30.872,46 €', 'Superficie: 246,63 m²'];
+            }
+          }
+        };
+        
+        // Enhanced hover effects
+        finalOptions.interaction = { intersect: false, mode: 'point' };
+        finalOptions.elements = {
+          arc: {
+            hoverBackgroundColor: function(context: any) {
+              const originalColor = context.dataset.backgroundColor[context.dataIndex];
+              if (originalColor.includes('#')) {
+                const hex = originalColor.replace('#', '');
+                const r = parseInt(hex.substr(0, 2), 16);
+                const g = parseInt(hex.substr(2, 2), 16);
+                const b = parseInt(hex.substr(4, 2), 16);
+                return `rgba(${Math.min(255, r + 40)}, ${Math.min(255, g + 40)}, ${Math.min(255, b + 40)}, 0.9)`;
+              }
+              return originalColor;
+            },
+            hoverBorderColor: '#FCFBF8',
+            hoverBorderWidth: 4,
+            hoverOffset: 15
+          }
+        };
+
+        finalOptions.onHover = (event: any, activeElements: any[]) => {
+          if (canvasRef.current) {
+            canvasRef.current.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
+          }
+        };
       }
 
       if (type === 'bar') {
-        defaultOptions.scales = {
+        finalOptions.scales = {
           x: {
             beginAtZero: true,
             grid: {
@@ -115,17 +198,32 @@ export default function InteractiveChart({
               color: '#333333'
             }
           },
-          ...defaultOptions.scales
+          ...finalOptions.scales
         };
       }
 
       try {
+        // Debug: Log all options for debugging
+        console.log('=== CHART DEBUG ===');
+        console.log('Chart type:', type);
+        console.log('Chart ID:', id);
+        console.log('Input options:', options);
+        console.log('Final options:', finalOptions);
+        console.log('Tooltip config:', finalOptions.plugins?.tooltip);
+        console.log('==================');
+        
         // Create new chart
         chartRef.current = new Chart(ctx, {
           type,
           data,
-          options: defaultOptions
+          options: finalOptions
         });
+        
+        // Additional debug after chart creation
+        if (chartRef.current && (type === 'doughnut' || type === 'pie')) {
+          console.log('Chart created successfully:', chartRef.current);
+          console.log('Chart options applied:', chartRef.current.options);
+        }
       } catch (error) {
         console.error('Error creating chart:', error);
       }
@@ -156,13 +254,12 @@ export default function InteractiveChart({
   }, [type, data, options, id]);
 
   return (
-    <div className={`relative w-full ${className}`} style={{ height: `${height}px` }}>
+    <div className={`relative w-full transition-all duration-300 ease-in-out ${className}`} style={{ height: `${height}px` }}>
       <canvas 
         ref={canvasRef} 
         id={id}
-        className="w-full h-full"
+        className="w-full h-full transition-all duration-200 ease-in-out hover:drop-shadow-lg"
         aria-label={`Gráfico ${type} - ${id}`}
-        role="img"
       />
     </div>
   );

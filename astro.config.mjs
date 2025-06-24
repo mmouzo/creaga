@@ -4,5 +4,13 @@ import react from '@astrojs/react';
 
 export default defineConfig({
   integrations: [tailwind(), react()],
-  output: 'static'
+  output: 'static',
+  build: {
+    inlineStylesheets: 'auto'
+  },
+  vite: {
+    optimizeDeps: {
+      include: ['chart.js', 'gsap']
+    }
+  }
 });

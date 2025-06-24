@@ -17,6 +17,15 @@ const { title, description = "Centro de Cría de Razas Galegas - Proyecto CRIAGA
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     
+    <!-- SEO Meta Tags -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Pedro Citoula Pérez" />
+    <meta name="keywords" content="CRIAGA, razas gallegas, ganadería ecológica, arquitectura rural, Galicia" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    
     <!-- Preconnect to external resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +38,21 @@ const { title, description = "Centro de Cría de Razas Galegas - Proyecto CRIAGA
     
     <!-- Preload critical images -->
     <link rel="preload" href="/images/image127.png" as="image" type="image/png">
+    
+    <!-- Structured data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "CRIAGA",
+      "description": "Centro de Cría de Razas Galegas - Proyecto innovador para la revitalización rural",
+      "url": "https://criaga.com",
+      "author": {
+        "@type": "Person",
+        "name": "Pedro Citoula Pérez"
+      }
+    }
+    </script>
   </head>
   <body class="antialiased bg-criaga-cream text-criaga-gray">
     <slot />

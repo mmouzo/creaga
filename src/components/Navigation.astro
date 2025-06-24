@@ -1,12 +1,14 @@
 ---
 import Logo from './Logo.astro';
 
+// Detectar la página actual
+const currentPath = Astro.url.pathname;
+
 const navItems = [
   { href: '#vision', label: 'Visión' },
   { href: '#entorno', label: 'Entorno' },
   { href: '#programa', label: 'Programa' },
   { href: '#diseno', label: 'Diseño' },
-  { href: '/galeria', label: 'Galería' },
   { href: '#analisis', label: 'Análisis' },
   { href: '#pliego', label: 'Pliego' }
 ];
@@ -22,7 +24,7 @@ const navItems = [
         {navItems.map(item => (
           <a 
             href={item.href} 
-            class="nav-link text-criaga-gray hover:text-criaga-red transition-all duration-300 font-medium border-b-2 border-transparent hover:border-criaga-red pb-1 relative group"
+            class="nav-link transition-all duration-300 font-medium border-b-2 border-transparent pb-1 relative group text-criaga-gray hover:text-criaga-red hover:border-criaga-red"
           >
             {item.label}
             <span class="absolute inset-x-0 -bottom-1 h-0.5 bg-criaga-red transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
@@ -60,7 +62,7 @@ const navItems = [
         {navItems.map(item => (
           <a 
             href={item.href} 
-            class="nav-link-mobile text-criaga-gray hover:text-criaga-red transition-colors duration-300 font-medium py-2 px-4 rounded-lg hover:bg-criaga-gray-light/50"
+            class="nav-link-mobile transition-colors duration-300 font-medium py-2 px-4 rounded-lg hover:bg-criaga-gray-light/50 text-criaga-gray hover:text-criaga-red"
           >
             {item.label}
           </a>
@@ -210,12 +212,12 @@ const navItems = [
     const searchResults = document.getElementById('search-results');
     
     if (searchInput && searchResults) {
-      let searchTimeout: NodeJS.Timeout;
+      let searchTimeout: number;
       
-      searchInput.addEventListener('input', function() {
+      searchInput.addEventListener('input', function(this: HTMLInputElement) {
         clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-          const query = (this as HTMLInputElement).value.toLowerCase().trim();
+        searchTimeout = window.setTimeout(() => {
+          const query = this.value.toLowerCase().trim();
           
           if (query.length < 2) {
             searchResults.innerHTML = '';
