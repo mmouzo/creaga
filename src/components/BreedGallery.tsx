@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import InteractiveChart from './InteractiveChart';
 
 interface Breed {
   id: string;
@@ -49,15 +50,26 @@ const breeds: Breed[] = [
 export default function BreedGallery() {
   const [selectedBreed, setSelectedBreed] = useState<Breed>(breeds[0]);
 
+  const superficiesData = {
+    labels: ['Carballeira', 'Viñedos', 'Zona Ext. Vacas', 'Granja', 'Eira', 'Caminos', 'Cultivos', 'Invernaderos'],
+    datasets: [{
+      label: 'Superficie (m²)',
+      data: [12359.98, 4993.75, 4181.67, 2989.32, 2287.89, 1511.95, 1449.79, 432.00],
+      backgroundColor: '#BF4A3F',
+      borderColor: '#8C1D18',
+      borderWidth: 1
+    }]
+  };
+
   return (
-    <div className="grid lg:grid-cols-2 gap-8 items-start">
-      <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
-        <h3 className="text-xl font-bold font-serif text-criaga-red mb-6 text-center">
+    <div class="grid lg:grid-cols-2 gap-8 items-start">
+      <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+        <h3 class="text-xl font-bold font-serif text-criaga-red mb-6 text-center">
           Razas Autóctonas
         </h3>
         
         {/* Breed Selection Buttons */}
-        <div className="flex flex-wrap justify-center gap-2 mb-6">
+        <div class="flex flex-wrap justify-center gap-2 mb-6">
           {breeds.map((breed) => (
             <button
               key={breed.id}
@@ -74,8 +86,8 @@ export default function BreedGallery() {
         </div>
         
         {/* Selected Breed Display */}
-        <div className="text-center animate-fade-in">
-          <div className="mb-4 overflow-hidden rounded-lg">
+        <div class="text-center animate-fade-in">
+          <div class="mb-4 overflow-hidden rounded-lg">
             <img
               src={selectedBreed.image}
               alt={`Imagen de ${selectedBreed.name}`}
@@ -83,25 +95,41 @@ export default function BreedGallery() {
               loading="lazy"
             />
           </div>
-          <h4 className="text-xl font-bold font-serif text-criaga-red mb-2">
+          <h4 class="text-xl font-bold font-serif text-criaga-red mb-2">
             {selectedBreed.name}
           </h4>
-          <p className="text-gray-600 text-sm leading-relaxed">
+          <p class="text-gray-600 text-sm leading-relaxed">
             {selectedBreed.description}
           </p>
         </div>
       </div>
       
-      {/* Chart placeholder - will be replaced with actual chart */}
-      <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
-        <h3 className="text-xl font-bold font-serif text-criaga-red mb-4 text-center">
+      {/* Chart Section */}
+      <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+        <h3 class="text-xl font-bold font-serif text-criaga-red mb-4 text-center">
           Distribución de Superficies
         </h3>
-        <div className="h-96 flex items-center justify-center bg-gray-50 rounded-lg">
-          <div id="superficies-chart-container" className="w-full h-full">
-            <canvas id="superficiesChart"></canvas>
-          </div>
-        </div>
+        <InteractiveChart
+          id="superficiesChart"
+          type="bar"
+          data={superficiesData}
+          options={{
+            indexAxis: 'y',
+            plugins: {
+              legend: { display: false }
+            },
+            scales: {
+              x: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: 'Superficie (m²)'
+                }
+              }
+            }
+          }}
+          height={384}
+        />
       </div>
     </div>
   );

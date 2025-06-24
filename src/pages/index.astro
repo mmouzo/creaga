@@ -9,44 +9,8 @@ import BreedGallery from '../components/BreedGallery';
 import DesignSlider from '../components/DesignSlider';
 import InteractiveChart from '../components/InteractiveChart';
 import Accordion from '../components/Accordion';
-import ImageGallery from '../components/ImageGallery';
 import AnimatedSection from '../components/AnimatedSection';
 import ScrollAnimations from '../components/ScrollAnimations';
-
-// Gallery data
-const galleryImages = [
-  // Razas Autóctonas
-  { id: '1', src: '/images/image1.png', alt: 'Vaca Cachena', category: 'Razas', title: 'Vaca Cachena', description: 'Raza autóctona de pequeño tamaño, muy rústica y adaptada al monte gallego.', metadata: { type: 'Bovino', location: 'Galicia' } },
-  { id: '2', src: '/images/image2.png', alt: 'Vaca Caldelá', category: 'Razas', title: 'Vaca Caldelá', description: 'Raza de aptitud cárnica, bien adaptada a las condiciones climáticas de Galicia.', metadata: { type: 'Bovino', location: 'Galicia' } },
-  { id: '3', src: '/images/image3.png', alt: 'Vaca Frieiresa', category: 'Razas', title: 'Vaca Frieiresa', description: 'Raza de gran rusticidad, tradicionalmente utilizada para trabajo y producción de carne.', metadata: { type: 'Bovino', location: 'Galicia' } },
-  { id: '4', src: '/images/image4.png', alt: 'Vaca Limiá', category: 'Razas', title: 'Vaca Limiá', description: 'Raza originaria de la comarca de A Limia, de gran valor genético.', metadata: { type: 'Bovino', location: 'A Limia' } },
-  { id: '5', src: '/images/image5.png', alt: 'Rubia Galega', category: 'Razas', title: 'Rubia Galega', description: 'La raza bovina más representativa de Galicia, de gran tamaño y excelente producción cárnica.', metadata: { type: 'Bovino', location: 'Galicia' } },
-  { id: '6', src: '/images/image6.png', alt: 'Vaca Vianesa', category: 'Razas', title: 'Vaca Vianesa', description: 'Raza de montaña, muy rústica y adaptada a terrenos difíciles.', metadata: { type: 'Bovino', location: 'Viana do Bolo' } },
-  
-  // Proceso de Diseño
-  { id: '7', src: '/images/image7.png', alt: 'Preexistencias', category: 'Diseño', title: 'Análisis de Preexistencias', description: 'Estado inicial del terreno con edificaciones en ruinas.', metadata: { type: 'Análisis', location: 'Lusquiños' } },
-  { id: '8', src: '/images/image8.png', alt: 'Volumen inicial', category: 'Diseño', title: 'Concepto Volumétrico', description: 'Idea inicial del volumen longitudinal para la granja.', metadata: { type: 'Concepto', location: 'Lusquiños' } },
-  { id: '9', src: '/images/image9.png', alt: 'Estructura inicial', category: 'Diseño', title: 'Sistema Estructural', description: 'Secuencia de muros permeables para ventilación natural.', metadata: { type: 'Estructura', location: 'Lusquiños' } },
-  { id: '10', src: '/images/image10.png', alt: 'Adaptación topográfica', category: 'Diseño', title: 'Integración Topográfica', description: 'Adaptación del volumen a las curvas de nivel existentes.', metadata: { type: 'Topografía', location: 'Lusquiños' } },
-  { id: '11', src: '/images/image11.png', alt: 'Estado final', category: 'Diseño', title: 'Propuesta Final', description: 'Edificio con cubierta vegetal integrado en el paisaje.', metadata: { type: 'Propuesta', location: 'Lusquiños' } },
-  
-  // Instalaciones
-  { id: '12', src: '/images/image12.png', alt: 'Vista granja', category: 'Instalaciones', title: 'Vista General de la Granja', description: 'Perspectiva general de las instalaciones ganaderas.', metadata: { type: 'Instalación', location: 'Lusquiños' } },
-  { id: '13', src: '/images/image13.png', alt: 'Vivienda', category: 'Instalaciones', title: 'Unidad de Vivienda', description: 'Vivienda mínima para los encargados de la granja.', metadata: { type: 'Vivienda', location: 'Lusquiños' } },
-  { id: '14', src: '/images/image14.png', alt: 'Centro visitantes', category: 'Instalaciones', title: 'Centro de Visitantes', description: 'Espacio para divulgación, formación y exposición.', metadata: { type: 'Centro', location: 'Lusquiños' } },
-  
-  // Planos y Documentación
-  { id: '15', src: '/images/image15.png', alt: 'Plano situación', category: 'Documentación', title: 'Plano de Situación', description: 'Ubicación del proyecto en el contexto territorial.', metadata: { type: 'Plano', location: 'Lusquiños' } },
-  { id: '16', src: '/images/image16.png', alt: 'Plano emplazamiento', category: 'Documentación', title: 'Plano de Emplazamiento', description: 'Implantación detallada en la parcela.', metadata: { type: 'Plano', location: 'Lusquiños' } },
-  { id: '17', src: '/images/image17.png', alt: 'Planta general', category: 'Documentación', title: 'Planta General', description: 'Distribución completa de las instalaciones.', metadata: { type: 'Plano', location: 'Lusquiños' } },
-  
-  // Detalles Constructivos
-  { id: '18', src: '/images/image18.png', alt: 'Detalle cimentación', category: 'Construcción', title: 'Detalle de Cimentación', description: 'Sistema de cimentación con zapatas corridas.', metadata: { type: 'Detalle', location: 'Lusquiños' } },
-  { id: '19', src: '/images/image19.png', alt: 'Detalle muro', category: 'Construcción', title: 'Detalle de Muro', description: 'Construcción de muros de hormigón armado.', metadata: { type: 'Detalle', location: 'Lusquiños' } },
-  { id: '20', src: '/images/image20.png', alt: 'Detalle cubierta', category: 'Construcción', title: 'Detalle de Cubierta', description: 'Sistema de cubierta vegetal sobre losa de hormigón.', metadata: { type: 'Detalle', location: 'Lusquiños' } }
-];
-
-const galleryCategories = ['Razas', 'Diseño', 'Instalaciones', 'Documentación', 'Construcción'];
 ---
 
 <Layout title="CRIAGA - Centro de Cría de Razas Galegas">
@@ -56,31 +20,44 @@ const galleryCategories = ['Razas', 'Diseño', 'Instalaciones', 'Documentación'
   
   <main class="container mx-auto px-6 py-12 max-w-7xl">
     
-    <!-- Hero Section -->
+    <!-- Hero Section with Background Logo -->
     <section class="hero-section relative text-center mb-24 py-20 overflow-hidden">
-      <div class="hero-bg absolute inset-0 opacity-5">
-        <img src="/images/image127.png" alt="Background" class="w-full h-full object-cover" />
+      <!-- Background Logo -->
+      <div class="absolute inset-0 flex items-center justify-center opacity-5 z-0">
+        <img 
+          src="/images/image127.png" 
+          alt="CRIAGA Logo Background" 
+          class="w-96 h-96 object-contain hero-bg"
+          loading="eager"
+        />
       </div>
+      
+      <!-- Content with higher z-index -->
       <div class="relative z-10 max-w-4xl mx-auto">
         <AnimatedSection animation="fadeIn" client:load>
-          <Logo size="xl" className="justify-center mb-8" />
+          <h1 class="text-6xl md:text-7xl font-bold font-serif text-criaga-red mb-4 relative z-20">
+            CRIAGA
+          </h1>
+          <h2 class="text-2xl md:text-3xl font-semibold text-criaga-gray mb-8 relative z-20">
+            Centro de Cría de Razas Galegas
+          </h2>
         </AnimatedSection>
         
         <AnimatedSection animation="slideUp" delay={0.3} client:load>
-          <p class="text-xl md:text-2xl text-gray-600 mb-8">
+          <p class="text-xl md:text-2xl text-gray-600 mb-8 relative z-20">
             Un proyecto innovador para investigar una nueva ruralidad
           </p>
         </AnimatedSection>
         
         <AnimatedSection animation="slideUp" delay={0.6} client:load>
-          <p class="text-lg text-gray-700 leading-relaxed mb-12">
+          <p class="text-lg text-gray-700 leading-relaxed mb-12 relative z-20">
             CRIAGA busca poner en valor las razas autóctonas gallegas, los terrenos de pasto y cultivo, 
             y actuar como un catalizador para la revitalización de la comunidad rural de Lusquiños, Pontevedra.
           </p>
         </AnimatedSection>
         
         <AnimatedSection animation="scale" delay={0.9} client:load>
-          <div class="flex flex-wrap justify-center gap-4">
+          <div class="flex flex-wrap justify-center gap-4 relative z-20">
             <a 
               href="#vision" 
               class="bg-criaga-red text-white px-8 py-3 rounded-lg font-semibold hover:bg-criaga-red-light transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
@@ -88,7 +65,7 @@ const galleryCategories = ['Razas', 'Diseño', 'Instalaciones', 'Documentación'
               Explorar Proyecto
             </a>
             <a 
-              href="#galeria" 
+              href="/galeria" 
               class="border-2 border-criaga-red text-criaga-red px-8 py-3 rounded-lg font-semibold hover:bg-criaga-red hover:text-white transition-all duration-300"
             >
               Ver Galería
@@ -240,22 +217,7 @@ const galleryCategories = ['Razas', 'Diseño', 'Instalaciones', 'Documentación'
       </AnimatedSection>
     </Section>
 
-    <!-- Section 5: Galería Multimedia -->
-    <Section 
-      id="galeria" 
-      title="Galería Multimedia"
-      subtitle="Explora la documentación visual completa del proyecto CRIAGA, desde las razas autóctonas hasta los detalles constructivos."
-    >
-      <AnimatedSection animation="fadeIn" client:load>
-        <ImageGallery 
-          images={galleryImages} 
-          categories={galleryCategories}
-          client:load 
-        />
-      </AnimatedSection>
-    </Section>
-
-    <!-- Section 6: Análisis Técnico y Económico -->
+    <!-- Section 5: Análisis Técnico y Económico -->
     <Section 
       id="analisis" 
       title="Análisis Técnico y Económico"
@@ -265,12 +227,38 @@ const galleryCategories = ['Razas', 'Diseño', 'Instalaciones', 'Documentación'
       <div class="grid lg:grid-cols-2 gap-12 items-start">
         <AnimatedSection animation="slideLeft" client:load>
           <Card title="Resumen del Presupuesto">
-            <div class="h-80 mb-4">
-              <canvas id="budgetChart"></canvas>
-            </div>
-            <div class="text-center">
+            <InteractiveChart
+              id="budgetChart"
+              type="doughnut"
+              data={{
+                labels: ['Acond. Terreno', 'Estructuras', 'Urbanización', 'Instalaciones', 'Cimentaciones', 'Otros'],
+                datasets: [{
+                  label: 'Distribución del Presupuesto',
+                  data: [27.42, 22.28, 14.21, 12.27, 9.70, 14.12],
+                  backgroundColor: ['#8C1D18', '#A6231D', '#BF4A3F', '#D97566', '#F2A499', '#E5E5E5'],
+                  borderColor: '#FCFBF8',
+                  borderWidth: 3,
+                  hoverOffset: 8
+                }]
+              }}
+              options={{
+                plugins: {
+                  legend: {
+                    position: 'right'
+                  },
+                  tooltip: {
+                    callbacks: {
+                      label: (context) => `${context.label}: ${context.parsed}%`
+                    }
+                  }
+                }
+              }}
+              height={320}
+              client:load
+            />
+            <div class="text-center mt-4">
               <p class="font-bold text-xl text-criaga-red counter" data-target="4594748">
-                0 €
+                4.594.747,74 €
               </p>
               <div class="progress-bar bg-criaga-red h-1 w-full mt-2 rounded origin-left"></div>
             </div>
@@ -342,7 +330,7 @@ const galleryCategories = ['Razas', 'Diseño', 'Instalaciones', 'Documentación'
       </div>
     </Section>
 
-    <!-- Section 7: Pliego de Condiciones -->
+    <!-- Section 6: Pliego de Condiciones -->
     <Section 
       id="pliego" 
       title="Pliego de Condiciones"
@@ -388,7 +376,7 @@ const galleryCategories = ['Razas', 'Diseño', 'Instalaciones', 'Documentación'
             <li><a href="#vision" class="hover:text-criaga-red transition-colors">Visión General</a></li>
             <li><a href="#programa" class="hover:text-criaga-red transition-colors">Programa Ganadero</a></li>
             <li><a href="#diseno" class="hover:text-criaga-red transition-colors">Diseño Arquitectónico</a></li>
-            <li><a href="#galeria" class="hover:text-criaga-red transition-colors">Galería Multimedia</a></li>
+            <li><a href="/galeria" class="hover:text-criaga-red transition-colors">Galería Multimedia</a></li>
             <li><a href="#analisis" class="hover:text-criaga-red transition-colors">Análisis Técnico</a></li>
           </ul>
         </div>
@@ -408,101 +396,9 @@ const galleryCategories = ['Razas', 'Diseño', 'Instalaciones', 'Documentación'
     </div>
   </footer>
 
-  <!-- Load GSAP and ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
   <!-- Scripts -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Chart data
-      const budgetData = {
-        labels: ['Acond. Terreno', 'Estructuras', 'Urbanización', 'Instalaciones', 'Cimentaciones', 'Otros'],
-        datasets: [{
-          label: 'Distribución del Presupuesto',
-          data: [27.42, 22.28, 14.21, 12.27, 9.70, 14.12],
-          backgroundColor: ['#8C1D18', '#A6231D', '#BF4A3F', '#D97566', '#F2A499', '#E5E5E5'],
-          borderColor: '#FCFBF8',
-          borderWidth: 3,
-          hoverOffset: 8
-        }]
-      };
-
-      const superficiesData = {
-        labels: ['Carballeira', 'Viñedos', 'Zona Ext. Vacas', 'Granja', 'Eira', 'Caminos', 'Cultivos', 'Invernaderos'],
-        datasets: [{
-          label: 'Superficie (m²)',
-          data: [12359.98, 4993.75, 4181.67, 2989.32, 2287.89, 1511.95, 1449.79, 432.00],
-          backgroundColor: '#BF4A3F',
-          borderColor: '#8C1D18',
-          borderWidth: 1
-        }]
-      };
-
-      // Initialize charts
-      if (window.Chart) {
-        // Budget Chart
-        const ctxBudget = document.getElementById('budgetChart');
-        if (ctxBudget) {
-          new Chart(ctxBudget.getContext('2d'), {
-            type: 'doughnut',
-            data: budgetData,
-            options: {
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  position: 'right',
-                  labels: {
-                    font: { family: "'Inter', sans-serif" },
-                    padding: 20
-                  }
-                },
-                tooltip: {
-                  callbacks: {
-                    label: (context) => `${context.label}: ${context.parsed}%`
-                  }
-                }
-              },
-              animation: {
-                animateRotate: true,
-                duration: 2000
-              }
-            }
-          });
-        }
-
-        // Superficies Chart
-        const ctxSuperficies = document.getElementById('superficiesChart');
-        if (ctxSuperficies) {
-          new Chart(ctxSuperficies.getContext('2d'), {
-            type: 'bar',
-            data: superficiesData,
-            options: {
-              indexAxis: 'y',
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: { display: false }
-              },
-              scales: {
-                x: {
-                  beginAtZero: true,
-                  title: {
-                    display: true,
-                    text: 'Superficie (m²)'
-                  }
-                }
-              },
-              animation: {
-                duration: 2000,
-                easing: 'easeOutQuart'
-              }
-            }
-          });
-        }
-      }
-
       // Pliego functionality
       const pliegoData = {
         muro: {
@@ -590,63 +486,6 @@ const galleryCategories = ['Razas', 'Diseño', 'Instalaciones', 'Documentación'
           }
         });
       });
-
-      // Enhanced search functionality
-      const searchInput = document.getElementById('search-input');
-      const searchResults = document.getElementById('search-results');
-      
-      if (searchInput && searchResults) {
-        let searchTimeout;
-        
-        searchInput.addEventListener('input', function() {
-          clearTimeout(searchTimeout);
-          searchTimeout = setTimeout(() => {
-            const query = this.value.toLowerCase().trim();
-            
-            if (query.length < 2) {
-              searchResults.innerHTML = '';
-              return;
-            }
-            
-            // Enhanced search implementation
-            const sections = document.querySelectorAll('section[id]');
-            const results = [];
-            
-            sections.forEach(section => {
-              const title = section.querySelector('h2')?.textContent || '';
-              const content = section.textContent?.toLowerCase() || '';
-              
-              if (content.includes(query)) {
-                const queryIndex = content.indexOf(query);
-                const relevance = title.toLowerCase().includes(query) ? 2 : 1;
-                
-                results.push({
-                  title: title,
-                  id: section.id,
-                  snippet: content.substring(Math.max(0, queryIndex - 50), queryIndex + 100),
-                  relevance
-                });
-              }
-            });
-            
-            // Sort by relevance
-            results.sort((a, b) => b.relevance - a.relevance);
-            
-            if (results.length > 0) {
-              searchResults.innerHTML = results.map(result => `
-                <div class="p-3 hover:bg-gray-50 rounded-lg cursor-pointer border-b border-gray-100 last:border-b-0 transition-colors duration-200">
-                  <a href="#${result.id}" class="block">
-                    <h4 class="font-semibold text-criaga-red mb-1">${result.title}</h4>
-                    <p class="text-sm text-gray-600 line-clamp-2">${result.snippet}...</p>
-                  </a>
-                </div>
-              `).join('');
-            } else {
-              searchResults.innerHTML = '<p class="p-3 text-gray-500 text-center">No se encontraron resultados</p>';
-            }
-          }, 300);
-        });
-      }
     });
   </script>
 </Layout>

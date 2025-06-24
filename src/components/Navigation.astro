@@ -6,7 +6,7 @@ const navItems = [
   { href: '#entorno', label: 'Entorno' },
   { href: '#programa', label: 'Programa' },
   { href: '#diseno', label: 'Diseño' },
-  { href: '#galeria', label: 'Galería' },
+  { href: '/galeria', label: 'Galería' },
   { href: '#analisis', label: 'Análisis' },
   { href: '#pliego', label: 'Pliego' }
 ];
@@ -176,35 +176,37 @@ const navItems = [
       }
     });
     
-    // Enhanced active navigation highlighting
+    // Enhanced active navigation highlighting for hash links only
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
     
-    const observerOptions = {
-      rootMargin: '-20% 0px -80% 0px',
-      threshold: 0
-    };
+    if (sections.length > 0 && navLinks.length > 0) {
+      const observerOptions = {
+        rootMargin: '-20% 0px -80% 0px',
+        threshold: 0
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            navLinks.forEach(link => {
+              link.classList.remove('text-criaga-red', 'border-criaga-red');
+              link.classList.add('text-criaga-gray', 'border-transparent');
+              
+              if (link.getAttribute('href') === `#${id}`) {
+                link.classList.remove('text-criaga-gray', 'border-transparent');
+                link.classList.add('text-criaga-red', 'border-criaga-red');
+              }
+            });
+          }
+        });
+      }, observerOptions);
+      
+      sections.forEach(section => observer.observe(section));
+    }
     
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          navLinks.forEach(link => {
-            link.classList.remove('text-criaga-red', 'border-criaga-red');
-            link.classList.add('text-criaga-gray', 'border-transparent');
-            
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.remove('text-criaga-gray', 'border-transparent');
-              link.classList.add('text-criaga-red', 'border-criaga-red');
-            }
-          });
-        }
-      });
-    }, observerOptions);
-    
-    sections.forEach(section => observer.observe(section));
-    
-    // Enhanced search functionality with Fuse.js
+    // Enhanced search functionality
     const searchResults = document.getElementById('search-results');
     
     if (searchInput && searchResults) {
