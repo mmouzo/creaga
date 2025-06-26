@@ -98,12 +98,11 @@ import ScrollAnimations from '../components/ScrollAnimations.astro';
               </div>
               <div class="relative">
                 <img 
-                  src="/images/image127.png" 
-                  alt="Logo CRIAGA en contexto rural" 
-                  class="w-full rounded-lg shadow-lg" 
+                  src="/images/image129.png" 
+                  alt="Render del proyecto CRIAGA" 
+                  class="w-full rounded-xl shadow-lg" 
                   loading="lazy"
                 >
-                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
               </div>
             </div>
           </div>
@@ -170,11 +169,11 @@ import ScrollAnimations from '../components/ScrollAnimations.astro';
         
         <div class="grid md:grid-cols-3 gap-8 cards-container">
           <Card title="Centro de Cría de Ganado" className="animate-card">
-            <div class="mb-4">
+            <div class="mb-4 bg-gray-50 rounded-lg overflow-hidden">
               <img 
-                src="/images/image12.png" 
-                alt="Vista de la granja" 
-                class="w-full h-40 object-cover rounded-lg mb-4" 
+                src="/images/image103.png" 
+                alt="Raza bovina Cachena - Característica por su pequeño tamaño y pelaje castaño" 
+                class="w-full h-40 object-contain rounded-lg mb-4" 
                 loading="lazy"
                 width="400"
                 height="160"
@@ -185,8 +184,8 @@ import ScrollAnimations from '../components/ScrollAnimations.astro';
                 <strong class="text-criaga-red">Ganadería Ecológica Extensiva</strong>
               </p>
               <p class="text-gray-600 leading-relaxed text-sm">
-                Cría de razas autóctonas gallegas: Frieiresa, Cachena, Caldelá, Limiá, Vianesa, Morenas de Galicia, 
-                junto con Ovejas Gallegas y Gallinas de Mos.
+                Cría de las seis razas bovinas autóctonas gallegas: Cachena, Caldelá, Frieiresa, Limiá, Rubia Galega y Vianesa, 
+                junto con Cabra Gallega, Oveja Gallega y Gallina de Mos.
               </p>
               <ul class="text-gray-600 text-sm space-y-1">
                 <li>• Producción ligada al suelo y pastos naturales</li>
@@ -198,11 +197,11 @@ import ScrollAnimations from '../components/ScrollAnimations.astro';
           </Card>
           
           <Card title="Vivienda y Plaza Comunitaria" className="animate-card">
-            <div class="mb-4">
+            <div class="mb-4 bg-gray-50 rounded-lg overflow-hidden">
               <img 
                 src="/images/image13.png" 
                 alt="Vista de la vivienda" 
-                class="w-full h-40 object-cover rounded-lg mb-4" 
+                class="w-full h-40 object-contain rounded-lg mb-4" 
                 loading="lazy"
                 width="400"
                 height="160"
@@ -225,11 +224,11 @@ import ScrollAnimations from '../components/ScrollAnimations.astro';
           </Card>
           
           <Card title="Centro de Interpretación" className="animate-card">
-            <div class="mb-4">
+            <div class="mb-4 bg-gray-50 rounded-lg overflow-hidden">
               <img 
                 src="/images/image14.png" 
                 alt="Centro de visitantes" 
-                class="w-full h-40 object-cover rounded-lg mb-4" 
+                class="w-full h-40 object-contain rounded-lg mb-4" 
                 loading="lazy"
                 width="400"
                 height="160"
@@ -918,6 +917,11 @@ import ScrollAnimations from '../components/ScrollAnimations.astro';
   </footer>
 
   <!-- Scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    });
+  </script>
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Pliego functionality

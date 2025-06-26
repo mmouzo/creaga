@@ -12,38 +12,60 @@ const breeds: Breed[] = [
   {
     id: 'cachena',
     name: 'Cachena',
-    image: '/images/image1.png',
-    description: 'Raza autóctona de pequeño tamaño, muy rústica y adaptada al monte gallego. Excelente para la limpieza de monte y prevención de incendios.'
+    image: '/images/image103.png',
+    description: 'Raza bovina autóctona característica por su pequeño tamaño y pelaje castaño. Perfectamente adaptada al territorio montañoso gallego y al pastoreo en zonas de pendiente. Ideal para la limpieza de monte y prevención de incendios.'
   },
   {
     id: 'caldela',
     name: 'Caldelá',
-    image: '/images/image2.png',
-    description: 'Raza de aptitud cárnica, bien adaptada a las condiciones climáticas de Galicia. Conocida por su docilidad y facilidad de parto.'
+    image: '/images/image84.png',
+    description: 'Raza bovina gallega de aptitud cárnica, bien adaptada a las condiciones climáticas locales. Forma parte del programa de conservación de razas autóctonas gallegas. Requiere 41.000 m² de pastos por cabeza de ganado.'
   },
   {
     id: 'frieiresa',
     name: 'Frieiresa',
-    image: '/images/image3.png',
-    description: 'Raza de gran rusticidad, tradicionalmente utilizada para trabajo y producción de carne. Muy resistente a enfermedades.'
+    image: '/images/image82.png',
+    description: 'Raza bovina autóctona de gran rusticidad y resistencia. Tradicionalmente criada en sistema extensivo, es una de las seis razas bovinas autóctonas de Galicia incluidas en el proyecto CRIAGA.'
   },
   {
     id: 'limia',
     name: 'Limiá',
-    image: '/images/image4.png',
-    description: 'Raza originaria de la comarca de A Limia, de gran valor genético y perfectamente adaptada al pastoreo extensivo.'
+    image: '/images/image95.png',
+    description: 'Raza bovina originaria de la comarca de A Limia (Ourense). De gran valor genético y perfectamente adaptada al pastoreo extensivo en las condiciones climáticas gallegas.'
   },
   {
     id: 'rubia',
     name: 'Rubia Galega',
-    image: '/images/image5.png',
-    description: 'La raza bovina más representativa de Galicia, de gran tamaño y excelente producción cárnica. Símbolo de la ganadería gallega.'
+    image: '/images/image92.png',
+    description: 'La raza bovina más representativa y emblemática de Galicia. De gran tamaño y excelente producción cárnica, constituye el símbolo de la ganadería tradicional gallega y parte fundamental del patrimonio genético regional.'
   },
   {
     id: 'vianesa',
     name: 'Vianesa',
-    image: '/images/image6.png',
-    description: 'Raza de montaña, muy rústica y adaptada a terrenos difíciles. Excelente madre y de gran longevidad.'
+    image: '/images/image89.png',
+    description: 'Raza bovina de montaña, muy rústica y perfectamente adaptada a terrenos difíciles y zonas de pendiente. Conocida por ser excelente reproductora y de gran longevidad, ideal para el pastoreo en monte comunal.'
+  }
+];
+
+// Otras especies autóctonas criadas en CRIAGA
+const otherSpecies = [
+  {
+    id: 'cabra-gallega',
+    name: 'Cabra Gallega',
+    image: '/images/image60.png',
+    description: 'Especie caprina autóctona gallega de menor tamaño que puede convivir con las vacas. Realiza trabajos de limpieza en zonas donde las vacas no pueden acceder. Requiere 24.000 m² de pastos por rebaño.'
+  },
+  {
+    id: 'oveja-gallega',
+    name: 'Oveja Gallega',
+    image: '/images/image58.png',
+    description: 'Raza ovina autóctona de Galicia, perfectamente adaptada al clima y terreno local. Animal de pastoreo que contribuye a la limpieza y mantenimiento de los pastos comunales.'
+  },
+  {
+    id: 'gallina-mos',
+    name: 'Gallina de Mos',
+    image: '/images/image73.png',
+    description: 'Raza aviar autóctona gallega criada para la obtención de huevos ecológicos. Forma parte del programa de conservación de razas locales y contribuye a la diversificación productiva de la granja.'
   }
 ];
 
@@ -62,7 +84,7 @@ const superficiesData = {
 <div class="grid lg:grid-cols-2 gap-8 items-start">
   <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
     <h3 class="text-xl font-bold font-serif text-criaga-red mb-6 text-center">
-      Razas Autóctonas
+      Razas Bovinas Autóctonas
     </h3>
     
     <!-- Breed Selection Buttons -->
@@ -88,11 +110,11 @@ const superficiesData = {
           class={`breed-content ${index === 0 ? 'active' : 'hidden'}`}
           data-breed-content={breed.id}
         >
-          <div class="mb-4 overflow-hidden rounded-lg">
+          <div class="mb-4 overflow-hidden rounded-lg bg-gray-50">
             <img
               src={breed.image}
               alt={`Imagen de ${breed.name}`}
-              class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+              class="w-full h-48 object-contain transition-transform duration-300 hover:scale-105"
               loading="lazy"
             />
           </div>
@@ -107,16 +129,65 @@ const superficiesData = {
     </div>
   </div>
   
-  <!-- Chart Section -->
+  <!-- Other Species Section -->
   <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
-    <h3 class="text-xl font-bold font-serif text-criaga-red mb-4 text-center">
-      Distribución de Superficies
+    <h3 class="text-xl font-bold font-serif text-criaga-red mb-6 text-center">
+      Otras Especies Autóctonas
     </h3>
-    <InteractiveChart
-      id="breed-gallery-superficies-chart"
-      type="bar"
-      data={superficiesData}
-      options={{
+    
+    <!-- Other Species Selection Buttons -->
+    <div class="flex flex-wrap justify-center gap-2 mb-6">
+      {otherSpecies.map((species, index) => (
+        <button
+          class={`species-button px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+            index === 0
+              ? 'bg-criaga-red text-white shadow-md'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          }`}
+          data-species-id={species.id}
+        >
+          {species.name}
+        </button>
+      ))}
+    </div>
+    
+    <!-- Selected Species Display -->
+    <div class="species-display text-center">
+      {otherSpecies.map((species, index) => (
+        <div 
+          class={`species-content ${index === 0 ? 'active' : 'hidden'}`}
+          data-species-content={species.id}
+        >
+          <div class="mb-4 overflow-hidden rounded-lg bg-gray-50">
+            <img
+              src={species.image}
+              alt={`Imagen de ${species.name}`}
+              class="w-full h-48 object-contain transition-transform duration-300 hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+          <h4 class="text-xl font-bold font-serif text-criaga-red mb-2">
+            {species.name}
+          </h4>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            {species.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<!-- Chart Section -->
+<div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6 mt-8">
+  <h3 class="text-xl font-bold font-serif text-criaga-red mb-4 text-center">
+    Distribución de Superficies del Proyecto
+  </h3>
+  <InteractiveChart
+    id="breed-gallery-superficies-chart"
+    type="bar"
+    data={superficiesData}
+    options={{
         indexAxis: 'y',
         plugins: {
           legend: { display: false }
@@ -168,19 +239,50 @@ const superficiesData = {
         }
       });
     });
+
+    // Species Gallery Functionality
+    const speciesButtons = document.querySelectorAll('.species-button');
+    const speciesContents = document.querySelectorAll('.species-content');
+    
+    speciesButtons.forEach(button => {
+      button.addEventListener('click', function(this: HTMLElement) {
+        const speciesId = this.getAttribute('data-species-id');
+        
+        // Update button states
+        speciesButtons.forEach(btn => {
+          btn.classList.remove('bg-criaga-red', 'text-white', 'shadow-md');
+          btn.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+        });
+        
+        this.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+        this.classList.add('bg-criaga-red', 'text-white', 'shadow-md');
+        
+        // Update content display
+        speciesContents.forEach(content => {
+          content.classList.add('hidden');
+          content.classList.remove('active');
+        });
+        
+        const targetContent = document.querySelector(`[data-species-content="${speciesId}"]`);
+        if (targetContent) {
+          targetContent.classList.remove('hidden');
+          targetContent.classList.add('active');
+        }
+      });
+    });
   });
 </script>
 
 <style>
-  .breed-content {
+  .breed-content, .species-content {
     transition: opacity 0.3s ease-in-out;
   }
   
-  .breed-content.active {
-    animation: fadeInBreed 0.3s ease-in-out;
+  .breed-content.active, .species-content.active {
+    animation: fadeInContent 0.3s ease-in-out;
   }
   
-  @keyframes fadeInBreed {
+  @keyframes fadeInContent {
     from {
       opacity: 0;
       transform: translateY(10px);
@@ -191,7 +293,7 @@ const superficiesData = {
     }
   }
   
-  .breed-button:hover {
+  .breed-button:hover, .species-button:hover {
     transform: translateY(-1px);
   }
 </style>
